@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>МОНТАЖ В ДЕНЬГИ · премиум-гайд · 30 дней</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Unbounded:wght@700;900&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --acid:#CFF71E;
+  --acid-hot:#E4FF3D;
+  --ink:#0A0A09;
+  --ink-soft:#141412;
+  --paper:#FAFAF2;
+  --grey:#8A8A80;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Manrope',system-ui,sans-serif;
+  background:var(--ink);
+  color:var(--paper);
+  overflow-x:hidden;
+  font-size:16px;
+}
+::selection{background:var(--acid);color:var(--ink)}
+
+/* ---------- текстуры (мягче, чтобы не мешали тексту) ---------- */
+.grain::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.28;mix-blend-mode:overlay;z-index:1;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");
+}
+
+/* ---------- типографика ---------- */
+.display{
+  font-family:'Oswald','Arial Narrow',sans-serif;font-weight:700;text-transform:uppercase;
+  line-height:.94;letter-spacing:.012em;
+  text-rendering:optimizeLegibility;
+}
+.mono{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.2em;font-size:11.5px;font-weight:800}
+/* ── атмосфера: видеопродакшн вместо иероглифов ── */
+/* цветные пятна света за стеклом — именно их размывает блюр карточек */
+.blob{
+  position:absolute;border-radius:50%;pointer-events:none;z-index:0;
+  filter:blur(70px);opacity:.6;
+  animation:blobFloat 14s ease-in-out infinite;
+}
+@keyframes blobFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(40px,-50px) scale(1.15)}
+  66%{transform:translate(-30px,40px) scale(.92)}
+}
+.ghostword{
+  font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;
+  position:absolute;pointer-events:none;user-select:none;line-height:.85;z-index:0;
+  color:transparent;-webkit-text-stroke:2px currentColor;letter-spacing:.02em;
+  animation:drift 10s ease-in-out infinite;
+}
+@keyframes drift{0%,100%{transform:rotate(var(--r,0deg)) translateY(0)}50%{transform:rotate(var(--r,0deg)) translateY(-12px)}}
+/* киноплёнка с перфорацией */
+.filmstrip{
+  position:absolute;top:0;bottom:0;width:44px;z-index:1;pointer-events:none;opacity:.9;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 14px,currentColor 14px 26px,transparent 26px 40px) 6px 0/8px 100% no-repeat,
+    repeating-linear-gradient(0deg,transparent 0 14px,currentColor 14px 26px,transparent 26px 40px) 30px 0/8px 100% no-repeat,
+    linear-gradient(currentColor,currentColor) 17px 0/2px 100% no-repeat,
+    linear-gradient(currentColor,currentColor) 25px 0/2px 100% no-repeat;
+  animation:film 4s linear infinite;
+}
+@keyframes film{to{background-position:6px 40px,30px 40px,17px 0,25px 0}}
+/* эквалайзер-волна */
+.wave{position:absolute;display:flex;align-items:flex-end;gap:5px;height:70px;z-index:1;pointer-events:none}
+.wave i{width:6px;background:currentColor;animation:eq 1.1s ease-in-out infinite;border-radius:2px}
+.wave i:nth-child(1){height:30%;animation-delay:0s}
+.wave i:nth-child(2){height:75%;animation-delay:.12s}
+.wave i:nth-child(3){height:45%;animation-delay:.24s}
+.wave i:nth-child(4){height:95%;animation-delay:.36s}
+.wave i:nth-child(5){height:55%;animation-delay:.48s}
+.wave i:nth-child(6){height:85%;animation-delay:.6s}
+.wave i:nth-child(7){height:35%;animation-delay:.72s}
+.wave i:nth-child(8){height:65%;animation-delay:.84s}
+@keyframes eq{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1.15)}}
+/* фокус-скобки видоискателя */
+.focus{position:absolute;width:120px;height:120px;z-index:1;pointer-events:none;animation:pulseF 2.6s ease-in-out infinite}
+.focus::before,.focus::after,.focus i::before,.focus i::after{content:"";position:absolute;width:30px;height:30px;border:3.5px solid currentColor}
+.focus::before{top:0;left:0;border-right:none;border-bottom:none}
+.focus::after{top:0;right:0;border-left:none;border-bottom:none}
+.focus i::before{bottom:0;left:0;border-right:none;border-top:none}
+.focus i::after{bottom:0;right:0;border-left:none;border-top:none}
+.focus b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;font-weight:800}
+@keyframes pulseF{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.06);opacity:1}}
+
+/* ---------- секции ---------- */
+section{position:relative;padding:120px 6vw 140px;overflow:hidden}
+.wrap{max-width:1060px;margin:0 auto;position:relative;z-index:3;
+  transform:translateY(var(--lagY,0px)) skewY(var(--sk,0deg));will-change:transform}
+.s-acid{background:var(--acid);color:var(--ink)}
+.s-ink{background:var(--ink);color:var(--paper)}
+
+/* boxed label */
+.tagbox{
+  display:inline-block;position:relative;
+  font-family:'JetBrains Mono',monospace;font-weight:800;font-size:12.5px;letter-spacing:.32em;text-transform:uppercase;
+  padding:11px 22px 11px 26px;border:2.5px solid currentColor;margin-bottom:36px;background:transparent;
+}
+.tagbox::before{
+  content:"";position:absolute;left:-2.5px;top:-13px;height:7px;width:60%;
+  background:repeating-linear-gradient(90deg,currentColor 0 7px,transparent 7px 12px);
+}
+.tagbox::after{
+  content:"";position:absolute;right:14px;bottom:-8px;height:4px;width:36px;background:currentColor;transform:skewX(-30deg);
+}
+
+/* штрих-код */
+.barcode{
+  position:absolute;width:26px;height:190px;z-index:2;
+  background:repeating-linear-gradient(0deg,currentColor 0 2px,transparent 2px 4px,currentColor 4px 7px,transparent 7px 9px,currentColor 9px 10px,transparent 10px 14px);
+  opacity:.9;
+}
+.barcode span{
+  position:absolute;left:100%;top:0;transform:rotate(90deg) translateY(-100%);transform-origin:top left;
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.3em;white-space:nowrap;padding-left:4px;font-weight:700;
+}
+
+/* мазок кисти — полная подложка, текст всегда контрастен */
+.smear{position:relative;display:inline-block;color:var(--acid);padding:.02em .14em;z-index:1}
+.smear::after{
+  content:"";position:absolute;left:-2%;right:-2%;top:-5%;bottom:-7%;z-index:-1;transform:rotate(-1deg);
+  background:var(--ink);
+  clip-path:polygon(1% 10%,9% 0,25% 7%,43% 1%,61% 8%,79% 0,96% 6%,100% 22%,98% 52%,100% 86%,89% 100%,71% 93%,53% 100%,35% 92%,17% 100%,3% 91%,0 58%);
+}
+.s-ink .smear{color:var(--ink)}
+.s-ink .smear::after{background:var(--acid)}
+
+/* карточки — матовое стекло (iOS glassmorphism) */
+.card{
+  background:rgba(255,255,255,.055);
+  backdrop-filter:blur(28px) saturate(1.8);
+  -webkit-backdrop-filter:blur(28px) saturate(1.8);
+  border-radius:24px;padding:32px 34px;position:relative;
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:0 12px 40px -12px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.35), inset 0 -1px 0 rgba(255,255,255,.08);
+  transition:transform .45s cubic-bezier(.2,.9,.3,1.2),border-color .3s,box-shadow .4s,background .3s;
+  overflow:hidden;
+}
+/* блик по верху + косая полоса-отражение, как на стекле айфона */
+.card::before{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,.05) 30%,transparent 55%),
+    linear-gradient(115deg,transparent 42%,rgba(255,255,255,.13) 47%,rgba(255,255,255,.02) 53%,transparent 58%);
+}
+.card:hover{
+  transform:translateY(-5px) rotate(-.3deg);
+  border-color:rgba(207,247,30,.65);
+  background:rgba(255,255,255,.09);
+  box-shadow:0 20px 50px -16px rgba(207,247,30,.3), inset 0 1px 0 rgba(255,255,255,.45);
+}
+.s-acid .card{
+  background:rgba(10,10,9,.5);color:var(--paper);
+  border-color:rgba(255,255,255,.24);
+  box-shadow:0 14px 40px -14px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.s-acid .card:hover{background:rgba(10,10,9,.62)}
+.card-acid{
+  background:rgba(228,255,80,.72)!important;color:var(--ink)!important;
+  border:1px solid rgba(255,255,255,.65)!important;
+  backdrop-filter:blur(26px) saturate(1.8);
+  -webkit-backdrop-filter:blur(26px) saturate(1.8);
+  box-shadow:0 14px 44px -14px rgba(160,200,0,.5), inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+.card h4{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:20px;letter-spacing:.03em;margin-bottom:10px}
+.card p{font-size:15.5px;line-height:1.68;opacity:.96;font-weight:500}
+.card-acid p{font-weight:600}
+
+/* ── перелив стекла от наклона телефона ── */
+.card::after,.script::after,.price::after,.stat::before{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;z-index:1;
+  background:
+    /* мягкое пятно света — уезжает противоположно наклону, как настоящий отблеск */
+    radial-gradient(280px circle at calc(28% + var(--gx,0px)) calc(22% + var(--gy,0px)), rgba(255,255,255,.34), transparent 55%),
+    /* резкий зеркальный штрих — скользит по стеклу при повороте */
+    linear-gradient(calc(105deg + var(--ga,0deg)),
+      transparent calc(var(--gs,46%) - 7%),
+      rgba(255,255,255,.42) var(--gs,46%),
+      transparent calc(var(--gs,46%) + 7%)),
+    /* радужный перелив — меняет угол вместе с телефоном */
+    linear-gradient(calc(115deg + var(--ga,0deg) * 1.6),
+      transparent 28%,
+      rgba(255,80,200,.10) 40%,
+      rgba(120,240,255,.13) 50%,
+      rgba(228,255,80,.12) 60%,
+      transparent 72%);
+  mix-blend-mode:screen;
+  opacity:calc(.6 + var(--gi,0));
+  transition:opacity .3s;
+}
+/* содержимое плашек — поверх слоя перелива */
+.card>*,.script>*,.price>*,.stat>*{position:relative;z-index:2}
+
+/* стикер-номер */
+.stik{
+  display:inline-flex;align-items:center;justify-content:center;flex:none;
+  min-width:40px;height:40px;padding:0 7px;
+  background:var(--acid);color:var(--ink);
+  font-family:'Unbounded',sans-serif;font-weight:900;font-size:12.5px;
+  transform:rotate(-5deg);box-shadow:5px 6px 0 rgba(0,0,0,.6);
+  transition:transform .3s;
+  position:relative;z-index:6; /* всегда поверх стеклянных плашек */
+  rotate:var(--spin,0deg);     /* подкрутка от скорости скролла */
+}
+.row:hover .stik{transform:rotate(4deg) scale(1.1)}
+.s-acid .stik{background:var(--ink);color:var(--acid);box-shadow:5px 6px 0 rgba(0,0,0,.25)}
+.stik.alt{transform:rotate(4deg)}
+
+/* строки */
+.rows{display:flex;flex-direction:column}
+.row{
+  display:flex;gap:26px;align-items:flex-start;padding:26px 4px;
+  border-bottom:1.5px dashed rgba(250,250,242,.22);
+}
+.s-acid .row{border-bottom-color:rgba(10,10,9,.35)}
+.row:last-child{border-bottom:none}
+.row b{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.03em;font-weight:600;font-size:18px;display:block;margin-bottom:4px}
+.row p{font-size:15.5px;line-height:1.6;opacity:.92;font-weight:500}
+
+.h-big{font-size:clamp(46px,8vw,102px);margin-bottom:28px}
+.h-mid{font-size:clamp(32px,5.2vw,60px);margin-bottom:22px}
+.lead{font-size:clamp(16.5px,1.65vw,19.5px);line-height:1.7;max-width:660px;font-weight:600}
+.s-ink .lead{font-weight:500}
+
+/* статы */
+.stats{display:flex;flex-wrap:wrap;gap:16px;margin-top:48px}
+.stat{
+  background:rgba(10,10,9,.48);color:var(--paper);border-radius:22px;padding:24px 30px;flex:1;min-width:150px;
+  position:relative;overflow:hidden;transition:transform .35s,box-shadow .35s,background .3s;
+  backdrop-filter:blur(26px) saturate(1.7);
+  -webkit-backdrop-filter:blur(26px) saturate(1.7);
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:0 10px 32px -12px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.stat:hover{transform:translateY(-6px);background:rgba(10,10,9,.72);box-shadow:0 20px 40px -16px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.3)}
+.stat::after{content:"";position:absolute;top:0;left:0;width:100%;height:3.5px;background:var(--acid)}
+.stat .n{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(26px,3vw,38px);color:var(--acid)}
+.stat .l{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;opacity:.85;margin-top:8px;font-weight:700}
+.s-ink .stat{background:var(--acid);color:var(--ink)}
+.s-ink .stat::after{background:var(--ink)}
+.s-ink .stat .n{color:var(--ink)}
+.s-ink .stat .l{opacity:.8}
+
+/* REC */
+.rec{position:absolute;top:36px;right:6vw;display:flex;align-items:center;gap:9px;z-index:5;
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.28em;font-weight:800}
+.rec i{width:10px;height:10px;border-radius:50%;background:#ff2d2d;animation:blink 1.1s steps(2) infinite;box-shadow:0 0 10px rgba(255,45,45,.8)}
+@keyframes blink{50%{opacity:.15}}
+
+/* бегущая строка */
+.ticker{
+  background:var(--ink);color:var(--acid);border-top:3px solid var(--acid);border-bottom:3px solid var(--acid);
+  overflow:hidden;white-space:nowrap;padding:15px 0;position:relative;z-index:3;
+}
+.ticker.inv{background:var(--acid);color:var(--ink);border-color:var(--ink)}
+.ticker-track{display:inline-flex;gap:44px;animation:marquee 26s linear infinite;font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:17px;letter-spacing:.14em}
+.ticker-track span{display:flex;gap:44px}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+.brush-arrow{position:absolute;pointer-events:none;z-index:2;opacity:.95}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* reveal — пружинный вход */
+.rv{opacity:0;transform:translateY(46px) scale(.955) rotate(.5deg);
+  transition:opacity .8s ease,transform .9s cubic-bezier(.16,1.3,.3,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+
+/* глитч hero */
+.hero-word{
+  font-family:'Unbounded',sans-serif;font-weight:900;
+  font-size:.72em;letter-spacing:-.015em;line-height:1;
+  color:var(--ink);display:inline-block;
+}
+
+/* таймлайн */
+.tl{position:relative;padding-left:84px;display:flex;flex-direction:column;gap:34px}
+.tl::before{content:"";position:absolute;left:20px;top:8px;bottom:8px;width:3px;
+  background:repeating-linear-gradient(0deg,var(--acid) 0 12px,transparent 12px 20px)}
+.tl .stik{position:absolute;left:0;z-index:7;font-size:11.5px;min-width:36px;height:36px;top:6px}
+.tl-item{position:relative}
+
+/* скрипты */
+.script{
+  border:1px solid rgba(207,247,30,.5);border-radius:22px;padding:28px 32px;
+  background:rgba(207,247,30,.07);
+  backdrop-filter:blur(26px) saturate(1.7);
+  -webkit-backdrop-filter:blur(26px) saturate(1.7);
+  box-shadow:0 10px 32px -14px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.2);
+  position:relative;margin-top:28px;
+}
+.script::before{
+  content:attr(data-label);position:absolute;top:-13px;left:24px;background:var(--ink);padding:4px 16px;border-radius:30px;
+  border:1px solid rgba(207,247,30,.5);
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.28em;color:var(--acid);font-weight:800;text-transform:uppercase;
+}
+.script p{font-size:16px;line-height:1.75;font-weight:500}
+.s-acid .script{
+  border-color:rgba(10,10,9,.4);background:rgba(10,10,9,.5);color:var(--paper);
+  box-shadow:0 10px 32px -14px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.18);
+}
+.s-acid .script::before{background:var(--acid);color:var(--ink);border-color:rgba(10,10,9,.4)}
+.s-acid .script p{font-weight:600}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+
+/* призрачный номер части */
+.ghost{
+  position:absolute;right:-10px;top:-60px;font-family:'Unbounded',sans-serif;font-weight:900;
+  font-size:clamp(160px,26vw,320px);opacity:.055;line-height:1;pointer-events:none;user-select:none;z-index:0;
+}
+
+/* чекбоксы */
+.check{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1.5px dashed rgba(250,250,242,.2);cursor:pointer;user-select:none}
+.s-acid .check{border-bottom-color:rgba(10,10,9,.3)}
+.check:last-child{border:none}
+.check i{
+  flex:none;width:24px;height:24px;border:3px solid var(--acid);border-radius:7px;
+  margin-top:1px;position:relative;transition:.25s;
+  background:rgba(207,247,30,.14);
+  box-shadow:0 0 10px rgba(207,247,30,.45), inset 0 1px 0 rgba(255,255,255,.35);
+}
+/* на кислотном фоне вне плашек — чёрные квадратики */
+.s-acid .check i{border-color:var(--ink);background:rgba(10,10,9,.12);box-shadow:0 0 0 rgba(0,0,0,0), inset 0 1px 0 rgba(255,255,255,.3)}
+/* но внутри тёмных стеклянных плашек — снова кислотные, иначе сливаются */
+.s-acid .card .check i,.s-acid .script .check i{
+  border-color:var(--acid);background:rgba(207,247,30,.14);
+  box-shadow:0 0 10px rgba(207,247,30,.45), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.check.done i{background:var(--acid);box-shadow:0 0 16px rgba(207,247,30,.7)}
+.s-acid .check.done i{background:var(--ink)}
+.s-acid .card .check.done i,.s-acid .script .check.done i{background:var(--acid);box-shadow:0 0 16px rgba(207,247,30,.7)}
+.check.done i::after{content:"✕";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ink);font-weight:800;font-size:13px}
+.s-acid .check.done i::after{color:var(--acid)}
+.s-acid .card .check.done i::after,.s-acid .script .check.done i::after{color:var(--ink)}
+.check span{font-size:16px;line-height:1.55;opacity:.95;font-weight:500}
+.check.done span{text-decoration:line-through;opacity:.45}
+
+/* прайсы */
+.price{
+  text-align:center;border:1px solid rgba(255,255,255,.28);border-radius:24px;padding:36px 20px;
+  background:rgba(10,10,9,.5);color:var(--paper);
+  backdrop-filter:blur(26px) saturate(1.7);
+  -webkit-backdrop-filter:blur(26px) saturate(1.7);
+  box-shadow:0 12px 36px -14px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.25);
+  transition:.35s;position:relative;overflow:hidden;
+}
+.price .n{color:var(--acid)}
+.price:hover{background:rgba(10,10,9,.78);transform:translateY(-6px);border-color:rgba(207,247,30,.6)}
+.price .n{font-family:'Unbounded',sans-serif;font-weight:900;font-size:34px}
+.price .l{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;margin-top:12px;opacity:.85;font-weight:700}
+
+/* таблица привычек */
+table.habit{width:100%;border-collapse:collapse;margin-top:30px;font-size:14px}
+table.habit th{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;padding:12px 8px;border-bottom:3px solid var(--ink);text-align:left;font-weight:800}
+table.habit td{padding:14px 8px;border-bottom:1.5px dashed rgba(10,10,9,.35);font-weight:600}
+table.habit td.c{text-align:center}
+.cell{display:inline-block;width:21px;height:21px;border:2.5px solid var(--ink);cursor:pointer;transition:.2s}
+.cell.on{background:var(--ink)}
+
+#prog{position:fixed;top:0;left:0;height:5px;background:var(--acid);width:0;z-index:99;box-shadow:0 0 14px rgba(207,247,30,.8)}
+
+/* ═══════ АНИМИРОВАННАЯ НУМЕРАЦИЯ СТРАНИЦ ═══════ */
+
+/* штамп страницы внутри секции */
+.pagestamp{
+  position:absolute;left:6vw;bottom:34px;z-index:5;
+  display:flex;align-items:center;gap:14px;
+}
+.pagestamp .num{
+  font-family:'Unbounded',sans-serif;font-weight:900;font-size:30px;line-height:1;
+  display:flex;
+}
+.pagestamp .num .digit{display:inline-block;opacity:0;transform:translateY(120%) rotate(8deg);transition:transform .6s cubic-bezier(.2,1.4,.3,1),opacity .4s}
+.pagestamp.on .num .digit{opacity:1;transform:none}
+.pagestamp.on .num .digit:nth-child(2){transition-delay:.1s}
+.pagestamp .of{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;font-weight:800;opacity:.7;text-transform:uppercase}
+.pagestamp .line{height:3px;width:0;background:currentColor;transition:width 1.1s cubic-bezier(.2,.8,.2,1) .25s}
+.pagestamp.on .line{width:64px}
+
+/* HUD-видоискатель — фикс. счётчик страниц */
+#hud{
+  position:fixed;right:18px;bottom:18px;z-index:98;
+  background:rgba(10,10,9,.88);backdrop-filter:blur(8px);
+  border:1.5px solid rgba(207,247,30,.55);border-radius:12px;
+  padding:12px 16px;display:flex;align-items:center;gap:14px;
+  font-family:'JetBrains Mono',monospace;color:var(--acid);
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+  transition:transform .4s,opacity .4s;
+}
+#hud .hud-rec{display:flex;align-items:center;gap:7px;font-size:10px;letter-spacing:.22em;font-weight:800}
+#hud .hud-rec i{width:8px;height:8px;border-radius:50%;background:#ff2d2d;animation:blink 1.1s steps(2) infinite}
+#hud .hud-page{font-size:13px;font-weight:800;letter-spacing:.14em;position:relative;overflow:hidden;height:18px;min-width:64px;display:flex;align-items:center}
+#hud .hud-page .roll{display:inline-block;transition:transform .45s cubic-bezier(.3,1.3,.4,1),opacity .3s}
+#hud .hud-page.flip .roll{transform:translateY(-120%);opacity:0}
+#hud .hud-tc{font-size:10.5px;letter-spacing:.14em;opacity:.75;font-weight:700}
+#hud .sep{width:1.5px;height:20px;background:rgba(207,247,30,.35)}
+@media(max-width:640px){#hud .hud-tc,#hud .sep:last-of-type{display:none}}
+
+/* интро-загрузка */
+#boot{
+  position:fixed;inset:0;background:var(--ink);z-index:200;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:22px;transition:opacity .6s,visibility .6s;
+}
+#boot.off{opacity:0;visibility:hidden}
+#boot .b-rec{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;color:var(--acid);letter-spacing:.3em;font-size:13px;font-weight:800}
+#boot .b-rec i{width:12px;height:12px;border-radius:50%;background:#ff2d2d;animation:blink .8s steps(2) infinite}
+#boot .b-title{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(28px,6vw,54px);color:var(--paper);letter-spacing:.02em}
+#boot .b-title em{color:var(--acid);font-style:normal}
+#boot .b-bar{width:min(320px,70vw);height:4px;background:rgba(207,247,30,.18);overflow:hidden;border-radius:2px}
+#boot .b-bar i{display:block;height:100%;width:0;background:var(--acid);animation:load 1.4s ease forwards}
+@keyframes load{to{width:100%}}
+#boot .b-tc{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--grey);letter-spacing:.24em}
+
+.finale .h-big{font-size:clamp(52px,9vw,120px)}
+
+/* премиальная CTA */
+.cta{
+  display:inline-flex;align-items:center;gap:14px;margin-top:36px;
+  background:var(--ink);color:var(--acid);text-decoration:none;
+  font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(17px,2vw,22px);letter-spacing:.06em;
+  padding:22px 40px;border-radius:60px;position:relative;overflow:hidden;
+  box-shadow:8px 10px 0 rgba(0,0,0,.35);
+  transition:transform .35s cubic-bezier(.2,.9,.3,1.3),box-shadow .35s;
+}
+.cta span{transition:transform .3s;font-size:1.2em}
+.cta:hover{transform:translateY(-4px) rotate(-.6deg);box-shadow:10px 14px 0 rgba(0,0,0,.4)}
+.cta:hover span{transform:translateX(8px)}
+.cta::after{
+  content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;
+  background:linear-gradient(105deg,transparent,rgba(207,247,30,.35),transparent);
+  animation:shine 2.8s ease-in-out infinite;
+}
+@keyframes shine{0%,55%{left:-80%}100%{left:130%}}
+
+footer{background:var(--ink);color:var(--grey);padding:44px 6vw;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;border-top:3px solid var(--acid);font-weight:700}
+
+@media (max-width:640px){
+  section{padding:90px 22px 130px}
+  .rec{right:22px}
+  .row{gap:16px}
+  .ghost{font-size:150px;top:-40px}
+  .tl{padding-left:64px}
+  .stik{min-width:34px;height:34px;font-size:11px}
+  .row{gap:14px}
+  .barcode,.focus,.filmstrip{display:none}
+  .ghostword{opacity:.5;font-size:110px!important}
+  .pagestamp{left:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv,.pagestamp .num .digit{opacity:1;transform:none}
+  .pagestamp .line{width:64px}
+  #boot{display:none}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+
+<!-- интро -->
+<div id="boot">
+  <div class="b-rec"><i></i>REC · ИНИЦИАЛИЗАЦИЯ</div>
+  <div class="b-title">МОНТАЖ <em>В ДЕНЬГИ</em></div>
+  <div class="b-bar"><i></i></div>
+  <div class="b-tc" id="bootTc">00:00:00:00</div>
+</div>
+
+<!-- HUD видоискатель -->
+<div id="hud">
+  <div class="hud-rec"><i></i>REC</div>
+  <div class="sep"></div>
+  <div class="hud-page"><span class="roll" id="hudPage">СТР 01/13</span></div>
+  <div class="sep"></div>
+  <div class="hud-tc" id="hudTc">00:00:00:00</div>
+</div>
+
+<!-- ═══════════════ 01 · HERO ═══════════════ -->
+<section class="s-acid grain" data-page="01" data-title="обложка" style="min-height:100vh;display:flex;align-items:center">
+  <div class="rec" style="color:var(--ink)"><i></i>REC · LIVE · <span class="recTime">00:00:00</span></div>
+  <div class="ghostword" style="font-size:clamp(140px,24vw,300px);right:-2vw;top:5%;color:rgba(10,10,9,.85);--r:-4deg">REC</div>
+  <div class="wave" style="left:8vw;bottom:8%;color:rgba(10,10,9,.85)"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="focus" style="right:22vw;bottom:22%;color:rgba(10,10,9,.7)"><i></i><b>AF · LOCK</b></div>
+  <div class="barcode" style="right:8vw;bottom:14%;color:var(--ink)"><span>1234 2123 99 1133 5778 · MONTAJ</span></div>
+  <div class="wrap">
+    <div class="tagbox rv">30 дней · практика · премиум</div>
+    <h1 class="display rv d1" style="font-size:clamp(64px,12.5vw,170px)">
+      <span class="hero-word">МОНТАЖ</span><br>
+      <span class="smear">В&nbsp;ДЕНЬГИ</span>
+    </h1>
+    <p class="lead rv d2" style="margin-top:30px">Путь от нуля до первого платного заказа на Reels. Без курсов за 50 000, без «жди своего часа». Система, проверенная по ночам в казарме.</p>
+    <div class="stats rv d3">
+      <div class="stat"><div class="n">2+</div><div class="l">года в монтаже</div></div>
+      <div class="stat"><div class="n">120+</div><div class="l">роликов сдано</div></div>
+      <div class="stat"><div class="n">30</div><div class="l">дней до заказа</div></div>
+      <div class="stat"><div class="n">2500₽</div><div class="l">старт цены</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker"><div class="ticker-track"></div></div>
+
+<!-- ═══════════════ 02 · ОТ АВТОРА ═══════════════ -->
+<section class="s-ink grain" data-page="02" data-title="от автора">
+  <div class="ghostword" style="font-size:clamp(110px,18vw,220px);right:-3vw;bottom:-2%;color:rgba(207,247,30,.16);--r:4deg">NIGHT<br>SHIFT</div>
+  <div class="barcode" style="left:2vw;top:20%;color:var(--acid)"><span>NIGHT SHIFT · КАЗАРМА</span></div>
+  <div class="wrap">
+    <div class="tagbox rv" style="color:var(--acid)">от автора</div>
+    <h2 class="display h-big rv d1">Я монтировал ночью,<br>когда <span class="smear">рота спала</span></h2>
+    <div class="grid2" style="margin-top:44px;align-items:start">
+      <div class="rv d2">
+        <p class="lead" style="margin-bottom:20px">Этот гайд написан не блогером с миллионом подписчиков. Его написал курсант военного училища, у которого не было ни свободного времени, ни свободы передвижения, ни «идеальных условий».</p>
+        <p style="line-height:1.75;opacity:.94;margin-bottom:18px;font-weight:500">Днём — учёба, наряды, строевая. Единственные окна — самоподготовка и время после отбоя. В эти окна я успел построить микро-бизнес на <b style="color:var(--acid)">50 000 ₽ в месяц</b> и параллельно научился монтажу настолько, что мне начали <b style="color:var(--acid)">платить за ролики</b>: рестораны, спортивные мероприятия, съёмки ивентов.</p>
+        <p style="line-height:1.75;opacity:.94;font-weight:500">Первые ролики я делал <b style="color:var(--acid)">бесплатно</b> — за портфолио. Потом заказы пошли по договорной цене, от 2500 ₽ за ролик. Никакой магии: сначала показываешь, что умеешь, потом за это платят.</p>
+      </div>
+      <div class="card card-acid rv d3" style="transform:rotate(1.2deg)">
+        <h4 style="font-size:25px;line-height:1.15">«Если это получилось в казарме — у тебя получится точно»</h4>
+        <p style="margin-top:14px">Я не обещаю миллион за месяц. Я обещаю: 30 дней, 2 часа в день — и у тебя будет навык, портфолио и система поиска клиентов, которая приводит к первому платному заказу.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 03 · КАК УСТРОЕН ═══════════════ -->
+<section class="s-acid grain" data-page="03" data-title="как устроен гайд">
+  <div class="filmstrip" style="left:0;color:rgba(10,10,9,.8)"></div>
+  <div class="wrap">
+    <div class="tagbox rv">как устроен гайд</div>
+    <h2 class="display h-big rv d1">Шесть частей — <br><span class="smear">один результат</span></h2>
+    <p class="lead rv d2">Гайд построен как маршрут. Не перескакивай: каждая часть опирается на предыдущую.</p>
+    <div class="rows" style="margin-top:34px">
+      <div class="row rv"><div class="stik">01</div><div><b>Система</b><p>Как выкроить 2 часа в день и не слиться на третьей неделе</p></div></div>
+      <div class="row rv d1"><div class="stik alt">02</div><div><b>Инструменты</b><p>Маршрут CapCut → Premiere → After Effects</p></div></div>
+      <div class="row rv d2"><div class="stik">03</div><div><b>Анатомия Reels</b><p>Хук, ритм, плашки, звук — формула ролика, за который платят</p></div></div>
+      <div class="row rv"><div class="stik alt">04</div><div><b>Портфолио</b><p>Стратегия «3 бесплатных ролика» без единого клиента</p></div></div>
+      <div class="row rv d1"><div class="stik">05</div><div><b>Клиенты и деньги</b><p>5 источников заказов, скрипты, цена, возражения</p></div></div>
+      <div class="row rv d2"><div class="stik alt">06</div><div><b>План на 30 дней</b><p>Пошаговый календарь — что делать каждый день</p></div></div>
+    </div>
+    <div class="card rv d2" style="margin-top:36px">
+      <h4 style="color:var(--acid)">+ 5 бонусов в конце гайда</h4>
+      <p><b>01</b> Банк из 15 скриптов · <b>02</b> 10 шаблонов плашек · <b>03</b> Чек-лист · <b>04</b> Калькулятор цены · <b>05</b> 30 ниш · <b>+</b> Система привычек</p>
+    </div>
+  </div>
+</section>
+
+<div class="ticker inv"><div class="ticker-track"></div></div>
+
+<!-- ═══════════════ 04 · КАРТА ПУТИ ═══════════════ -->
+<section class="s-ink grain" data-page="04" data-title="карта пути">
+  <div class="ghostword" style="font-size:clamp(130px,20vw,260px);right:-2vw;top:4%;color:rgba(207,247,30,.15);--r:5deg">30</div>
+  <div class="focus" style="right:14vw;bottom:14%;color:rgba(207,247,30,.5)"><i></i><b>DAY 01</b></div>
+  <div class="wrap">
+    <div class="tagbox rv" style="color:var(--acid)">карта пути</div>
+    <h2 class="display h-big rv d1">30 дней от нуля<br><span class="smear">до заказа</span></h2>
+    <div class="tl" style="margin-top:56px">
+      <div class="tl-item rv"><div class="stik">1-7</div>
+        <div class="card"><h4>Инструмент в руках</h4><p>Осваиваешь CapCut, собираешь первые 3 учебных ролика «в стол». Понимаешь структуру продающего Reels.</p></div></div>
+      <div class="tl-item rv d1"><div class="stik alt">8-14</div>
+        <div class="card"><h4>Портфолио из реальных работ</h4><p>Делаешь 3 бесплатных ролика для реальных мест: кафе, спортзал, мастер. Оформляешь портфолио.</p></div></div>
+      <div class="tl-item rv d2"><div class="stik">15-24</div>
+        <div class="card"><h4>Рассылка и переговоры</h4><p>Пишешь 10–15 клиентам в день по скриптам из части 05. Ведёшь переговоры, показываешь портфолио.</p></div></div>
+      <div class="tl-item rv d3"><div class="stik alt">25-30</div>
+        <div class="card card-acid"><h4>Первый платный заказ</h4><p>Закрываешь первую сделку от 2500 ₽, сдаёшь работу, берёшь отзыв — и превращаешь его в следующие заказы.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 05 · СИСТЕМА ═══════════════ -->
+<section class="s-acid grain" data-page="05" data-title="часть 01 · система">
+  <div class="ghost">01</div>
+  <div class="ghostword" style="font-size:clamp(120px,18vw,230px);left:-2vw;bottom:2%;color:rgba(250,250,242,.6);--r:-4deg">2Ч</div>
+  <div class="wrap">
+    <div class="tagbox rv">часть 01 из 06</div>
+    <h2 class="display h-big rv d1">Система</h2>
+    <p class="lead rv d2">Навык монтажа можно скачать за неделю. Дисциплину — нет. Эта часть о том, как построить режим, который не развалится, когда пропадёт мотивация.</p>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Математика <span class="smear">двух часов</span></h3>
+    <p class="lead rv d1">Все думают, что для нового навыка нужны «свободные месяцы». Враньё. Я учился монтажу в военном училище — там у человека нет вообще ничего своего, включая время. И всё равно окна находились.</p>
+    <div class="stats rv d2">
+      <div class="stat"><div class="n">2ч</div><div class="l">в день</div></div>
+      <div class="stat"><div class="n">60ч</div><div class="l">за 30 дней</div></div>
+      <div class="stat"><div class="n">~15</div><div class="l">роликов практики</div></div>
+    </div>
+    <p class="lead rv" style="margin-top:26px">60 часов целенаправленной практики — это больше, чем у 90% людей, которые «хотят в монтаж». Большинство смотрит уроки месяцами и не собирает ни одного ролика. Ты будешь собирать ролики с третьего дня.</p>
+
+    <h3 class="display h-mid rv" style="margin-top:66px">Где взять 2 часа</h3>
+    <div class="rows">
+      <div class="row rv"><div class="stik">1</div><div><b>Утро до всех (40–60 мин)</b><p>Самое защищённое время: никто не пишет, никто не дёргает.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">2</div><div><b>Мёртвое время (30–40 мин)</b><p>Дорога, очереди, перерывы — смотришь разборы, сохраняешь референсы.</p></div></div>
+      <div class="row rv d2"><div class="stik">3</div><div><b>Вечерний блок (60 мин)</b><p>Основная практика. Одна задача на вечер, не три.</p></div></div>
+    </div>
+    <div class="card rv d1" style="margin-top:30px"><h4 style="color:var(--acid)">Правило одного касания</h4><p>Каждый день ты должен коснуться монтажа хотя бы 20 минут. Пропустил день — цепочка рвётся, и вернуться в 2 раза тяжелее.</p></div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Пять правил <span class="smear">ночного монтажёра</span></h3>
+    <div class="rows">
+      <div class="row rv"><div class="stik">01</div><div><b>Одна цель на 30 дней — первый платный заказ</b><p>Не «стать моушн-дизайнером». Всё, что не ведёт к ней, — в сторону.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">02</div><div><b>Практика важнее теории — 80/20</b><p>На час уроков — четыре часа сборки роликов.</p></div></div>
+      <div class="row rv d2"><div class="stik">03</div><div><b>Телефон в режим «инструмент»</b><p>Лента без цели — минус вечер.</p></div></div>
+      <div class="row rv"><div class="stik alt">04</div><div><b>Готово лучше идеального</b><p>Ролик, который ты выложил, приносит опыт и клиентов.</p></div></div>
+      <div class="row rv d1"><div class="stik">05</div><div><b>Окружение не решает — решаешь ты</b><p>Вокруг меня пили и прожигали деньги. Я выбрал другое.</p></div></div>
+    </div>
+    <div class="card rv" style="margin-top:30px"><p style="font-size:17.5px;font-weight:700;opacity:1;line-height:1.6">Мотивация — это спичка: вспыхнула и погасла. <span style="color:var(--acid)">Система — это розетка:</span> даёт ток каждый день, независимо от настроения.</p></div>
+  </div>
+</section>
+
+<!-- ═══════════════ 06 · ИНСТРУМЕНТЫ ═══════════════ -->
+<section class="s-ink grain" data-page="06" data-title="часть 02 · инструменты">
+  <div class="ghost" style="color:var(--acid)">02</div>
+  <div class="barcode" style="right:3vw;top:10%;color:var(--acid)"><span>CAPCUT → PREMIERE → AE</span></div>
+  <div class="wrap">
+    <div class="tagbox rv" style="color:var(--acid)">часть 02 из 06</div>
+    <h2 class="display h-big rv d1">Инструменты</h2>
+    <p class="lead rv d2">Новички тонут в выборе программ. Правда простая: первые деньги приносит CapCut на телефоне, а Premiere и After Effects добавляют к чеку нули позже.</p>
+
+    <h3 class="display h-mid rv" style="margin-top:64px">Маршрут: <span class="smear">три ступени</span></h3>
+    <p class="lead rv d1">Не учи всё сразу. Каждая программа открывается, когда предыдущая начала приносить результат.</p>
+    <div style="display:flex;flex-direction:column;gap:20px;margin-top:34px">
+      <div class="card rv" style="border-left:6px solid var(--acid)"><div class="mono" style="color:var(--acid);margin-bottom:10px">ступень 1 · дни 1-14</div><h4>CapCut — деньги здесь</h4><p>Бесплатный, работает на телефоне, покрывает 90% задач коммерческого Reels. Все первые заказы можно сдать в CapCut.</p></div>
+      <div class="card rv d1" style="border-left:6px solid var(--acid);margin-left:5%"><div class="mono" style="color:var(--acid);margin-bottom:10px">ступень 2 · после первого заказа</div><h4>Premiere Pro — скорость и контроль</h4><p>Когда заказов 2–3 в неделю, телефона перестаёт хватать. Мультитрек, точный цвет, пресеты ускоряют сдачу в разы.</p></div>
+      <div class="card rv d2" style="border-left:6px solid var(--acid);margin-left:10%"><div class="mono" style="color:var(--acid);margin-bottom:10px">ступень 3 · месяц 2-3</div><h4>After Effects — дорогие ролики</h4><p>Анимация плашек, логотипов, инфографики. Именно за AE-фишки ролик стоит не 2500, а 5000–10000 ₽.</p></div>
+    </div>
+    <div class="card card-acid rv d1" style="margin-top:26px"><h4>Ошибка №1 новичка</h4><p>Полгода «изучать After Effects», не сделав ни одного коммерческого ролика. Порядок обратный.</p></div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">CapCut за 3 дня: чему учиться</h3>
+    <p class="lead rv d1">Не смотри 40-минутные обзоры интерфейса. Учись задачами: открыл функцию — сразу применил на своём материале.</p>
+    <div class="rows">
+      <div class="row rv"><div class="stik">Д1</div><div><b>База монтажа</b><p>Импорт, нарезка, склейки, скорость, кадрирование под 9:16, простые переходы.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">Д2</div><div><b>Текст и плашки</b><p>Автосабы, стили текста, безопасные зоны — не лепи текст под кнопки интерфейса.</p></div></div>
+      <div class="row rv d2"><div class="stik">Д3</div><div><b>Звук и цвет</b><p>Монтаж под биты музыки, даккинг, пресеты цвета + ручная коррекция.</p></div></div>
+    </div>
+    <div class="script rv" data-label="Упражнение третьего дня">
+      <p>Найди Reels с большими просмотрами. Разбери по кадрам: длина плана, склейки относительно музыки, появление текста. Сними похожий материал и собери свою версию — «копия мастера», самый быстрый способ поставить руку.</p>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Premiere Pro: минимальный набор</h3>
+    <p class="lead rv d1">Открывай этот блок, когда сдал первые платные ролики. Осваивается за 5–7 вечеров.</p>
+    <div style="margin-top:22px">
+      <div class="check rv"><i></i><span><b>Секвенция 1080×1920, 30 fps.</b> Сохрани как пресет.</span></div>
+      <div class="check rv"><i></i><span><b>Горячие клавиши:</b> C (лезвие), V (выбор), Q/W (подрезка). Скорость монтажа = скорость сдачи.</span></div>
+      <div class="check rv"><i></i><span><b>Essential Graphics</b> — 3–4 своих шаблона плашек для всех заказов.</span></div>
+      <div class="check rv"><i></i><span><b>Lumetri Color</b> — свои пресеты «тёплый ресторан», «жёсткий спортзал», «чистый продукт».</span></div>
+      <div class="check rv"><i></i><span><b>Essential Sound</b> — тег «Диалог», авто-даккинг, чистка шума.</span></div>
+      <div class="check rv"><i></i><span><b>Экспорт:</b> H.264, битрейт 10–16 Мбит/с. Сделай пресет один раз.</span></div>
+    </div>
+    <div class="card rv" style="margin-top:24px"><h4 style="color:var(--acid)">Принцип пресетов</h4><p>Всё, что делаешь дважды, — становится пресетом. Через месяц ролик собирается за 1,5–2 часа вместо шести.</p></div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">After Effects: <span class="smear">только 6 приёмов</span></h3>
+    <p class="lead rv d1">AE — бездонная программа. Для коммерческих Reels нужно шесть вещей — выучи их, и твой ролик визуально дороже 80% рынка.</p>
+    <div class="rows">
+      <div class="row rv"><div class="stik">01</div><div><b>Анимация текста по ключам</b><p>Позиция + прозрачность + масштаб с easy ease.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">02</div><div><b>Появление логотипа клиента</b><p>Маска + свечение.</p></div></div>
+      <div class="row rv d2"><div class="stik">03</div><div><b>Трекинг текста к объекту</b><p>Выглядит как магия, делается за 10 минут.</p></div></div>
+      <div class="row rv"><div class="stik alt">04</div><div><b>Простая инфографика</b><p>Анимированные цифры, стрелки, подчёркивания.</p></div></div>
+      <div class="row rv d1"><div class="stik">05</div><div><b>Скоростные рампы + motion blur</b><p>Фирменный приём спортивных роликов.</p></div></div>
+      <div class="row rv d2"><div class="stik alt">06</div><div><b>Шейковый зум-переход</b><p>Один пресет — используешь везде.</p></div></div>
+    </div>
+    <div class="card card-acid rv" style="margin-top:26px"><h4>Правило чека</h4><p>Ролик в CapCut — 2500 ₽. Тот же + 2–3 приёма из AE — уже 4000–6000 ₽.</p></div>
+  </div>
+</section>
+
+<div class="ticker"><div class="ticker-track"></div></div>
+
+<!-- ═══════════════ 07 · АНАТОМИЯ ═══════════════ -->
+<section class="s-acid grain" data-page="07" data-title="часть 03 · анатомия">
+  <div class="ghost">03</div>
+  <div class="ghostword" style="font-size:clamp(120px,18vw,240px);right:-3vw;top:3%;color:rgba(10,10,9,.85);--r:5deg">CUT</div>
+  <div class="wave" style="right:8vw;top:26%;color:rgba(10,10,9,.7)"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="wrap">
+    <div class="tagbox rv">часть 03 из 06</div>
+    <h2 class="display h-big rv d1">Анатомия<br>продающего Reels</h2>
+    <p class="lead rv d2">Клиент платит не за монтаж. Клиент платит за ролик, который приводит ему гостей, учеников и покупателей.</p>
+
+    <h3 class="display h-mid rv" style="margin-top:64px">Формула <span class="smear">коммерческого ролика</span></h3>
+    <p class="lead rv d1">Любой продающий Reels держится на четырёх блоках. Длина: 15–30 секунд.</p>
+    <div class="rows">
+      <div class="row rv"><div class="stik">0-3с</div><div><b>Хук</b><p>Самый сочный кадр или дерзкая фраза. Задача одна — остановить палец.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">3-20с</div><div><b>Показ</b><p>Продукт в действии. Планы по 0,7–1,5 сек, склейки на биты, движение в каждом кадре.</p></div></div>
+      <div class="row rv d2"><div class="stik">20-27с</div><div><b>Доказательство</b><p>Полный зал, очередь, отзыв на экране, «до/после». Мозг верит не словам, а другим людям.</p></div></div>
+      <div class="row rv"><div class="stik alt">финал</div><div><b>Действие</b><p>Одна плашка: «Бронируй в директ». Одно действие, не три.</p></div></div>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Хук: битва за первые 3 секунды</h3>
+    <p class="lead rv d1">Если хук слабый, весь остальной монтаж не имеет значения — его никто не увидит. Семь рабочих типов:</p>
+    <div class="grid2" style="margin-top:30px">
+      <div class="card rv"><h4>01 · Сочный макро-кадр</h4><p>Крупный план текстуры.</p></div>
+      <div class="card rv d1"><h4>02 · Движение в лицо</h4><p>Объект резко приближается к камере.</p></div>
+      <div class="card rv"><h4>03 · Цифра-провокация</h4><p>«Это заказывают 200 раз в день».</p></div>
+      <div class="card rv d1"><h4>04 · Вопрос-вызов</h4><p>«Почему сюда очередь в будний вечер?»</p></div>
+      <div class="card rv"><h4>05 · Середина действия</h4><p>Ролик начинается с кульминации.</p></div>
+      <div class="card rv d1"><h4>06 · До/после</h4><p>Резкий стык двух состояний.</p></div>
+      <div class="card rv" style="grid-column:1/-1"><h4>07 · Запретная фраза</h4><p>«Не приходите сюда голодными» — отрицание цепляет сильнее призыва.</p></div>
+    </div>
+    <div class="script rv" data-label="Тест хука">
+      <p>Покажи первые 3 секунды другу без звука. Спроси: «Хочешь узнать, что дальше?» Пауза дольше секунды — переделывай.</p>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Ритм: монтаж <span class="smear">под музыку</span></h3>
+    <p class="lead rv d1">Разница между «набором кадров» и роликом, который хочется пересмотреть, — это ритм. <b>Музыка выбирается до монтажа</b>, а не после.</p>
+    <div class="rows">
+      <div class="row rv"><div class="stik">1</div><div><p style="font-size:16.5px;opacity:1">Выбери трек из трендов площадки — тренды дают охват.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">2</div><div><p style="font-size:16.5px;opacity:1">Расставь маркеры на сильные доли: автоопределение или клавишей M на слух.</p></div></div>
+      <div class="row rv d2"><div class="stik">3</div><div><p style="font-size:16.5px;opacity:1">Склейки — точно на маркеры. Смена кадра мимо бита ощущается как фальшивая нота.</p></div></div>
+      <div class="row rv"><div class="stik alt">4</div><div><p style="font-size:16.5px;opacity:1">Меняй темп: 3–4 быстрых плана подряд, затем один длинный.</p></div></div>
+      <div class="row rv d1"><div class="stik">5</div><div><p style="font-size:16.5px;opacity:1">На пиковый момент (дроп) — самый сильный кадр ролика.</p></div></div>
+    </div>
+    <div class="card rv" style="margin-top:26px"><h4 style="color:var(--acid)">Движение в кадре</h4><p>Каждый план должен содержать движение: объекта, камеры или монтажное (плавный зум 105–110%). Статичная картинка дольше секунды — сигнал листать дальше.</p></div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Плашки, титры, сабы</h3>
+    <p class="lead rv d1">Текст в ролике — то, чем новички чаще всего портят ролик. Правила ниже — из реальных заказов.</p>
+    <div class="rows">
+      <div class="row rv"><div class="stik">01</div><div><b>Максимум 2 шрифта на ролик</b><p>Один жирный для акцентов, один простой для сабов.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">02</div><div><b>Текст живёт 1,5–2 секунды минимум</b><p>Проверь: успеваешь прочитать вслух дважды.</p></div></div>
+      <div class="row rv d2"><div class="stik">03</div><div><b>Подложка обязательна</b><p>Белый текст на светлом кадре — признак дилетанта.</p></div></div>
+      <div class="row rv"><div class="stik alt">04</div><div><b>Безопасные зоны</b><p>Смысловой текст — в центральных 70% кадра.</p></div></div>
+      <div class="row rv d1"><div class="stik">05</div><div><b>Сабы короткими фразами</b><p>По 2–4 слова, с подсветкой активного слова.</p></div></div>
+      <div class="row rv d2"><div class="stik alt">06</div><div><b>Цвета текста — из брендбука</b><p>Радуга цветов удешевляет ролик сильнее плохой камеры.</p></div></div>
+    </div>
+    <div class="script rv" data-label="Фишка">
+      <p>Собери библиотеку из 10 скринов чужих плашек, которые выглядят дорого. Перед заказом сверяйся с ней — насмотренность тренируется сравнением.</p>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Звук и обложка — <span class="smear">невидимые продавцы</span></h3>
+    <div class="grid2" style="margin-top:26px">
+      <div class="card rv"><h4 style="color:var(--acid)">Звук</h4>
+        <div class="check"><i></i><span><b>Живые звуки поверх музыки:</b> шипение сковороды, лязг штанги.</span></div>
+        <div class="check"><i></i><span><b>Голос всегда громче музыки.</b> Даккинг на −10…−15 дБ.</span></div>
+        <div class="check"><i></i><span><b>Проверка на динамике телефона</b> — 80% смотрят без наушников.</span></div>
+      </div>
+      <div class="card rv d1"><h4 style="color:var(--acid)">Обложка</h4>
+        <div class="check"><i></i><span>Отдельный кадр: самый аппетитный план + 2–4 слова крупно.</span></div>
+        <div class="check"><i></i><span>Обложки профиля должны смотреться серией — единый стиль.</span></div>
+        <div class="check"><i></i><span>Текст читается с расстояния вытянутой руки.</span></div>
+      </div>
+    </div>
+    <p class="rv" style="margin-top:20px;opacity:.8;font-size:15px;font-weight:600">Эти же принципы работают для карточек товаров: сочный кадр, крупный оффер, чистый фон, один акцентный цвет.</p>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Чек-лист перед сдачей</h3>
+    <p class="lead rv d1">Прогоняй каждый ролик по этому списку — жми на пункты. Когда всё закрывается на автомате, готов брать деньги.</p>
+    <div class="card rv d2" style="margin-top:26px" id="cl1">
+      <div class="check"><i></i><span>Хук в первых 3 секундах останавливает палец</span></div>
+      <div class="check"><i></i><span>Длина 15–30 секунд, ни одного проходного плана</span></div>
+      <div class="check"><i></i><span>Все склейки стоят на битах музыки</span></div>
+      <div class="check"><i></i><span>В каждом плане есть движение</span></div>
+      <div class="check"><i></i><span>Максимум 2 шрифта, текст с подложкой</span></div>
+      <div class="check"><i></i><span>Сабы вычитаны без ошибок</span></div>
+      <div class="check"><i></i><span>Голос громче музыки, проверено на динамике</span></div>
+      <div class="check"><i></i><span>Цвет выровнен между кадрами</span></div>
+      <div class="check"><i></i><span>Один понятный призыв к действию в финале</span></div>
+      <div class="check"><i></i><span>Обложка сделана отдельно, читается с телефона</span></div>
+    </div>
+    <div class="card card-acid rv" style="margin-top:22px"><p style="font-weight:800;font-size:16.5px"><span id="cl1n">0</span> из 10 отмечено. 10 из 10 — сдаёшь. Меньше 8 — обратно в монтажку.</p></div>
+  </div>
+</section>
+
+<!-- ═══════════════ 08 · ПОРТФОЛИО ═══════════════ -->
+<section class="s-ink grain" data-page="08" data-title="часть 04 · портфолио">
+  <div class="ghost" style="color:var(--acid)">04</div>
+  <div class="barcode" style="left:2vw;bottom:14%;color:var(--acid)"><span>PORTFOLIO · 7 DAYS</span></div>
+  <div class="wrap">
+    <div class="tagbox rv" style="color:var(--acid)">часть 04 из 06</div>
+    <h2 class="display h-big rv d1">Портфолио<br><span class="smear">за 7 дней</span></h2>
+    <p class="lead rv d2">«Покажи работы» — первый вопрос любого клиента. Замкнутый круг разрывается стратегией трёх бесплатных роликов.</p>
+
+    <h3 class="display h-mid rv" style="margin-top:64px">Стратегия «3 бесплатных ролика»</h3>
+    <p class="lead rv d1">Мои первые ролики были «за спасибо» — и это было лучшее вложение. Каждый бесплатный ролик — оплата за вход на рынок.</p>
+    <div class="rows">
+      <div class="row rv"><div class="stik">01</div><div><b>Только 3 ролика. Не 10</b><p>Три работы в трёх нишах — достаточно, чтобы продавать.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">02</div><div><b>Три разные ниши</b><p>Заведение, спорт, товар или мастер.</p></div></div>
+      <div class="row rv d2"><div class="stik">03</div><div><b>Бесплатно — в обмен на три вещи</b><p>Портфолио, отметка, короткий отзыв.</p></div></div>
+      <div class="row rv"><div class="stik alt">04</div><div><b>Делаешь как за деньги</b><p>Бесплатный ролик вполсилы — антиреклама.</p></div></div>
+      <div class="row rv d1"><div class="stik">05</div><div><b>Дедлайн — 48 часов на ролик</b><p>Скорость — часть будущего оффера.</p></div></div>
+    </div>
+    <div class="script rv" data-label="Почему это работает">
+      <p>Для бизнеса «бесплатный ролик от начинающего» — предложение без риска. Одна съёмка даёт материал на 2–3 варианта ролика.</p>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Кому предлагать и что писать</h3>
+    <div class="grid2" style="margin-top:26px">
+      <div class="card rv"><h4 style="color:var(--acid)">Заведения рядом с тобой</h4><p>Где ты бываешь сам.</p></div>
+      <div class="card rv d1"><h4 style="color:var(--acid)">Спортзал, где занимаешься</h4><p>Доверие уже есть.</p></div>
+      <div class="card rv"><h4 style="color:var(--acid)">Знакомые с товаром/услугой</h4><p>У каждого есть 2–3 контакта.</p></div>
+      <div class="card rv d1"><h4 style="color:var(--acid)">Мероприятия</h4><p>Один ивент = знакомство с десятком бизнесов.</p></div>
+    </div>
+    <div class="script rv" data-label="Скрипт · предложение бесплатного ролика">
+      <p>Здравствуйте! Меня зовут [имя], я монтирую Reels для заведений. Был у вас на днях — [конкретика] отлично смотрится в кадре. Предлагаю бесплатно снять и смонтировать один ролик. Вы ничем не рискуете. Когда удобно заехать на 30–40 минут?</p>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Как оформить портфолио</h3>
+    <p class="lead rv d1">На старте это Telegram-канал плюс рабочий аккаунт. Важно одно: клиент за 30 секунд поймёт, что ты делаешь.</p>
+    <div class="rows">
+      <div class="row rv"><div class="stik">01</div><div><b>Название</b><p>«[Имя] · Монтаж Reels для бизнеса». Без «начинающий».</p></div></div>
+      <div class="row rv d1"><div class="stik alt">02</div><div><b>Закреп-визитка</b><p>Кто ты, 3 лучшие работы, условия, контакт.</p></div></div>
+      <div class="row rv d2"><div class="stik">03</div><div><b>Каждая работа — пост</b><p>Ролик + для кого, какая задача, результат цифрой.</p></div></div>
+      <div class="row rv"><div class="stik alt">04</div><div><b>Отзывы скринами</b><p>После каждой сдачи проси 2–3 предложения.</p></div></div>
+    </div>
+    <div class="card card-acid rv" style="margin-top:26px"><h4>Страховка от блокировок</h4><p>Мой канал с работами однажды заблокировали за день. Вывод: все исходники храни в облаке, витрину дублируй минимум на двух площадках.</p></div>
+  </div>
+</section>
+
+<div class="ticker inv"><div class="ticker-track"></div></div>
+
+<!-- ═══════════════ 09 · КЛИЕНТЫ ═══════════════ -->
+<section class="s-acid grain" data-page="09" data-title="часть 05 · клиенты и деньги">
+  <div class="ghost">05</div>
+  <div class="ghostword" style="font-size:clamp(140px,22vw,280px);left:-2vw;top:2%;color:rgba(10,10,9,.85);--r:-5deg">₽</div>
+  <div class="wrap">
+    <div class="tagbox rv">часть 05 из 06</div>
+    <h2 class="display h-big rv d1">Клиенты<br><span class="smear">и деньги</span></h2>
+    <p class="lead rv d2">Монтируют многие. Зарабатывают те, кто умеет написать первое сообщение и назвать цену. Самая денежная часть гайда.</p>
+
+    <h3 class="display h-mid rv" style="margin-top:64px">Пять источников первых заказов</h3>
+    <div class="rows">
+      <div class="row rv"><div class="stik">01</div><div><b>Локальный бизнес ногами и в директ</b><p>10–15 сообщений в день.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">02</div><div><b>Твои бывшие «бесплатные» клиенты</b><p>Тёплые продажи закрываются легче.</p></div></div>
+      <div class="row rv d2"><div class="stik">03</div><div><b>Сарафан по отметкам</b><p>Со временем стал главным каналом.</p></div></div>
+      <div class="row rv"><div class="stik alt">04</div><div><b>Чаты и биржи</b><p>Отвечай первым и сразу с примерами.</p></div></div>
+      <div class="row rv d1"><div class="stik">05</div><div><b>Ивенты и организаторы</b><p>Один ивент = знакомство с десятком бизнесов.</p></div></div>
+    </div>
+    <div class="card rv" style="margin-top:26px"><h4 style="color:var(--acid)">Норма контакта</h4><p>10 сообщений в день, 6 дней в неделю. 200–250 сообщений почти гарантированно дают первые заказы. Не «повезёт», а математика.</p></div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Скрипт первого сообщения</h3>
+    <p class="lead rv d1">Главная ошибка — писать «нужен монтажёр?». Правильное сообщение показывает проблему клиента, а не тебя.</p>
+    <div class="script rv" data-label="Скрипт · холодное сообщение бизнесу">
+      <p>Здравствуйте! Смотрю ваш профиль — [наблюдение]. Сейчас короткие ролики приводят [гостей] из рекомендаций. Вот примеры моих работ: [ссылка]. Могу собрать пробный ролик из ваших материалов — вы увидите результат до решения о постоянной работе. Интересно?</p>
+    </div>
+    <div class="rows" style="margin-top:14px">
+      <div class="row rv"><div class="stik">→</div><div><b>Конкретное наблюдение</b><p>Доказывает, что не спам. Удваивает ответы.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">→</div><div><b>Ссылка на примеры сразу</b><p>Экономит клиенту шаг.</p></div></div>
+      <div class="row rv d2"><div class="stik">→</div><div><b>Лёгкий первый шаг</b><p>Вместо «заключим договор на месяц».</p></div></div>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Follow-up и ивенты</h3>
+    <div class="script rv" data-label="Скрипт · напоминание (3 дня тишины)">
+      <p>Поднимаю своё сообщение — набросал идею ролика конкретно под вас: [1–2 предложения]. Если откликается — соберу пробник на этой неделе.</p>
+    </div>
+    <div class="script rv d1" data-label="Скрипт · организатору мероприятия">
+      <p>Делаю динамичные видеоотчёты с таких событий — вот примеры: [ссылка]. Отдаю первый ролик в течение 24 часов после события. Обсудим условия?</p>
+    </div>
+    <div style="margin-top:26px">
+      <div class="check rv"><i></i><span><b>Один follow-up, не пять.</b> Напомнил через 3 дня — тишина значит «нет».</span></div>
+      <div class="check rv"><i></i><span><b>Отвечай быстро.</b> 15 минут против «вечером» — разные конверсии.</span></div>
+      <div class="check rv"><i></i><span><b>Переводи в конкретику:</b> «Могу приехать в четверг или субботу?»</span></div>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Как назвать 2500 ₽ <span class="smear">и не дрогнуть</span></h3>
+    <div class="grid3" style="margin-top:30px">
+      <div class="price rv"><div class="n">2500₽</div><div class="l">из ваших материалов</div></div>
+      <div class="price rv d1"><div class="n">3500₽</div><div class="l">съёмка + монтаж</div></div>
+      <div class="price rv d2"><div class="n">8000₽</div><div class="l">пакет 4 ролика</div></div>
+    </div>
+    <div class="script rv" data-label="Скрипт · ответ на «сколько стоит?»">
+      <p>Ролик под ключ — 2500 ₽: монтаж, сабы, цвет, музыка, обложка. Срок 2 дня. Если нужна съёмка — 3500 ₽. Правки в разумном объёме входят в цену. На когда планируем первый?</p>
+    </div>
+    <div class="card rv" style="margin-top:22px"><h4 style="color:var(--acid)">Три правила цены</h4><p>Называй сразу с составом работы; после цены задавай вопрос; никогда не извиняйся за цену.</p></div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Возражения: что отвечать</h3>
+    <div class="grid2" style="margin-top:26px">
+      <div class="card rv"><h4 style="color:var(--acid)">«Дорого»</h4><p>Ролик работает в профиле месяцами и приводит клиентов бесплатно. Могу начать с одного ролика вместо пакета.</p></div>
+      <div class="card rv d1"><h4 style="color:var(--acid)">«Снимаем сами»</h4><p>Отлично, материал уже есть. Пришлите исходники — соберу пробный ролик, сравните.</p></div>
+      <div class="card rv"><h4 style="color:var(--acid)">«Есть СММ-щик»</h4><p>Я не заменяю СММ, а усиливаю. Могу связаться с вашим специалистом напрямую.</p></div>
+      <div class="card rv d1"><h4 style="color:var(--acid)">«Подумаем»</h4><p>Сейчас открыто 2 места на месяц. Напишу вам через 3–4 дня — скажете решение?</p></div>
+    </div>
+    <div class="card rv" style="margin-top:22px"><p style="font-size:16.5px;font-weight:700;opacity:1;line-height:1.6"><span style="color:var(--acid)">Общий принцип:</span> возражение — не отказ, а запрос на уверенность. Спокойный ответ + маленький шаг закрывают большинство сомнений.</p></div>
+
+    <h3 class="display h-mid rv" style="margin-top:70px">Сдача работы и отзыв</h3>
+    <div class="rows">
+      <div class="row rv"><div class="stik">01</div><div><b>Предоплата 50%</b><p>До начала работы — норма рынка.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">02</div><div><b>Сдавай раньше дедлайна</b><p>Дешёвый способ выглядеть профессионалом.</p></div></div>
+      <div class="row rv d2"><div class="stik">03</div><div><b>Правки: 2 круга входят в цену</b><p>Дальше — по 500 ₽.</p></div></div>
+      <div class="row rv"><div class="stik alt">04</div><div><b>Сдал — предложи следующий шаг</b><p>«Готов взять на пакет 4 ролика».</p></div></div>
+    </div>
+    <div class="script rv" data-label="Скрипт · просьба об отзыве">
+      <p>Рад, что ролик понравился! Можете написать пару предложений — что понравилось в работе и результате? Публикую отзывы в портфолио. И если есть знакомые, кому нужен видеоконтент — буду благодарен за рекомендацию.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 10 · ПЛАН ═══════════════ -->
+<section class="s-ink grain" data-page="10" data-title="часть 06 · план на 30 дней">
+  <div class="ghost" style="color:var(--acid)">06</div>
+  <div class="filmstrip" style="right:0;color:rgba(207,247,30,.35)"></div>
+  <div class="wrap">
+    <div class="tagbox rv" style="color:var(--acid)">часть 06 из 06</div>
+    <h2 class="display h-big rv d1">План<br><span class="smear">на 30 дней</span></h2>
+    <p class="lead rv d2">Всё, что было раньше, собирается в календарь. Каждый день — конкретная задача на свои 2 часа.</p>
+
+    <h3 class="display h-mid rv" style="margin-top:60px">Неделя 1 · Инструмент в руках</h3>
+    <div class="rows">
+      <div class="row rv"><div class="stik">Д1</div><div><b>Настройка базы</b><p>Установи CapCut. Заведи облачную папку. Заполни таблицу привычек.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">Д2</div><div><b>Текст и плашки</b><p>Автосабы, стили, подложки. Собери тренировочный ролик.</p></div></div>
+      <div class="row rv d2"><div class="stik">Д3</div><div><b>Звук и цвет</b><p>Упражнение «копия мастера».</p></div></div>
+      <div class="row rv"><div class="stik alt">Д4</div><div><b>Ролик №1 «в стол»</b><p>Полный цикл по формуле хук-показ-доказательство-действие.</p></div></div>
+      <div class="row rv d1"><div class="stik">Д5</div><div><b>Ролик №2</b><p>Другая ниша. Цель — скорость: 2 часа от импорта до экспорта.</p></div></div>
+      <div class="row rv d2"><div class="stik alt">Д6</div><div><b>Ролик №3 + разбор</b><p>Что общего в слабых местах?</p></div></div>
+      <div class="row rv"><div class="stik">Д7</div><div><b>Список целей</b><p>10 кандидатов для бесплатных роликов.</p></div></div>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:60px">Неделя 2 · Портфолио из реальных работ</h3>
+    <div class="rows">
+      <div class="row rv"><div class="stik">Д8</div><div><b>Рассылка предложений</b><p>Напиши 10 кандидатам по скрипту. К двум ближайшим сходи ногами.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">Д9</div><div><b>Съёмка №1</b><p>30–60 минут материала: крупные планы, движение, детали.</p></div></div>
+      <div class="row rv d2"><div class="stik">Д10</div><div><b>Монтаж и сдача №1</b><p>Сдай в течение 48 часов. Попроси отметку и отзыв.</p></div></div>
+      <div class="row rv"><div class="stik alt">Д11</div><div><b>Съёмка №2</b><p>Вторая ниша. Параллельно — follow-up.</p></div></div>
+      <div class="row rv d1"><div class="stik">Д12</div><div><b>Монтаж и сдача №2</b><p>Собери 2 варианта ролика из одной съёмки.</p></div></div>
+      <div class="row rv d2"><div class="stik alt">Д13</div><div><b>Съёмка и монтаж №3</b><p>Товар или мастер. Сделай обложку-карточку бонусом.</p></div></div>
+      <div class="row rv"><div class="stik">Д14</div><div><b>Сборка портфолио</b><p>Оформи Telegram-канал: визитка, 3+ работы, отзывы.</p></div></div>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:60px">Неделя 3 · Рассылка и переговоры</h3>
+    <div class="rows">
+      <div class="row rv"><div class="stik">Д15</div><div><b>База клиентов</b><p>Собери таблицу 50 контактов по городу.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">Д16</div><div><b>Старт холодной рассылки</b><p>10 сообщений с персональным наблюдением.</p></div></div>
+      <div class="row rv d2"><div class="stik">Д17</div><div><b>10 сообщений + чаты</b><p>Вступи в 5 чатов предпринимателей города.</p></div></div>
+      <div class="row rv"><div class="stik alt">Д18</div><div><b>10 сообщений + follow-up</b><p>Напоминание тем, кто молчит 3 дня.</p></div></div>
+      <div class="row rv d1"><div class="stik">Д19</div><div><b>10 сообщений + тёплые</b><p>Напиши «бесплатным» клиентам, предложи пакет.</p></div></div>
+      <div class="row rv d2"><div class="stik alt">Д20</div><div><b>10 сообщений + практика</b><p>Собери ещё ролик в портфолио.</p></div></div>
+      <div class="row rv"><div class="stik">Д21</div><div><b>Разбор недели</b><p>Посчитай воронку, скорректируй скрипт.</p></div></div>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:60px">Неделя 4 · Первый платный заказ</h3>
+    <div class="rows">
+      <div class="row rv"><div class="stik">Д22</div><div><b>Рассылка продолжается</b><p>10 сообщений — норма до первого заказа.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">Д23-25</div><div><b>Переговоры → сделка</b><p>Называй цену, закрывай возражения, бери предоплату.</p></div></div>
+      <div class="row rv d2"><div class="stik">Д26-27</div><div><b>Исполнение заказа</b><p>Сдай раньше срока. Возьми отзыв.</p></div></div>
+      <div class="row rv"><div class="stik alt">Д28</div><div><b>Кейс из заказа</b><p>Оформи как: задача → решение → результат → отзыв.</p></div></div>
+      <div class="row rv d1"><div class="stik">Д29</div><div><b>Масштаб</b><p>Подними план: 15 сообщений в день, 2 клиента на пакетах.</p></div></div>
+      <div class="row rv d2"><div class="stik alt">Д30</div><div><b>Ретроспектива</b><p>Запиши цель на следующие 30 дней.</p></div></div>
+    </div>
+    <div class="card card-acid rv" style="margin-top:30px"><h4>Если заказа нет к дню 30</h4><p>Проверь три места — портфолио, объём рассылки, скрипт. Воронка математична, она дожмётся.</p></div>
+  </div>
+</section>
+
+<div class="ticker"><div class="ticker-track"></div></div>
+
+<!-- ═══════════════ 11 · ПРИВЫЧКИ ═══════════════ -->
+<section class="s-acid grain" data-page="11" data-title="бонус · привычки">
+  <div class="ghostword" style="font-size:clamp(100px,15vw,200px);right:-2vw;top:2%;color:rgba(10,10,9,.85);--r:4deg">80%</div>
+  <div class="wrap">
+    <div class="tagbox rv">бонус · система привычек</div>
+    <h2 class="display h-big rv d1">Система <span class="smear">привычек</span></h2>
+    <p class="lead rv d2">Таблица, по которой я перестраивал свои дни в училище: внедрял по одной полезной привычке, ломал вредные и бросил курить.</p>
+
+    <h3 class="display h-mid rv" style="margin-top:56px">Как работает таблица</h3>
+    <p class="lead rv d1">Максимум 5 привычек, каждый вечер за 30 секунд отмечаешь выполненные, в конце недели считаешь процент. Только клетки и честность.</p>
+    <div class="rows">
+      <div class="row rv"><div class="stik">01</div><div><b>Максимум 5 привычек одновременно</b><p>Больше — система разваливается.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">02</div><div><b>Привычка = действие «да/нет»</b><p>«Тренировка 30 минут», не «заниматься спортом».</p></div></div>
+      <div class="row rv d2"><div class="stik">03</div><div><b>Отмечаешь вечером, в одно время</b><p>Жёсткость к учёту = честность к себе.</p></div></div>
+      <div class="row rv"><div class="stik alt">04</div><div><b>Цель недели — 80%, не 100%</b><p>Перфекционизм убивает системы.</p></div></div>
+      <div class="row rv d1"><div class="stik">05</div><div><b>Новая привычка — только вместо освоенной</b><p>3 недели на 80%+ — можно менять.</p></div></div>
+    </div>
+    <div class="script rv" data-label="Мой опыт">
+      <p>Так я бросил курить — рушить цепочку из закрашенных клеток было жальче, чем хотелось никотина.</p>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:60px">Твоя таблица на неделю</h3>
+    <p class="lead rv d1">Кликай клетки прямо здесь — или распечатай страницу. Одна неделя = один лист.</p>
+    <table class="habit rv d2" id="habit">
+      <tr><th>Привычка</th><th>пн</th><th>вт</th><th>ср</th><th>чт</th><th>пт</th><th>сб</th><th>вс</th></tr>
+      <tr><td><b>1. Монтаж / клиенты — 2ч</b></td></tr>
+      <tr><td>2. ______________</td></tr>
+      <tr><td>3. ______________</td></tr>
+      <tr><td>4. Убрать: ______________</td></tr>
+      <tr><td>5. Убрать: ______________</td></tr>
+    </table>
+    <div class="grid2" style="margin-top:28px">
+      <div class="card rv"><h4 style="color:var(--acid)">Неделя закрыта</h4><p>28+ клеток из 35 (80%). Награди себя.</p></div>
+      <div class="card rv d1"><h4 style="color:#ff5db1">Неделя провалена</h4><p>Меньше 22 клеток. Разбор, не самобичевание.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 12 · БОНУС-ПАК ═══════════════ -->
+<section class="s-ink grain" data-page="12" data-title="бонус-пак">
+  <div class="barcode" style="right:3vw;top:8%;color:var(--acid)"><span>BONUS PACK · 15 / 10 / 30</span></div>
+  <div class="wrap">
+    <div class="tagbox rv" style="color:var(--acid)">бонус-пак</div>
+    <h2 class="display h-big rv d1">Пять инструментов,<br><span class="smear">которые ускоряют путь</span></h2>
+    <p class="lead rv d2">Всё, что снимает конкретную задержку: что писать, как оформить, сколько просить, кому писать.</p>
+    <div class="stats rv d3" style="max-width:560px">
+      <div class="stat"><div class="n">15</div><div class="l">скриптов</div></div>
+      <div class="stat"><div class="n">10</div><div class="l">шаблонов</div></div>
+      <div class="stat"><div class="n">30</div><div class="l">ниш</div></div>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:76px">Бонус 01 · <span class="smear">15 готовых сообщений</span></h3>
+    <p class="lead rv d1">Компактный банк для быстрого копипаста. Меняй то, что в [скобках]. Тапни по карточке — текст скопируется.</p>
+    <div class="mono rv" style="color:var(--acid);margin:34px 0 16px">// холодный контакт</div>
+    <div class="grid2">
+      <div class="card copyable rv"><h4 style="color:var(--acid)">01 · Первое сообщение</h4><p>Здравствуйте! Смотрю профиль — [наблюдение]. Монтирую Reels для [ниша]: [ссылка]. Могу собрать пробный ролик — интересно?</p></div>
+      <div class="card copyable rv d1"><h4 style="color:var(--acid)">02 · Если не ответили 3 дня</h4><p>Поднимаю сообщение — идея ролика под вас: [фраза]. Соберу пробник на этой неделе.</p></div>
+      <div class="card copyable rv"><h4 style="color:var(--acid)">03 · Организатору события</h4><p>Делаю афтемуви с мероприятий: [ссылка]. Отдаю ролик в течение 24 часов. Обсудим?</p></div>
+    </div>
+    <div class="mono rv" style="color:var(--acid);margin:34px 0 16px">// бесплатный ролик</div>
+    <div class="grid2">
+      <div class="card copyable rv"><h4 style="color:var(--acid)">04 · Предложение</h4><p>Бесплатно сниму и смонтирую ролик. Вы не рискуете, мне нужно портфолио. Когда удобно?</p></div>
+      <div class="card copyable rv d1"><h4 style="color:var(--acid)">05 · Просьба об отзыве</h4><p>Рад, что понравилось! Напишите пару предложений — публикую отзывы в портфолио.</p></div>
+      <div class="card copyable rv"><h4 style="color:var(--acid)">06 · Переход на платную основу</h4><p>Как отработал ролик? Готов сделать серию из 4 — расскажу про пакет.</p></div>
+    </div>
+    <div class="mono rv" style="color:var(--acid);margin:34px 0 16px">// цена и возражения</div>
+    <div class="grid2">
+      <div class="card copyable rv" style="grid-column:1/-1"><h4 style="color:var(--acid)">07 · Ответ на «сколько стоит?»</h4><p>Ролик под ключ — 2500 ₽: монтаж, сабы, цвет, музыка, обложка. Срок 2 дня. Съёмка — 3500 ₽. Есть пакет 4 ролика за 8000 ₽. На когда планируем первый?</p></div>
+      <div class="card copyable rv"><h4 style="color:var(--acid)">08 · «Дорого»</h4><p>Ролик приводит клиентов месяцами бесплатно. Могу начать с одного вместо пакета.</p></div>
+      <div class="card copyable rv d1"><h4 style="color:var(--acid)">09 · «Снимаем сами»</h4><p>Материал уже есть. Пришлите исходники — соберу пробный, сравните.</p></div>
+      <div class="card copyable rv"><h4 style="color:var(--acid)">10 · «Есть СММ»</h4><p>Я усиливаю СММ, а не заменяю. Могу связаться с вашим специалистом.</p></div>
+      <div class="card copyable rv d1"><h4 style="color:var(--acid)">11 · «Подумаем»</h4><p>Открыто 2 места на месяц. Напишу через 3-4 дня — скажете решение?</p></div>
+    </div>
+    <div class="mono rv" style="color:var(--acid);margin:34px 0 16px">// сдача работы</div>
+    <div class="grid2">
+      <div class="card copyable rv"><h4 style="color:var(--acid)">12 · Правки вне лимита</h4><p>Первые 2 круга правок входят в цену, дальше — 500 ₽ за круг. Сообщаю заранее.</p></div>
+      <div class="card copyable rv d1"><h4 style="color:var(--acid)">13 · Ранняя сдача</h4><p>Ролик готов — отправляю на день раньше срока. Жду фидбэк.</p></div>
+      <div class="card copyable rv"><h4 style="color:var(--acid)">14 · Запрос рекомендации</h4><p>Если знаете предпринимателей, которым нужен видеоконтент — буду благодарен за рекомендацию.</p></div>
+      <div class="card copyable rv d1"><h4 style="color:var(--acid)">15 · Следующий заказ</h4><p>Готов взять на пакет 4 ролика в месяц, ближайший слот — со следующей недели. Забронировать?</p></div>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:76px">Бонус 02 · 10 стилей текстовых оверлеев</h3>
+    <p class="lead rv d1">Готовые связки «шрифт + подложка + цвет». Сохрани как пресет, используй в каждом заказе.</p>
+    <div class="rows">
+      <div class="row rv"><div class="stik">01</div><div><b>«Чистая цена»</b><p>Крупная цифра на плашке акцентного цвета. Для товаров и меню.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">02</div><div><b>«Заголовок-полоса»</b><p>Жирный текст на цветной полосе. Для хуков и офферов.</p></div></div>
+      <div class="row rv d2"><div class="stik">03</div><div><b>«Стеклянная подложка»</b><p>Полупрозрачный блюр-бокс. Универсальный вариант.</p></div></div>
+      <div class="row rv"><div class="stik alt">04</div><div><b>«Счётчик»</b><p>Анимированная цифра с плюсом. Для достижений.</p></div></div>
+      <div class="row rv d1"><div class="stik">05</div><div><b>«Диалог-саб»</b><p>Сабы с подсветкой активного слова. Для разговорных роликов.</p></div></div>
+      <div class="row rv d2"><div class="stik alt">06</div><div><b>«Стрелка-акцент»</b><p>Текст + стрелка на деталь в кадре. Для обзоров.</p></div></div>
+      <div class="row rv"><div class="stik">07</div><div><b>«До/после»</b><p>Разделительная линия по центру. Для трансформаций.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">08</div><div><b>«Тикер снизу»</b><p>Бегущая строка с контактом. Для финальных призывов.</p></div></div>
+      <div class="row rv d2"><div class="stik">09</div><div><b>«Логотип-печать»</b><p>Лого клиента с поворотом. Для брендированных роликов.</p></div></div>
+      <div class="row rv"><div class="stik alt">10</div><div><b>«Прайс-плашка»</b><p>Таблица цен на 3 секунды. Для меню и услуг.</p></div></div>
+    </div>
+    <div class="card card-acid rv" style="margin-top:24px"><h4>Как использовать</h4><p>Выбери 2–3 стиля под нишу клиента и используй во всех роликах для него — профиль выглядит собранным, а не хаотичным.</p></div>
+
+    <h3 class="display h-mid rv" style="margin-top:76px">Бонус 03 · <span class="smear">чек-лист при сдаче</span></h3>
+    <p class="lead rv d1">Сохрани как картинку на телефон и открывай перед каждой сдачей.</p>
+    <div class="card rv d2" style="margin-top:26px" id="cl2">
+      <div class="check"><i></i><span>Хук в первых 3 секундах останавливает палец</span></div>
+      <div class="check"><i></i><span>Длина 15–30 секунд, ни одного проходного плана</span></div>
+      <div class="check"><i></i><span>Склейки стоят на битах музыки</span></div>
+      <div class="check"><i></i><span>В каждом плане есть движение</span></div>
+      <div class="check"><i></i><span>Максимум 2 шрифта, текст с подложкой</span></div>
+      <div class="check"><i></i><span>Сабы вычитаны без ошибок</span></div>
+      <div class="check"><i></i><span>Голос громче музыки, проверено на динамике</span></div>
+      <div class="check"><i></i><span>Цвет выровнен между кадрами</span></div>
+      <div class="check"><i></i><span>Один понятный призыв к действию</span></div>
+      <div class="check"><i></i><span>Обложка сделана отдельно</span></div>
+      <div class="check"><i></i><span>Экспорт 1080×1920, без чёрных полос</span></div>
+      <div class="check"><i></i><span>Пересмотрено целиком свежим взглядом</span></div>
+    </div>
+    <div class="card card-acid rv" style="margin-top:22px"><p style="font-weight:800;font-size:16.5px"><span id="cl2n">0</span> из 12 отмечено. 12 из 12 — сдаёшь. Меньше 10 — обратно в монтажку.</p></div>
+
+    <h3 class="display h-mid rv" style="margin-top:76px">Бонус 04 · сколько просить за заказ</h3>
+    <p class="lead rv d1">Считай не интуицией, а по формуле: база + надбавки. Калькулятор живой — кликай.</p>
+    <div class="card rv d2" style="margin-top:26px">
+      <div class="mono" style="color:var(--acid);margin-bottom:14px">шаг 1 — базовая цена</div>
+      <div class="row" style="border:none;padding:8px 0"><div class="stik">2500₽</div><div><p style="font-size:16.5px;opacity:1">Монтаж из готовых материалов, без выезда</p></div></div>
+      <div class="mono" style="color:var(--acid);margin:22px 0 6px">шаг 2 — надбавки (кликай)</div>
+      <div class="calc-opt check" data-v="1000"><i></i><span><b>+1000₽</b> · нужна съёмка</span></div>
+      <div class="calc-opt check" data-v="800"><i></i><span><b>+800₽</b> · приёмы After Effects</span></div>
+      <div class="calc-opt check" data-v="500"><i></i><span><b>+500₽</b> · срочность 24 часа</span></div>
+      <div class="calc-opt check" data-v="-300"><i></i><span><b>−300₽</b> · пакет от 4 роликов — скидка</span></div>
+      <div style="margin-top:26px;border-top:3px solid var(--acid);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <span class="mono" style="color:var(--acid)">итог за ролик</span>
+        <span style="font-family:'Unbounded',sans-serif;font-weight:900;font-size:40px;color:var(--acid)" id="calcSum">2500 ₽</span>
+      </div>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:76px">Бонус 05 · 30 готовых ниш для рассылки</h3>
+    <div class="grid2" style="margin-top:26px">
+      <div class="card rv"><h4 style="color:var(--acid)">Еда и напитки</h4><p>Кафе · Рестораны · Кофейни · Бары · Кальянные · Пекарни · Суши-бары</p></div>
+      <div class="card rv d1"><h4 style="color:var(--acid)">Красота и здоровье</h4><p>Барбершопы · Салоны · Ногтевые студии · Стоматологии · Фитнес-клубы</p></div>
+      <div class="card rv"><h4 style="color:var(--acid)">Спорт и события</h4><p>Спортзалы · Организаторы турниров · Танцевальные студии · Ивенты</p></div>
+      <div class="card rv d1"><h4 style="color:var(--acid)">Товары и услуги</h4><p>Хендмейд · Мебель на заказ · Автосервисы · Цветочные · Ателье</p></div>
+    </div>
+    <div class="script rv" data-label="Как искать быстро">
+      <p>2ГИС → категория («барбершоп», «кофейня») → фильтр по району → Instagram/Telegram компании через профиль. За 20 минут набирается 15–20 контактов.</p>
+    </div>
+
+    <h3 class="display h-mid rv" style="margin-top:76px">Что дальше, <span class="smear">после первого заказа</span></h3>
+    <p class="lead rv d1">Первые 2500 ₽ — не про деньги. Это доказательство, что цепочка «навык → портфолио → клиент → оплата» работает.</p>
+    <div class="rows">
+      <div class="row rv"><div class="stik">→</div><div><b>Месяц 2: пакеты</b><p>Три клиента на пакетах — 24 000 ₽ стабильно.</p></div></div>
+      <div class="row rv d1"><div class="stik alt">→</div><div><b>Месяц 2-3: инструменты дороже</b><p>AE поднимает чек до 5000–10000 ₽.</p></div></div>
+      <div class="row rv d2"><div class="stik">→</div><div><b>Месяц 3+: специализация</b><p>Узкий специалист стоит дороже универсала.</p></div></div>
+      <div class="row rv"><div class="stik alt">→</div><div><b>Поднимай цены каждые 5-7 заказов</b><p>2500 → 3500 → 5000.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 13 · ФИНАЛ ═══════════════ -->
+<section class="s-acid grain finale" data-page="13" data-title="финал" style="min-height:92vh;display:flex;align-items:center">
+  <div class="rec" style="color:var(--ink)"><i></i>STOP REC · <span class="recTime">00:00:00</span></div>
+  <div class="ghostword" style="font-size:clamp(90px,14vw,190px);right:-3vw;bottom:2%;color:rgba(10,10,9,.85);--r:-4deg">EXPORT<br>DONE</div>
+  <div class="wave" style="right:12vw;top:16%;color:rgba(10,10,9,.75)"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="barcode" style="left:4vw;bottom:16%;color:var(--ink)"><span>MONTAJ V DENGI · 2026 · 00:30:00:00</span></div>
+  <div class="wrap">
+    <div class="tagbox rv">финал</div>
+    <h2 class="display rv d1" style="font-size:clamp(48px,9vw,116px);line-height:.94">
+      30 дней.<br>2 часа в день.<br><span class="smear">Первый заказ.</span>
+    </h2>
+    <p class="lead rv d2" style="margin-top:28px">Гайд и все 5 бонусов закончились. Теперь заполняй свой таймлайн: день 1 начинается сегодня вечером.</p>
+    <p class="lead rv d3" style="margin-top:20px;font-weight:800">Дни идут в любом случае. Вопрос только в том, засчитаешь ты их себе — или нет.</p>
+
+    <!-- продающий value-блок -->
+    <div class="card rv d3" style="margin-top:48px;max-width:720px">
+      <div class="mono" style="color:var(--acid);margin-bottom:16px">что у тебя в руках</div>
+      <div class="check done" style="pointer-events:none"><i></i><span><b>6 частей системы</b> — от первого клика в CapCut до предоплаты на карте</span></div>
+      <div class="check done" style="pointer-events:none"><i></i><span><b>15 готовых скриптов</b> — переговоры закрыты за тебя, копируй и отправляй</span></div>
+      <div class="check done" style="pointer-events:none"><i></i><span><b>Калькулятор цены + 2 чек-листа</b> — никогда не продешевишь и не сдашь брак</span></div>
+      <div class="check done" style="pointer-events:none"><i></i><span><b>30 ниш + план на каждый день</b> — ноль вопросов «а что мне делать сегодня»</span></div>
+      <div class="check done" style="pointer-events:none"><i></i><span><b>Система привычек из казармы</b> — работает, даже когда мотивации ноль</span></div>
+      <div style="margin-top:22px;padding-top:20px;border-top:3px solid var(--acid)">
+        <p style="font-size:16.5px;font-weight:700;line-height:1.6;opacity:1">Один заказ по этому гайду — <span style="color:var(--acid)">2500 ₽</span>. Система рассчитана на первый заказ за 30 дней и окупает себя в первую же сделку. Дальше — только масштаб.</p>
+      </div>
+    </div>
+
+    <a href="#" class="cta rv d4" onclick="scrollTo({top:0,behavior:'smooth'});return false">Начать день 1 сегодня <span>→</span></a>
+
+    <div class="tagbox rv d4" style="margin-top:40px">увидимся на первом заказе ●</div>
+  </div>
+</section>
+
+<footer>
+  <span>Монтаж в деньги · премиум · 2026</span>
+  <span id="footTc">00:30:00:00</span>
+</footer>
+
+<script>
+/* ── интро ── */
+setTimeout(()=>document.getElementById('boot').classList.add('off'),1700);
+
+/* ── прогресс ── */
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+});
+
+/* ── reveal ── */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ── пятна света за стеклом ── */
+const darkColors=['rgba(207,247,30,.5)','rgba(255,60,170,.4)','rgba(120,60,255,.42)','rgba(0,200,255,.32)'];
+const acidColors=['rgba(255,255,255,.75)','rgba(255,60,170,.42)','rgba(120,60,255,.4)','rgba(10,10,9,.5)'];
+document.querySelectorAll('section[data-page]').forEach((sec,si)=>{
+  const cols=sec.classList.contains('s-acid')?acidColors:darkColors;
+  const n=3+ (si%2);
+  for(let i=0;i<n;i++){
+    const b=document.createElement('div');
+    b.className='blob';
+    const size=220+((si*67+i*131)%260);
+    b.style.width=b.style.height=size+'px';
+    b.style.background=cols[(si+i)%cols.length];
+    b.style.left=((si*37+i*53)%80)+'%';
+    b.style.top=((si*23+i*41)%75)+'%';
+    b.style.animationDelay=(-(si*2+i*3.5))+'s';
+    b.style.animationDuration=(12+((si+i)%3)*4)+'s';
+    sec.insertBefore(b,sec.firstChild);
+  }
+});
+
+/* ── тикеры ── */
+const phrases=['МОНТАЖ В ДЕНЬГИ','ПРОВЕРЕННЫЕ ИНСТРУМЕНТЫ','30 ДНЕЙ · ПРАКТИКА','REC · CUT · RENDER · EXPORT','CAPCUT → PREMIERE → AE','ХУК · ПОКАЗ · ДОКАЗАТЕЛЬСТВО · ДЕЙСТВИЕ','2500 ₽ СТАРТ'];
+document.querySelectorAll('.ticker-track').forEach(t=>{
+  const s='<span>'+phrases.map(p=>p+' &nbsp;●&nbsp;').join(' ')+'</span>';
+  t.innerHTML=s+s;
+});
+
+/* ── АНИМИРОВАННАЯ НУМЕРАЦИЯ СТРАНИЦ ── */
+const secs=[...document.querySelectorAll('section[data-page]')];
+const TOTAL=String(secs.length).padStart(2,'0');
+
+/* штампы внутри секций */
+secs.forEach(sec=>{
+  const p=sec.dataset.page,title=sec.dataset.title||'';
+  const st=document.createElement('div');
+  st.className='pagestamp';
+  st.style.color=sec.classList.contains('s-acid')?'var(--ink)':'var(--acid)';
+  st.innerHTML='<div class="num">'+p.split('').map(d=>'<span class="digit">'+d+'</span>').join('')+'</div>'
+    +'<div class="line"></div>'
+    +'<div class="of">/ '+TOTAL+' · '+title+'</div>';
+  sec.appendChild(st);
+});
+const ioStamp=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.querySelector('.pagestamp').classList.add('on')}
+}),{threshold:.18});
+secs.forEach(s=>ioStamp.observe(s));
+
+/* HUD-счётчик с перелистыванием */
+const hudPage=document.getElementById('hudPage');
+let curPage='01';
+const ioHud=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      const p=e.target.dataset.page;
+      if(p!==curPage){
+        curPage=p;
+        const box=hudPage.parentElement;
+        box.classList.add('flip');
+        setTimeout(()=>{
+          hudPage.textContent='СТР '+p+'/'+TOTAL;
+          box.classList.remove('flip');
+        },240);
+      }
+    }
+  });
+},{threshold:.35});
+secs.forEach(s=>ioHud.observe(s));
+
+/* таймкод = реальное локальное время зрителя (его часовой пояс) + кадры */
+function tickTc(){
+  const now=new Date();
+  const pad=n=>String(n).padStart(2,'0');
+  const f=Math.floor(now.getMilliseconds()/1000*30); /* 30 fps */
+  const tc=pad(now.getHours())+':'+pad(now.getMinutes())+':'+pad(now.getSeconds())+':'+pad(f);
+  document.getElementById('hudTc').textContent=tc;
+  const b=document.getElementById('bootTc');if(b)b.textContent=tc;
+  const ft=document.getElementById('footTc');if(ft)ft.textContent=tc+' · '+Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const hm=pad(now.getHours())+':'+pad(now.getMinutes())+':'+pad(now.getSeconds());
+  document.querySelectorAll('.recTime').forEach(el=>el.textContent=hm);
+}
+tickTc();
+setInterval(tickTc,33);
+
+/* ── ФИЗИКА СТРАНИЦ: параллакс + инерция + разгон тикеров ── */
+(function(){
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce)return;
+  const root=document.documentElement.style;
+
+  /* параллакс-слои: у каждого декора своя глубина */
+  const targets=[];
+  function collect(){
+    targets.length=0;
+    const speedMap=[
+      ['.ghostword',.55,220],['.ghost',.4,240],['.barcode',.5,200],
+      ['.blob',.32,220],['.wave',.5,200],['.focus',.5,200],['.filmstrip',.18,160],
+      ['.h-big',.07,30],['.h-mid',.055,24]   /* заголовки чуть «плывут» — глубина видна и на телефоне */
+    ];
+    speedMap.forEach(([sel,sp,mx])=>{
+      document.querySelectorAll(sel).forEach((el,i)=>{
+        targets.push({el,sp:sp*(1+(i%3)*.3),mx});
+      });
+    });
+    measure();
+  }
+  function measure(){
+    const sy=scrollY;
+    targets.forEach(t=>{t.el.style.translate='0 0'});
+    targets.forEach(t=>{
+      const r=t.el.getBoundingClientRect();
+      t.mid=r.top+sy+r.height/2;
+    });
+  }
+  collect();
+  addEventListener('resize',measure);
+  addEventListener('load',measure);
+
+  /* инерция скролла */
+  let prevY=scrollY,vel=0;
+  const tickers=[...document.querySelectorAll('.ticker-track')];
+
+  function phys(){
+    const y=scrollY;
+    vel+=((y-prevY)-vel)*.12;   /* сглаженная скорость */
+    prevY=y;
+
+    /* желейная инерция: контент заметно отстаёт и скашивается */
+    const lag=Math.max(-34,Math.min(34,-vel*.7));
+    const sk=Math.max(-1.6,Math.min(1.6,vel*.035));
+    root.setProperty('--lagY',lag.toFixed(2)+'px');
+    root.setProperty('--sk',sk.toFixed(3)+'deg');
+    /* стикеры подкручиваются от скорости листания */
+    const spin=Math.max(-10,Math.min(10,vel*.28));
+    root.setProperty('--spin',spin.toFixed(2)+'deg');
+
+    /* параллакс: декор плывёт с разной скоростью относительно текста */
+    const center=y+innerHeight/2;
+    for(const t of targets){
+      let off=(t.mid-center)*t.sp;
+      off=Math.max(-t.mx,Math.min(t.mx,off));
+      t.el.style.translate='0 '+(-off).toFixed(1)+'px';
+    }
+
+    /* бегущие строки разгоняются от скорости скролла */
+    const rate=1+Math.min(5,Math.abs(vel)*.06);
+    tickers.forEach(tk=>{
+      const a=tk.getAnimations&&tk.getAnimations()[0];
+      if(a)a.playbackRate+=(rate-a.playbackRate)*.15;
+    });
+
+    requestAnimationFrame(phys);
+  }
+  requestAnimationFrame(phys);
+})();
+
+/* ── перелив стекла: гироскоп + палец + скролл + авто-мерцание ── */
+(function(){
+  let tx=0,ty=0,cx=0,cy=0,scrollKick=0,lastSY=scrollY;
+  let hasSensor=false; /* когда гироскоп реально работает — авто-мерцание уступает ему */
+  const root=document.documentElement.style;
+  const clamp=(v,m)=>Math.max(-m,Math.min(m,v));
+
+  function loop(t){
+    /* авто-мерцание: полное без датчиков, почти нулевое при живом гироскопе */
+    const k=hasSensor?.12:1;
+    const autoX=Math.sin(t/1600)*26*k, autoY=Math.cos(t/2100)*18*k, autoA=Math.sin(t/2400)*14*k;
+    cx+=(tx-cx)*.1; cy+=(ty-cy)*.1;
+    scrollKick*=.9;
+    /* позиция мягкого пятна света */
+    root.setProperty('--gx',(cx*5+autoX)+'px');
+    root.setProperty('--gy',(cy*4+autoY+scrollKick)+'px');
+    /* угол штриха и радуги вращается с телефоном */
+    root.setProperty('--ga',(cx*2+autoA)+'deg');
+    /* зеркальный штрих скользит по стеклу */
+    root.setProperty('--gs',(46+cx*1.3+Math.sin(t/1900)*8*k)+'%');
+    /* яркость: чем сильнее наклон, тем ярче «поймал свет» */
+    root.setProperty('--gi',Math.min(.4,(Math.abs(cx)+Math.abs(cy))/130));
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  /* скролл двигает блик — работает везде, всегда */
+  addEventListener('scroll',()=>{
+    scrollKick=clamp(scrollKick+(scrollY-lastSY)*.35,90);
+    lastSY=scrollY;
+  },{passive:true});
+
+  /* палец по экрану = блик под пальцем */
+  addEventListener('touchmove',e=>{
+    if(hasSensor)return; /* при живом гироскопе палец не мешает физике */
+    const p=e.touches[0];
+    tx=(p.clientX/innerWidth-.5)*70;
+    ty=(p.clientY/innerHeight-.5)*70;
+  },{passive:true});
+
+  /* десктоп: мышь */
+  addEventListener('mousemove',e=>{
+    tx=(e.clientX/innerWidth-.5)*60;
+    ty=(e.clientY/innerHeight-.5)*60;
+  });
+
+  /* гироскоп: свет «закреплён в комнате» — наклонил вправо, отражение ушло влево */
+  function onOri(e){
+    if(e.gamma==null&&e.beta==null)return;
+    hasSensor=true;
+    const landscape=Math.abs((screen.orientation&&screen.orientation.angle)||window.orientation||0)===90;
+    let roll = landscape ? (e.beta||0) : (e.gamma||0);
+    let pitch = landscape ? -(e.gamma||0) : ((e.beta||0)-45);
+    tx=clamp(-roll*1.4,45);   /* инверсия = правдоподобное отражение */
+    ty=clamp(-pitch*1.2,45);
+  }
+  function enableGyro(){
+    addEventListener('deviceorientation',onOri);
+  }
+  if(typeof DeviceOrientationEvent!=='undefined'
+     && typeof DeviceOrientationEvent.requestPermission==='function'){
+    const ask=()=>{
+      DeviceOrientationEvent.requestPermission()
+        .then(r=>{if(r==='granted')enableGyro()})
+        .catch(()=>{});
+    };
+    addEventListener('touchend',ask,{once:true});
+    addEventListener('click',ask,{once:true});
+  }else{
+    enableGyro();
+  }
+})();
+
+/* ── чек-листы ── */
+function bindChecklist(boxId,numId){
+  const box=document.getElementById(boxId);if(!box)return;
+  box.querySelectorAll('.check').forEach(c=>c.addEventListener('click',()=>{
+    c.classList.toggle('done');
+    document.getElementById(numId).textContent=box.querySelectorAll('.check.done').length;
+  }));
+}
+bindChecklist('cl1','cl1n');
+bindChecklist('cl2','cl2n');
+document.querySelectorAll('.check').forEach(c=>{
+  if(!c.closest('#cl1')&&!c.closest('#cl2')&&!c.classList.contains('calc-opt'))
+    c.addEventListener('click',()=>c.classList.toggle('done'));
+});
+
+/* ── калькулятор ── */
+const opts=document.querySelectorAll('.calc-opt');
+function recalc(){
+  let sum=2500;
+  opts.forEach(o=>{if(o.classList.contains('done'))sum+=parseInt(o.dataset.v)});
+  document.getElementById('calcSum').textContent=sum.toLocaleString('ru-RU')+' ₽';
+}
+opts.forEach(o=>o.addEventListener('click',()=>{o.classList.toggle('done');recalc()}));
+
+/* ── таблица привычек ── */
+document.querySelectorAll('#habit tr').forEach((tr,i)=>{
+  if(i===0)return;
+  for(let d=0;d<7;d++){
+    const td=document.createElement('td');td.className='c';
+    const c=document.createElement('span');c.className='cell';
+    c.addEventListener('click',()=>c.classList.toggle('on'));
+    td.appendChild(c);tr.appendChild(td);
+  }
+});
+
+/* ── копирование ── */
+document.querySelectorAll('.copyable').forEach(c=>{
+  c.style.cursor='copy';
+  c.addEventListener('click',()=>{
+    const t=c.querySelector('p').textContent;
+    navigator.clipboard&&navigator.clipboard.writeText(t);
+    const h=c.querySelector('h4'),old=h.textContent;
+    h.textContent='✕ СКОПИРОВАНО';
+    setTimeout(()=>h.textContent=old,900);
+  });
+});
+</script>
+</body>
+</html>
