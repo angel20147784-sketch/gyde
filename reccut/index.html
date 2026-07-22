@@ -239,7 +239,8 @@ textarea{min-height:92px;resize:vertical}
 /* видео-колонка справа — фикс. ширина, не тянет баннер */
 .promobar .pb-video{position:relative;z-index:2;flex:none;width:120px;height:64px;overflow:hidden;margin-right:46px;
   -webkit-mask:linear-gradient(90deg,transparent,#000 30%);mask:linear-gradient(90deg,transparent,#000 30%)}
-.promobar .pb-video video{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block}
+.promobar .pb-video .pb-gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;z-index:1}
+.promobar .pb-video .pb-mp4{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;z-index:2}
 .promobar .pb-close{position:absolute;right:12px;top:50%;translate:0 -50%;z-index:4;color:#fff;opacity:.85;
   background:rgba(0,0,0,.35);border:none;font-size:16px;cursor:pointer;line-height:1;width:24px;height:24px;border-radius:50%}
 .promobar .pb-close:hover{opacity:1}
@@ -275,7 +276,7 @@ footer b{color:var(--red)}
     <div class="pb-txt">Не хочешь платить за монтаж? <b>Сделай сам</b> — гайд «Монтаж в деньги» <s>990&nbsp;₽</s> <b>499&nbsp;₽</b></div>
     <a class="pb-btn" href="#guide">Забрать гайд →</a>
   </div>
-  <div class="pb-video"><video autoplay muted loop playsinline preload="auto" poster="promo-poster.jpg"><source src="promo-bg.mp4" type="video/mp4"></video></div>
+  <div class="pb-video"><img class="pb-gif" src="promo-bg.gif" alt=""><video class="pb-mp4" autoplay muted loop playsinline preload="auto"><source src="promo-bg.mp4" type="video/mp4"></video></div>
   <button class="pb-close" id="pbClose" aria-label="закрыть">×</button>
 </div>
 
