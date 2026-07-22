@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REC/CUT — монтаж Reels, который приводит клиентов</title>
+<meta name="description" content="Продающие Reels от 2500 ₽ за 48 часов. Или научись монтировать сам — гайд «Монтаж в деньги».">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Bebas+Neue&family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#E01B17;
+  --red-glow:#ff2b26;
+  --red-deep:#8f0b08;
+  --bg:#0A0908;
+  --panel:#141110;
+  --panel2:#1c1817;
+  --white:#F4F1EE;
+  --grey:#9b938e;
+  --line:rgba(255,255,255,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Golos Text',system-ui,sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;font-size:16px;line-height:1.6}
+::selection{background:var(--red);color:#fff}
+
+.head-font{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.01em;line-height:1}
+.bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:.02em;line-height:.9}
+.mono{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.24em;font-size:12px;font-weight:600}
+
+section{position:relative;padding:96px 6vw;overflow:hidden}
+.wrap{max-width:1080px;margin:0 auto;position:relative;z-index:3}
+
+/* фоновое красное свечение и «плёнка» */
+.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;
+  background:radial-gradient(circle,rgba(224,27,23,.5),transparent 65%)}
+.filmstrip-bg{position:absolute;top:0;bottom:0;width:60px;z-index:0;opacity:.5;pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 26px,rgba(255,255,255,.05) 26px 48px) 10px 0/12px 100% no-repeat,
+    repeating-linear-gradient(0deg,transparent 0 26px,rgba(255,255,255,.05) 26px 48px) 38px 0/12px 100% no-repeat}
+
+/* спрей-штрихи как в референсе (уголки-царапины) */
+.scratch{position:absolute;pointer-events:none;z-index:1;opacity:.85}
+.scratch path{stroke:var(--red);stroke-width:7;fill:none;stroke-linecap:round}
+
+/* ── шапка ── */
+header{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;
+  padding:16px 6vw;background:rgba(10,9,8,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header .logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.04em}
+header .logo b{color:var(--red)}
+header nav{display:flex;gap:28px}
+header nav a{color:var(--white);text-decoration:none;font-size:14px;font-weight:600;opacity:.82}
+header nav a:hover{color:var(--red);opacity:1}
+@media(max-width:860px){header nav{display:none}}
+.hbtn{background:var(--red);color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:10px 20px;border-radius:8px;
+  text-transform:uppercase;letter-spacing:.05em;box-shadow:0 0 18px rgba(224,27,23,.5)}
+.hbtn:hover{background:#fff;color:var(--red)}
+
+/* ── красная кнопка «записаться» с неоновым свечением ── */
+.rbtn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;cursor:pointer;border:none;
+  background:linear-gradient(180deg,var(--red-glow),var(--red) 60%,var(--red-deep));
+  color:#fff;font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.14em;
+  padding:15px 34px;border-radius:10px;
+  box-shadow:0 0 22px rgba(224,27,23,.55),inset 0 1px 0 rgba(255,255,255,.35);
+  transition:transform .25s,box-shadow .25s;
+}
+.rbtn:hover{transform:translateY(-3px);box-shadow:0 0 34px rgba(224,27,23,.8),inset 0 1px 0 rgba(255,255,255,.4)}
+.rbtn.ghost{background:transparent;border:2px solid var(--red);box-shadow:0 0 16px rgba(224,27,23,.3) inset}
+.rbtn.ghost:hover{background:var(--red)}
+
+/* ── панели/карточки ── */
+.panel{
+  background:linear-gradient(155deg,var(--panel2),var(--panel));
+  border:1px solid var(--line);border-radius:16px;padding:30px 32px;position:relative;overflow:hidden;
+  box-shadow:0 20px 44px -22px #000;
+}
+.panel::before{content:"";position:absolute;top:-40%;right:-20%;width:60%;height:120%;
+  background:radial-gradient(circle,rgba(224,27,23,.16),transparent 70%);pointer-events:none}
+.panel h4{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:20px;margin-bottom:10px;letter-spacing:.02em}
+.panel p{font-size:15px;color:#cfc8c3}
+
+/* красный номер-бейдж */
+.numbadge{
+  display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;flex:none;
+  background:radial-gradient(circle at 35% 30%,var(--red-glow),var(--red-deep));border-radius:14px;
+  font-family:'Bebas Neue',sans-serif;font-size:34px;color:#fff;
+  box-shadow:0 0 20px rgba(224,27,23,.55),inset 0 2px 0 rgba(255,255,255,.3);
+}
+.numbig{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,8vw,110px);color:transparent;
+  -webkit-text-stroke:2px rgba(224,27,23,.55);line-height:.8}
+
+/* типографика */
+.h-mega{font-size:clamp(56px,11vw,150px)}
+.h-big{font-size:clamp(42px,7vw,88px)}
+.h-mid{font-size:clamp(32px,5vw,58px)}
+.lead{font-size:clamp(15.5px,1.6vw,18px);max-width:560px;color:#cfc8c3;font-weight:500}
+.red-t{color:var(--red)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.9,.3,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.09s}.rv.d2{transition-delay:.18s}.rv.d3{transition-delay:.27s}
+
+/* ── HERO ── */
+#hero{padding-top:214px;min-height:100vh;display:flex;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.hero-badges{display:flex;flex-direction:column;gap:14px;margin:26px 0}
+.hbadge{display:flex;align-items:center;gap:16px}
+.hbadge .circle{width:76px;height:76px;flex:none;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--red-glow),var(--red-deep));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1;
+  box-shadow:0 0 22px rgba(224,27,23,.5)}
+.hbadge .circle b{font-family:'Bebas Neue',sans-serif;font-size:24px}
+.hbadge .circle span{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.hbadge .txt{font-size:14px;font-weight:600;color:#cfc8c3}
+/* «фото»-слот вертикальный */
+.photo{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:3/3.6;
+  background:linear-gradient(160deg,#241d1c,#0c0a09);border:1px solid var(--line);
+  display:flex;align-items:flex-end;justify-content:center;box-shadow:0 30px 60px -24px #000}
+.photo .redcorner{position:absolute;top:0;left:0;border-style:solid;border-width:0 90px 90px 0;border-color:transparent var(--red) transparent transparent;opacity:.9}
+.photo .play{position:absolute;top:50%;left:50%;translate:-50% -50%;width:76px;height:76px;border-radius:50%;
+  background:var(--red);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(224,27,23,.18);animation:pulse 2.2s ease-in-out infinite;cursor:pointer}
+.photo .play::after{content:"";border-style:solid;border-width:12px 0 12px 20px;border-color:transparent transparent transparent #fff;margin-left:4px}
+@keyframes pulse{50%{box-shadow:0 0 0 20px rgba(224,27,23,.06)}}
+.photo .cap{position:relative;z-index:2;padding:22px;text-align:center;width:100%;
+  background:linear-gradient(0deg,rgba(10,9,8,.92),transparent)}
+.photo .cap .mono{color:var(--red);margin-bottom:6px}
+.photo .cap b{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:22px;display:block}
+
+/* ── услуги (номерные блоки) ── */
+.services{display:flex;flex-direction:column;gap:22px;margin-top:44px}
+.service{display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center;padding:26px 30px}
+@media(max-width:720px){.service{grid-template-columns:auto 1fr;gap:16px}.service .rbtn{grid-column:1/-1}}
+.service .s-body h4{font-size:22px}
+.service .s-body ul{list-style:none;margin-top:8px;display:flex;flex-direction:column;gap:5px;font-size:14px;color:#b8b0ab;font-weight:500}
+.service .s-body li::before{content:"› ";color:var(--red);font-weight:700}
+.service .s-price{font-family:'Bebas Neue',sans-serif;font-size:34px;white-space:nowrap}
+.service .s-price small{display:block;font-family:'Golos Text';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);font-weight:600}
+
+/* «с какими запросами приходят» */
+.reqs{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:26px;counter-reset:r}
+.reqs li{display:flex;gap:16px;align-items:baseline;font-size:16px;font-weight:500;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.reqs li::before{counter-increment:r;content:counter(r);font-family:'Bebas Neue',sans-serif;color:var(--red);font-size:24px;min-width:26px}
+
+/* ── гайд ── */
+.guide-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:44px;align-items:center}
+@media(max-width:860px){.guide-grid{grid-template-columns:1fr}}
+.gcover{aspect-ratio:3/4.1;border-radius:14px;background:#0d0d0c;color:#CFF71E;padding:9%;transform:rotate(-3deg);
+  display:flex;flex-direction:column;justify-content:space-between;box-shadow:16px 18px 0 var(--red);transition:transform .4s;max-width:320px}
+.gcover:hover{transform:rotate(-.5deg)}
+.gcover .t{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(28px,3.4vw,42px);line-height:.9;color:#FAFAF2}
+.gcover .t em{font-style:normal;color:#CFF71E;display:block}
+.gcover .m{font-family:'Oswald';font-size:10px;letter-spacing:.24em;text-transform:uppercase;border:1.5px solid #CFF71E;padding:5px 9px;align-self:flex-start}
+.gcover .b{font-size:10px;letter-spacing:.18em;display:flex;justify-content:space-between;opacity:.8;text-transform:uppercase}
+.gl{list-style:none;display:flex;flex-direction:column;gap:11px;margin:18px 0;font-weight:600;font-size:15.5px}
+.gl li{display:flex;gap:11px;align-items:flex-start}
+.gl li::before{content:"✓";flex:none;width:22px;height:22px;background:var(--red);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;margin-top:2px;box-shadow:0 0 12px rgba(224,27,23,.5)}
+.gprice{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,5vw,60px);color:var(--red)}
+.gprice s{color:var(--grey);font-size:.5em;margin-right:12px}
+
+/* ── связь ── */
+.contacts{display:flex;flex-direction:column;gap:16px;max-width:440px;margin:36px auto 0}
+.contact{display:flex;align-items:center;gap:18px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 20px;
+  text-decoration:none;color:var(--white);transition:transform .25s,border-color .25s}
+.contact:hover{transform:translateX(6px);border-color:var(--red)}
+.contact .ic{width:44px;height:44px;flex:none;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--red-glow),var(--red-deep));
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;box-shadow:0 0 16px rgba(224,27,23,.45)}
+.contact b{font-family:'Oswald';text-transform:uppercase;letter-spacing:.1em;font-size:16px}
+
+/* ── форма ── */
+.formwrap{background:linear-gradient(155deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:clamp(26px,3.5vw,42px);position:relative;overflow:hidden}
+.formwrap::before{content:"";position:absolute;top:-30%;left:-10%;width:50%;height:120%;background:radial-gradient(circle,rgba(224,27,23,.18),transparent 70%)}
+form{display:flex;flex-direction:column;gap:15px;position:relative;z-index:2}
+.field label{display:block;font-family:'Oswald';font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:6px;font-weight:600}
+input,select,textarea{font-family:'Golos Text',sans-serif;font-size:15.5px;font-weight:500;color:var(--white);
+  background:rgba(0,0,0,.35);border:1.5px solid var(--line);border-radius:10px;padding:14px 16px;outline:none;width:100%;transition:border-color .2s,box-shadow .2s}
+input::placeholder,textarea::placeholder{color:#6f6863}
+input:focus,select:focus,textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(224,27,23,.18)}
+select option{background:#1c1817}
+textarea{min-height:92px;resize:vertical}
+.formrow{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+@media(max-width:560px){.formrow{grid-template-columns:1fr}}
+#formOk{display:none;text-align:center;padding:26px 10px;position:relative;z-index:2}
+#formOk .big{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--red)}
+
+
+/* ── рекламный баннер: видео справа целиком, текст слева ── */
+.promobar{
+  position:fixed;left:0;right:0;top:59px;z-index:70;overflow:hidden;min-height:88px;
+  background:linear-gradient(90deg,#0b0605 0%,#7a0805 55%,#E01B17 100%);
+  box-shadow:0 10px 30px -8px rgba(0,0,0,.7);
+  display:flex;align-items:stretch;
+  transform:translateX(-110%);opacity:0;animation:promoIn 1s cubic-bezier(.2,.9,.25,1.15) .5s forwards;
+}
+@keyframes promoIn{to{transform:translateX(0);opacity:1}}
+.promobar.hide{animation:promoOut .5s ease forwards}
+@keyframes promoOut{to{transform:translateX(-110%);opacity:0}}
+.promobar .pb-scan{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.3;
+  background:repeating-linear-gradient(115deg,transparent 0 22px,rgba(0,0,0,.14) 22px 44px);animation:pbScan 8s linear infinite}
+@keyframes pbScan{to{background-position:88px 0}}
+.promobar .pb-inner{position:relative;z-index:3;display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  flex:1;padding:14px 20px 14px 6vw}
+.promobar .pb-live{display:flex;align-items:center;gap:7px;font-family:'Oswald',sans-serif;font-weight:700;
+  font-size:12px;letter-spacing:.18em;color:#fff;text-transform:uppercase}
+.promobar .pb-live i{width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff;animation:blink 1s steps(2) infinite}
+.promobar .pb-txt{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.03em;
+  font-size:clamp(14px,1.9vw,19px);color:#fff;line-height:1.25;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.promobar .pb-txt b{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:1.3em;letter-spacing:.02em}
+.promobar .pb-txt s{opacity:.7;font-weight:400}
+.promobar .pb-btn{white-space:nowrap;background:#fff;color:var(--red);text-decoration:none;
+  font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:14px;
+  padding:11px 24px;border-radius:10px;box-shadow:0 4px 0 rgba(0,0,0,.3);
+  transition:transform .2s;animation:btnPulse 2.4s ease-in-out infinite}
+@keyframes btnPulse{50%{box-shadow:0 4px 0 rgba(0,0,0,.3),0 0 26px rgba(255,255,255,.6)}}
+.promobar .pb-btn:hover{transform:translateY(-2px)}
+/* видео-колонка справа — девушка целиком */
+.promobar .pb-video{position:relative;z-index:2;flex:none;height:88px;aspect-ratio:300/400;overflow:hidden;
+  margin-right:52px;-webkit-mask:linear-gradient(90deg,transparent,#000 22%);mask:linear-gradient(90deg,transparent,#000 22%)}
+.promobar .pb-video video{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
+.promobar .pb-close{position:absolute;right:14px;top:50%;translate:0 -50%;z-index:4;color:#fff;opacity:.85;
+  background:rgba(0,0,0,.35);border:none;font-size:17px;cursor:pointer;line-height:1;width:26px;height:26px;border-radius:50%}
+.promobar .pb-close:hover{opacity:1}
+@media(max-width:760px){.promobar .pb-video{display:none}.promobar .pb-inner{padding-right:44px}}
+
+footer{background:#060505;border-top:1px solid var(--line);padding:40px 6vw;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  font-family:'Oswald';font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
+footer b{color:var(--red)}
+
+@media(max-width:640px){section{padding:76px 22px}#hero{padding-top:120px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">REC<b>/CUT</b></div>
+  <nav>
+    <a href="#about">Обо мне</a>
+    <a href="#reqs">Запросы</a>
+    <a href="#services">Услуги</a>
+    <a href="#guide">Гайд</a>
+    <a href="#contacts">Контакты</a>
+  </nav>
+  <a class="hbtn" href="#zayavka">Заявка</a>
+</header>
+
+<!-- ═══ РЕКЛАМНЫЙ БАННЕР ГАЙДА ═══ -->
+<div class="promobar" id="promobar">
+  <div class="pb-scan"></div>
+  <div class="pb-inner">
+    <div class="pb-live"><i></i>live</div>
+    <div class="pb-txt">Не хочешь платить за монтаж? <b>Сделай сам</b> — гайд «Монтаж в деньги» <s>990&nbsp;₽</s> <b>499&nbsp;₽</b></div>
+    <a class="pb-btn" href="#guide">Забрать гайд →</a>
+  </div>
+  <div class="pb-video"><video autoplay muted loop playsinline preload="auto" poster="promo-poster.jpg"><source src="promo-bg.mp4" type="video/mp4"></video></div>
+  <button class="pb-close" id="pbClose" aria-label="закрыть">×</button>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="glow" style="width:640px;height:640px;left:-10%;top:20%"></div>
+  <div class="filmstrip-bg" style="right:0"></div>
+  <svg class="scratch" style="left:6%;top:16%;width:120px" viewBox="0 0 120 90"><path d="M10 80 L40 20 M30 78 L60 18 M52 76 L84 16"/></svg>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="rv"><span class="head-font" style="font-size:clamp(46px,9vw,120px);display:block">REC<span class="red-t">/CUT</span></span>
+        <span class="mono" style="color:var(--grey);display:block;margin-top:6px">монтаж reels для бизнеса</span></div>
+        <div class="hero-badges rv d1">
+          <div class="hbadge"><div class="circle"><b>120+</b><span>роликов</span></div><div class="txt">сдано для кафе, залов, ивентов и мастеров</div></div>
+          <div class="hbadge"><div class="circle"><b>48ч</b><span>сдача</span></div><div class="txt">срок — не маркетинг, а привычка из казармы</div></div>
+        </div>
+        <h1 class="head-font h-mid rv d2" style="margin-top:8px">Ролики, которые<br><span class="red-t">приводят клиентов</span></h1>
+        <p class="lead rv d2" style="margin-top:14px">Хук в первые 3 секунды, склейки на битах, один понятный призыв. Присылаете материал — через 48 часов получаете готовый Reels.</p>
+        <div class="rv d3" style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap">
+          <a class="rbtn" href="#zayavka">Заказать монтаж</a>
+          <a class="rbtn ghost" href="#guide">Научиться самому</a>
+        </div>
+      </div>
+      <div class="rv d1">
+        <div class="robot-stage">
+          <div class="redcorner"></div>
+          <div class="floorglow"></div>
+          <svg class="robot" viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="rbody" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#3a3634"/><stop offset="1" stop-color="#151212"/>
+              </linearGradient>
+              <linearGradient id="rmetal" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#4b4644"/><stop offset="1" stop-color="#1c1918"/>
+              </linearGradient>
+              <radialGradient id="rlens" cx="40%" cy="35%" r="70%">
+                <stop offset="0" stop-color="#ff6a63"/><stop offset="45%" stop-color="#E01B17"/><stop offset="100%" stop-color="#3a0503"/>
+              </radialGradient>
+            </defs>
+
+            <!-- REC над головой -->
+            <g transform="translate(150,20)">
+              <circle class="recdot" cx="0" cy="0" r="6" fill="#E01B17"/>
+              <text x="12" y="5" font-family="Oswald,sans-serif" font-size="15" font-weight="700" fill="#E01B17" letter-spacing="2">REC</text>
+            </g>
+
+            <!-- антенна -->
+            <line x1="90" y1="60" x2="78" y2="34" stroke="#4b4644" stroke-width="4" stroke-linecap="round"/>
+            <circle class="anten" cx="76" cy="30" r="6" fill="#E01B17"/>
+
+            <!-- голова -->
+            <rect x="66" y="58" width="86" height="72" rx="20" fill="url(#rbody)" stroke="#000" stroke-width="2"/>
+            <!-- визор -->
+            <rect x="76" y="74" width="66" height="34" rx="14" fill="#0c0a09" stroke="#2a2624" stroke-width="2"/>
+            <circle class="scan" cx="96" cy="91" r="7" fill="#E01B17"/>
+            <circle class="scan" cx="122" cy="91" r="7" fill="#E01B17"/>
+            <!-- ушки -->
+            <rect x="58" y="80" width="10" height="26" rx="4" fill="url(#rmetal)"/>
+            <rect x="150" y="80" width="10" height="26" rx="4" fill="url(#rmetal)"/>
+
+            <!-- шея -->
+            <rect x="100" y="128" width="18" height="14" fill="url(#rmetal)"/>
+
+            <!-- корпус -->
+            <rect x="70" y="140" width="80" height="96" rx="22" fill="url(#rbody)" stroke="#000" stroke-width="2"/>
+            <rect x="88" y="158" width="44" height="30" rx="8" fill="#0c0a09"/>
+            <text x="110" y="179" text-anchor="middle" font-family="Oswald,sans-serif" font-size="13" font-weight="700" fill="#E01B17" letter-spacing="1">R/C</text>
+            <circle cx="94" cy="206" r="4" fill="#4b4644"/><circle cx="110" cy="206" r="4" fill="#4b4644"/><circle cx="126" cy="206" r="4" fill="#4b4644"/>
+
+            <!-- ноги -->
+            <rect x="86" y="236" width="18" height="40" rx="7" fill="url(#rmetal)"/>
+            <rect x="116" y="236" width="18" height="40" rx="7" fill="url(#rmetal)"/>
+            <ellipse cx="95" cy="280" rx="16" ry="7" fill="#0c0a09"/>
+            <ellipse cx="125" cy="280" rx="16" ry="7" fill="#0c0a09"/>
+
+            <!-- левая рука держит камеру -->
+            <rect x="52" y="150" width="20" height="52" rx="10" fill="url(#rmetal)" transform="rotate(18 62 176)"/>
+            <!-- правая рука -->
+            <rect x="148" y="150" width="20" height="52" rx="10" fill="url(#rmetal)" transform="rotate(-30 158 176)"/>
+
+            <!-- КАМЕРА в руках -->
+            <g transform="translate(150,150)">
+              <rect x="0" y="0" width="70" height="48" rx="10" fill="url(#rmetal)" stroke="#000" stroke-width="2"/>
+              <!-- верхняя ручка -->
+              <rect x="14" y="-10" width="40" height="8" rx="3" fill="#2a2624"/>
+              <!-- объектив -->
+              <g class="lens-ring">
+                <circle cx="14" cy="24" r="20" fill="#0c0a09" stroke="#2a2624" stroke-width="3"/>
+                <circle cx="14" cy="24" r="13" fill="url(#rlens)"/>
+                <circle cx="9" cy="19" r="4" fill="#ffd2cf" opacity=".85"/>
+              </g>
+              <!-- tally-огонёк -->
+              <circle class="tally" cx="60" cy="10" r="4" fill="#E01B17"/>
+              <rect x="46" y="20" width="18" height="10" rx="2" fill="#0c0a09"/>
+              <text x="55" y="28" text-anchor="middle" font-family="Oswald" font-size="7" fill="#E01B17">9:16</text>
+            </g>
+          </svg>
+          <div class="cap"><div class="mono">шоурил · rec/cut</div><b>Ролики в работе</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ОБО МНЕ ═══ -->
+<section id="about">
+  <div class="glow" style="width:520px;height:520px;right:-8%;top:10%"></div>
+  <div class="wrap">
+    <div class="rv"><span class="mono red-t">кто за этим стоит</span></div>
+    <h2 class="head-font h-big rv d1" style="margin:12px 0 8px">Иван — монтажёр,<br>который учился <span class="red-t">в казарме</span></h2>
+    <p class="lead rv d2">Военное училище: днём учёба и наряды, монтаж — по ночам, когда рота спала. За эти окна собрал 120+ коммерческих роликов и микро-бизнес на 50 000 ₽/мес. Отсюда правило: дедлайн — это дедлайн.</p>
+    <div class="services" style="margin-top:38px">
+      <div class="panel service rv"><div class="numbadge">01</div><div class="s-body"><h4>Формула вместо вкусовщины</h4><p style="color:#b8b0ab">Каждый ролик по схеме хук → показ → доказательство → действие.</p></div></div>
+      <div class="panel service rv d1"><div class="numbadge">02</div><div class="s-body"><h4>12 проверок перед сдачей</h4><p style="color:#b8b0ab">От хука в первые 3 секунды до экспорта 9:16 без чёрных полос.</p></div></div>
+      <div class="panel service rv d2"><div class="numbadge">03</div><div class="s-body"><h4>Два круга правок включены</h4><p style="color:#b8b0ab">Правки в разумном объёме входят в цену. Дальше — по договорённости.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ЗАПРОСЫ ═══ -->
+<section id="reqs" style="background:linear-gradient(180deg,#0a0908,#120d0d)">
+  <div class="glow" style="width:560px;height:560px;left:40%;top:0"></div>
+  <svg class="scratch" style="right:6%;bottom:14%;width:130px" viewBox="0 0 120 90"><path d="M10 80 L40 20 M30 78 L60 18 M52 76 L84 16"/></svg>
+  <div class="wrap" style="max-width:760px">
+    <div class="rv"><span class="mono red-t">без ролика клиент проходит мимо</span></div>
+    <h2 class="head-font h-big rv d1" style="margin:12px 0">С какими запросами<br><span class="red-t">ко мне приходят</span></h2>
+    <ul class="reqs rv d2">
+      <li>«Открылись, а в профиле пусто — нужен контент»</li>
+      <li>«Снимаем сами на телефон, но выглядит любительски»</li>
+      <li>«Нужен ролик под акцию / новое меню — вчера»</li>
+      <li>«Reels есть, но они не набирают и не приводят гостей»</li>
+      <li>«Провели ивент — нужен динамичный афтемуви»</li>
+      <li>«Хочу серию роликов в едином стиле на месяц»</li>
+    </ul>
+    <div class="rv d3" style="margin-top:30px"><a class="rbtn" href="#zayavka">Обсудить мою задачу</a></div>
+  </div>
+</section>
+
+<!-- ═══ УСЛУГИ ═══ -->
+<section id="services">
+  <div class="glow" style="width:540px;height:540px;right:-10%;top:20%"></div>
+  <div class="wrap">
+    <div class="rv" style="text-align:center"><span class="mono red-t">прайс без сюрпризов</span></div>
+    <h2 class="head-font h-big rv d1" style="text-align:center;margin:12px 0 6px">Мои услуги</h2>
+    <p class="lead rv d2" style="text-align:center;margin:0 auto 8px">В каждый пакет входят монтаж, сабы, цвет, музыка в тренде и обложка.</p>
+    <div class="services">
+      <div class="panel service rv">
+        <div class="numbadge">01</div>
+        <div class="s-body"><h4>Монтаж из ваших материалов</h4><ul><li>сабы, плашки, цветокоррекция</li><li>обложка для профиля</li><li>сдача за 48 часов</li></ul></div>
+        <div class="s-price">2500 ₽<small>под ключ</small></div>
+      </div>
+      <div class="panel service rv d1" style="border-color:rgba(224,27,23,.5)">
+        <div class="numbadge">02</div>
+        <div class="s-body"><h4>Съёмка + монтаж <span class="red-t" style="font-size:14px">· берут чаще</span></h4><ul><li>приеду и сниму 30–60 минут</li><li>идея и сценарий — на мне</li><li>2–3 варианта из одной съёмки</li></ul></div>
+        <div class="s-price">3500 ₽<small>со съёмкой</small></div>
+      </div>
+      <div class="panel service rv d2">
+        <div class="numbadge">03</div>
+        <div class="s-body"><h4>Пакет — 4 ролика в месяц</h4><ul><li>единый стиль профиля</li><li>приоритетная очередь</li><li>выгода 2000 ₽</li></ul></div>
+        <div class="s-price">8000 ₽<small>за месяц</small></div>
+      </div>
+    </div>
+    <div class="rv" style="text-align:center;margin-top:36px"><a class="rbtn" href="#zayavka">Записаться на монтаж</a></div>
+  </div>
+</section>
+
+<!-- ═══ ГАЙД ═══ -->
+<section id="guide" style="background:linear-gradient(180deg,#120d0d,#0a0908)">
+  <div class="glow" style="width:600px;height:600px;left:-6%;bottom:0"></div>
+  <div class="wrap">
+    <div class="rv"><span class="mono red-t">не хочешь платить? научись сам</span></div>
+    <h2 class="head-font h-big rv d1" style="margin:12px 0 30px">Каждый мой ролик — 2500 ₽.<br>Система, по которой я их делаю, — <span class="red-t">дешевле одного</span></h2>
+    <div class="guide-grid">
+      <div class="rv d1">
+        <div class="gcover">
+          <div class="m">30 дней · практика</div>
+          <div class="t">МОНТАЖ<em>В ДЕНЬГИ</em></div>
+          <div class="b"><span>6 частей + 5 бонусов</span><span>00:30:00:00</span></div>
+        </div>
+      </div>
+      <div class="rv d2">
+        <p class="lead" style="color:#d4cdc8">Всё, чем я зарабатываю сам, собрано в один интерактивный гайд — от первого клика в CapCut до предоплаты на карте.</p>
+        <ul class="gl">
+          <li>Маршрут CapCut → Premiere → After Effects</li>
+          <li>Формула ролика: хук — показ — доказательство — действие</li>
+          <li>15 готовых скриптов переговоров с клиентами</li>
+          <li>Калькулятор цены + план на каждый из 30 дней</li>
+        </ul>
+        <p style="font-weight:600;color:#d4cdc8;margin-bottom:16px">Первый же заказ на 2500 ₽ окупает гайд <b class="red-t">пятикратно</b>.</p>
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px">
+          <span class="gprice"><s>990 ₽</s>499 ₽</span>
+          <span class="mono" style="color:var(--grey)">оплата в telegram · выдача сразу</span>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a class="rbtn" href="https://t.me/ВАШ_БОТ_ПРОДАЖ" target="_blank">Купить гайд</a>
+          <a class="rbtn ghost" href="https://angel20147784-sketch.github.io/gyde/" target="_blank">Полистать демо</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ КОНТАКТЫ ═══ -->
+<section id="contacts">
+  <div class="glow" style="width:520px;height:520px;right:-8%;top:10%"></div>
+  <div class="wrap">
+    <h2 class="head-font h-big rv" style="text-align:center">Связь со мной</h2>
+    <p class="lead rv d1" style="text-align:center;margin:12px auto 0">Отвечаю лично, в течение пары часов. Выбирай удобный канал:</p>
+    <div class="contacts rv d2">
+      <a class="contact" href="https://t.me/ВАШ_НИК" target="_blank"><span class="ic">TG</span><b>Telegram</b></a>
+      <a class="contact" href="https://wa.me/70000000000" target="_blank"><span class="ic">WA</span><b>WhatsApp</b></a>
+      <a class="contact" href="https://instagram.com/ВАШ_НИК" target="_blank"><span class="ic">IG</span><b>Instagram</b></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ФОРМА ═══ -->
+<section id="zayavka" style="background:linear-gradient(180deg,#0a0908,#140d0d)">
+  <div class="wrap" style="max-width:640px">
+    <h2 class="head-font h-big rv" style="text-align:center">Запишем твой<br><span class="red-t">первый ролик?</span></h2>
+    <p class="lead rv d1" style="text-align:center;margin:12px auto 30px">Оставь контакты — напишу в Telegram, задам три вопроса и назову точную цену. Предоплата только после согласования идеи.</p>
+    <div class="formwrap rv d2">
+      <form id="leadForm">
+        <div class="formrow">
+          <div class="field"><label>Как тебя зовут</label><input name="name" required placeholder="Имя"></div>
+          <div class="field"><label>Telegram или телефон</label><input name="contact" required placeholder="@nickname / +7…"></div>
+        </div>
+        <div class="field"><label>Ниша</label>
+          <select name="niche">
+            <option>Кафе / ресторан / кофейня</option>
+            <option>Спортзал / студия</option>
+            <option>Мастер / салон красоты</option>
+            <option>Мероприятия / ивенты</option>
+            <option>Товары / магазин</option>
+            <option>Другое</option>
+          </select>
+        </div>
+        <div class="field"><label>Пара слов о задаче — необязательно</label>
+          <textarea name="msg" placeholder="Например: открылись месяц назад, нужен ролик про новое меню"></textarea>
+        </div>
+        <button class="rbtn" type="submit" style="width:100%">Отправить заявку</button>
+        <p class="mono" style="text-align:center;color:var(--grey);font-size:10px">уходит мне в telegram · без рассылок</p>
+      </form>
+      <div id="formOk">
+        <div class="big">ЗАЯВКА У МЕНЯ!</div>
+        <p style="color:#cfc8c3;font-weight:600">Напишу в Telegram в течение пары часов.<br>А пока глянь <a href="#guide" style="color:var(--red);font-weight:800">гайд «Монтаж в деньги»</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>REC<b>/CUT</b> · монтаж и обучение · 2026</span>
+  <span>гайд «монтаж в деньги» — <b>499 ₽</b></span>
+</footer>
+
+<script>
+/* ══ НАСТРОЙКА ЗАЯВОК В TELEGRAM ══
+   1) Создай в @BotFather ОТДЕЛЬНОГО бота-уведомителя (не бота продаж!)
+   2) Напиши ему /start со своего аккаунта
+   3) Вставь токен и свой chat_id (@userinfobot) ниже  */
+const TG_TOKEN   = "";
+const TG_CHAT_ID = "";
+const TG_FALLBACK = "https://t.me/ВАШ_НИК";
+
+document.getElementById('leadForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const f=new FormData(e.target);
+  const text=`🔴 ЗАЯВКА REC/CUT\n\nИмя: ${f.get('name')}\nКонтакт: ${f.get('contact')}\nНиша: ${f.get('niche')}\nЗадача: ${f.get('msg')||'—'}`;
+  const btn=e.target.querySelector('button');btn.disabled=true;
+  let ok=false;
+  if(TG_TOKEN&&TG_CHAT_ID){
+    try{
+      const r=await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`,{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({chat_id:TG_CHAT_ID,text})});
+      ok=(await r.json()).ok;
+    }catch(_){}
+  }
+  if(ok){e.target.style.display='none';document.getElementById('formOk').style.display='block';}
+  else{try{await navigator.clipboard.writeText(text)}catch(_){}window.open(TG_FALLBACK,'_blank');btn.disabled=false;
+    alert('Открыл Telegram — текст заявки уже скопирован, вставь его в чат.');}
+});
+
+
+/* закрытие рекламного баннера */
+var pbc=document.getElementById('pbClose');
+if(pbc)pbc.addEventListener('click',()=>{
+  document.getElementById('promobar').classList.add('hide');
+  document.getElementById('hero').style.paddingTop='150px';
+});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
