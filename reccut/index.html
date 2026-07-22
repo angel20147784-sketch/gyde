@@ -33,8 +33,9 @@ section{position:relative;padding:96px 6vw;overflow:hidden}
 .wrap{max-width:1080px;margin:0 auto;position:relative;z-index:3}
 
 /* фоновое красное свечение и «плёнка» */
-.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;
+.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;animation:glowPulse 7s ease-in-out infinite;
   background:radial-gradient(circle,rgba(224,27,23,.5),transparent 65%)}
+@keyframes glowPulse{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.12)}}
 .filmstrip-bg{position:absolute;top:0;bottom:0;width:60px;z-index:0;opacity:.5;pointer-events:none;
   background:
     repeating-linear-gradient(0deg,transparent 0 26px,rgba(255,255,255,.05) 26px 48px) 10px 0/12px 100% no-repeat,
@@ -66,7 +67,9 @@ header nav a:hover{color:var(--red);opacity:1}
   box-shadow:0 0 22px rgba(224,27,23,.55),inset 0 1px 0 rgba(255,255,255,.35);
   transition:transform .25s,box-shadow .25s;
 }
-.rbtn:hover{transform:translateY(-3px);box-shadow:0 0 34px rgba(224,27,23,.8),inset 0 1px 0 rgba(255,255,255,.4)}
+.rbtn{animation:rbtnGlow 3s ease-in-out infinite}
+@keyframes rbtnGlow{50%{box-shadow:0 0 32px rgba(224,27,23,.75),inset 0 1px 0 rgba(255,255,255,.35)}}
+.rbtn:hover{transform:translateY(-3px);box-shadow:0 0 40px rgba(224,27,23,.9),inset 0 1px 0 rgba(255,255,255,.4)}
 .rbtn.ghost{background:transparent;border:2px solid var(--red);box-shadow:0 0 16px rgba(224,27,23,.3) inset}
 .rbtn.ghost:hover{background:var(--red)}
 
@@ -96,15 +99,34 @@ header nav a:hover{color:var(--red);opacity:1}
 .h-big{font-size:clamp(42px,7vw,88px)}
 .h-mid{font-size:clamp(32px,5vw,58px)}
 .lead{font-size:clamp(15.5px,1.6vw,18px);max-width:560px;color:#cfc8c3;font-weight:500}
-.red-t{color:var(--red)}
+.red-t{color:var(--red);text-shadow:0 0 24px rgba(224,27,23,.35)}
+
+
+/* ── АТМОСФЕРА: зерно, виньетка, лучи, частицы ── */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.06;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain .5s steps(3) infinite}
+@keyframes grain{0%{transform:translate(0,0)}33%{transform:translate(-4px,3px)}66%{transform:translate(3px,-3px)}}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:59;
+  background:radial-gradient(120% 90% at 50% 30%,transparent 55%,rgba(0,0,0,.55) 100%)}
+/* световой луч-прожектор, медленно качается */
+.beam{position:absolute;top:-20%;left:var(--bx,30%);width:2px;height:150%;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(224,27,23,.5),transparent 70%);filter:blur(3px);
+  transform-origin:top center;animation:beamSway var(--bd,9s) ease-in-out infinite}
+@keyframes beamSway{0%,100%{transform:rotate(-8deg);opacity:.5}50%{transform:rotate(8deg);opacity:.9}}
+/* парящие частицы пыли */
+.dust{position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(255,120,110,.5);
+  box-shadow:0 0 6px rgba(224,27,23,.6);pointer-events:none;z-index:1;animation:float var(--fd,14s) linear infinite}
+@keyframes float{0%{transform:translateY(20px) translateX(0);opacity:0}
+  10%{opacity:.8}90%{opacity:.8}100%{transform:translateY(-120px) translateX(var(--fx,20px));opacity:0}}
 
 /* reveal */
-.rv{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.9,.3,1)}
+.rv{opacity:0;transform:translateY(46px) scale(.985);filter:blur(6px);transition:opacity .8s ease,transform .9s cubic-bezier(.16,1.1,.3,1),filter .8s ease}
+.rv.in{filter:blur(0)}
 .rv.in{opacity:1;transform:none}
 .rv.d1{transition-delay:.09s}.rv.d2{transition-delay:.18s}.rv.d3{transition-delay:.27s}
 
 /* ── HERO ── */
-#hero{padding-top:214px;min-height:100vh;display:flex;align-items:center}
+#hero{padding-top:180px;min-height:100vh;display:flex;align-items:center}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
 .hero-badges{display:flex;flex-direction:column;gap:14px;margin:26px 0}
@@ -186,43 +208,42 @@ textarea{min-height:92px;resize:vertical}
 #formOk .big{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--red)}
 
 
-/* ── рекламный баннер: видео справа целиком, текст слева ── */
+/* ── рекламный баннер: компактный, видео в своём блоке ── */
 .promobar{
-  position:fixed;left:0;right:0;top:59px;z-index:70;overflow:hidden;min-height:88px;
+  position:fixed;left:0;right:0;top:59px;z-index:70;overflow:hidden;height:64px;
   background:linear-gradient(90deg,#0b0605 0%,#7a0805 55%,#E01B17 100%);
-  box-shadow:0 10px 30px -8px rgba(0,0,0,.7);
-  display:flex;align-items:stretch;
-  transform:translateX(-110%);opacity:0;animation:promoIn 1s cubic-bezier(.2,.9,.25,1.15) .5s forwards;
+  box-shadow:0 8px 26px -8px rgba(0,0,0,.7);display:flex;align-items:center;
+  transform:translateX(-110%);opacity:0;animation:promoIn .9s cubic-bezier(.2,.9,.25,1.15) .5s forwards;
 }
 @keyframes promoIn{to{transform:translateX(0);opacity:1}}
 .promobar.hide{animation:promoOut .5s ease forwards}
 @keyframes promoOut{to{transform:translateX(-110%);opacity:0}}
-.promobar .pb-scan{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.3;
+.promobar .pb-scan{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.28;
   background:repeating-linear-gradient(115deg,transparent 0 22px,rgba(0,0,0,.14) 22px 44px);animation:pbScan 8s linear infinite}
 @keyframes pbScan{to{background-position:88px 0}}
-.promobar .pb-inner{position:relative;z-index:3;display:flex;align-items:center;gap:20px;flex-wrap:wrap;
-  flex:1;padding:14px 20px 14px 6vw}
+.promobar .pb-inner{position:relative;z-index:3;display:flex;align-items:center;gap:18px;flex:1;
+  padding:0 20px 0 6vw;min-width:0}
 .promobar .pb-live{display:flex;align-items:center;gap:7px;font-family:'Oswald',sans-serif;font-weight:700;
-  font-size:12px;letter-spacing:.18em;color:#fff;text-transform:uppercase}
+  font-size:12px;letter-spacing:.18em;color:#fff;text-transform:uppercase;flex:none}
 .promobar .pb-live i{width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff;animation:blink 1s steps(2) infinite}
-.promobar .pb-txt{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.03em;
-  font-size:clamp(14px,1.9vw,19px);color:#fff;line-height:1.25;text-shadow:0 2px 8px rgba(0,0,0,.5)}
-.promobar .pb-txt b{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:1.3em;letter-spacing:.02em}
-.promobar .pb-txt s{opacity:.7;font-weight:400}
-.promobar .pb-btn{white-space:nowrap;background:#fff;color:var(--red);text-decoration:none;
-  font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:14px;
-  padding:11px 24px;border-radius:10px;box-shadow:0 4px 0 rgba(0,0,0,.3);
-  transition:transform .2s;animation:btnPulse 2.4s ease-in-out infinite}
-@keyframes btnPulse{50%{box-shadow:0 4px 0 rgba(0,0,0,.3),0 0 26px rgba(255,255,255,.6)}}
+.promobar .pb-txt{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.02em;
+  font-size:clamp(13px,1.7vw,17px);color:#fff;line-height:1.15;text-shadow:0 2px 8px rgba(0,0,0,.5);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.promobar .pb-txt b{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:1.28em;letter-spacing:.02em}
+.promobar .pb-txt s{opacity:.65;font-weight:400}
+.promobar .pb-btn{white-space:nowrap;flex:none;background:#fff;color:var(--red);text-decoration:none;
+  font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:13px;
+  padding:9px 20px;border-radius:8px;box-shadow:0 3px 0 rgba(0,0,0,.3);transition:transform .2s;animation:btnPulse 2.4s ease-in-out infinite}
+@keyframes btnPulse{50%{box-shadow:0 3px 0 rgba(0,0,0,.3),0 0 22px rgba(255,255,255,.6)}}
 .promobar .pb-btn:hover{transform:translateY(-2px)}
-/* видео-колонка справа — девушка целиком */
-.promobar .pb-video{position:relative;z-index:2;flex:none;height:88px;aspect-ratio:300/400;overflow:hidden;
-  margin-right:52px;-webkit-mask:linear-gradient(90deg,transparent,#000 22%);mask:linear-gradient(90deg,transparent,#000 22%)}
-.promobar .pb-video video{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
-.promobar .pb-close{position:absolute;right:14px;top:50%;translate:0 -50%;z-index:4;color:#fff;opacity:.85;
-  background:rgba(0,0,0,.35);border:none;font-size:17px;cursor:pointer;line-height:1;width:26px;height:26px;border-radius:50%}
+/* видео-колонка справа — фикс. ширина, не тянет баннер */
+.promobar .pb-video{position:relative;z-index:2;flex:none;width:120px;height:64px;overflow:hidden;margin-right:46px;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 30%);mask:linear-gradient(90deg,transparent,#000 30%)}
+.promobar .pb-video video{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block}
+.promobar .pb-close{position:absolute;right:12px;top:50%;translate:0 -50%;z-index:4;color:#fff;opacity:.85;
+  background:rgba(0,0,0,.35);border:none;font-size:16px;cursor:pointer;line-height:1;width:24px;height:24px;border-radius:50%}
 .promobar .pb-close:hover{opacity:1}
-@media(max-width:760px){.promobar .pb-video{display:none}.promobar .pb-inner{padding-right:44px}}
+@media(max-width:760px){.promobar .pb-video{display:none}.promobar .pb-inner{padding-right:44px}.promobar .pb-live{display:none}}
 
 footer{background:#060505;border-top:1px solid var(--line);padding:40px 6vw;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
   font-family:'Oswald';font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
@@ -545,8 +566,42 @@ document.getElementById('leadForm').addEventListener('submit',async e=>{
 var pbc=document.getElementById('pbClose');
 if(pbc)pbc.addEventListener('click',()=>{
   document.getElementById('promobar').classList.add('hide');
-  document.getElementById('hero').style.paddingTop='150px';
+  document.getElementById('hero').style.paddingTop='130px';
 });
+
+
+/* ── атмосферные частицы и лучи ── */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  document.querySelectorAll('section').forEach((sec,si)=>{
+    // 1-2 световых луча
+    const beams=1+(si%2);
+    for(let b=0;b<beams;b++){
+      const el=document.createElement('div');el.className='beam';
+      el.style.setProperty('--bx',(15+((si*29+b*40)%70))+'%');
+      el.style.setProperty('--bd',(7+((si+b)%4)*1.5)+'s');
+      el.style.animationDelay=(-(si*2+b*3))+'s';
+      sec.appendChild(el);
+    }
+    // парящие частицы
+    const parts=6;
+    for(let i=0;i<parts;i++){
+      const d=document.createElement('div');d.className='dust';
+      d.style.left=((si*13+i*17)%96)+'%';
+      d.style.top=(40+((si*7+i*23)%55))+'%';
+      d.style.setProperty('--fd',(10+((si+i)%6)*2)+'s');
+      d.style.setProperty('--fx',((i%2?1:-1)*(10+i*4))+'px');
+      d.style.animationDelay=(-(i*2.3+si))+'s';
+      sec.appendChild(d);
+    }
+  });
+  // glow слегка тянется за курсором
+  const glows=[...document.querySelectorAll('.glow')];
+  addEventListener('mousemove',e=>{
+    const dx=(e.clientX/innerWidth-.5)*24, dy=(e.clientY/innerHeight-.5)*24;
+    glows.forEach((g,i)=>{g.style.translate=(dx*(i%2?1:-1))+'px '+(dy*(i%2?-1:1))+'px'});
+  },{passive:true});
+})();
 
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
