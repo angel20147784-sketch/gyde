@@ -102,6 +102,32 @@ header nav a:hover{color:var(--red);opacity:1}
 .red-t{color:var(--red);text-shadow:0 0 24px rgba(224,27,23,.35)}
 
 
+
+/* ── ВСТРОЕННАЯ РЕКЛАМА ГАЙДА (баннер-секция) ── */
+.adband{position:relative;border-radius:22px;overflow:hidden;min-height:230px;display:flex;align-items:center;
+  box-shadow:0 26px 60px -22px #000;border:1px solid rgba(255,255,255,.08)}
+.adband .ab-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.adband .ab-bg .ab-gif,.adband .ab-bg .ab-mp4{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%}
+.adband .ab-bg .ab-gif{z-index:1}
+.adband .ab-bg .ab-mp4{z-index:2}
+.adband .ab-veil{position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(90deg,rgba(11,6,5,.95) 0%,rgba(120,8,5,.8) 42%,rgba(224,27,23,.4) 100%)}
+.adband .ab-scan{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:.22;
+  background:repeating-linear-gradient(115deg,transparent 0 22px,rgba(0,0,0,.14) 22px 44px);animation:pbScan 8s linear infinite}
+@keyframes pbScan{to{background-position:88px 0}}
+.adband .ab-inner{position:relative;z-index:5;padding:36px clamp(26px,4vw,54px);max-width:620px}
+.adband .ab-live{display:inline-flex;align-items:center;gap:8px;font-family:'Oswald',sans-serif;font-weight:700;
+  font-size:12px;letter-spacing:.2em;color:#fff;text-transform:uppercase;margin-bottom:14px}
+.adband .ab-live i{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:blink 1s steps(2) infinite}
+.adband h3{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(24px,3.4vw,40px);
+  line-height:1.02;color:#fff;text-shadow:0 3px 14px rgba(0,0,0,.7)}
+.adband h3 em{font-style:normal;color:#fff;background:var(--red);padding:0 8px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.adband p{font-size:15.5px;color:rgba(255,255,255,.9);font-weight:500;margin:12px 0 20px;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.adband .ab-price{font-family:'Bebas Neue',sans-serif;font-size:40px;color:#fff;margin-right:14px}
+.adband .ab-price s{opacity:.55;font-size:.5em;margin-right:8px}
+.adband .ab-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+@media(max-width:560px){.adband{min-height:auto}.adband .ab-veil{background:linear-gradient(180deg,rgba(11,6,5,.75),rgba(11,6,5,.95))}.adband .ab-inner{max-width:100%;padding:28px 22px}}
+
 /* ── АТМОСФЕРА: зерно, виньетка, лучи, частицы ── */
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.06;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain .5s steps(3) infinite}
@@ -126,7 +152,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:59;
 .rv.d1{transition-delay:.09s}.rv.d2{transition-delay:.18s}.rv.d3{transition-delay:.27s}
 
 /* ── HERO ── */
-#hero{padding-top:180px;min-height:100vh;display:flex;align-items:center}
+#hero{padding-top:150px;min-height:100vh;display:flex;align-items:center}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
 .hero-badges{display:flex;flex-direction:column;gap:14px;margin:26px 0}
@@ -270,22 +296,6 @@ footer b{color:var(--red)}
   <a class="hbtn" href="#zayavka">Заявка</a>
 </header>
 
-<!-- ═══ РЕКЛАМНЫЙ БАННЕР ГАЙДА ═══ -->
-<div class="promobar" id="promobar">
-  <div class="pb-bg">
-    <img class="pb-gif" src="promo-bg.gif" alt="">
-    <video class="pb-mp4" autoplay muted loop playsinline preload="auto"><source src="promo-bg.mp4" type="video/mp4"></video>
-  </div>
-  <div class="pb-veil"></div>
-  <div class="pb-scan"></div>
-  <div class="pb-inner">
-    <div class="pb-live"><i></i>rec</div>
-    <div class="pb-txt">Монтажёры берут за это 2500&nbsp;₽. <b>Научись сам за вечер</b> — гайд «Монтаж в деньги», <s>990</s> <b>499&nbsp;₽</b></div>
-    <a class="pb-btn" href="#guide">Забрать →</a>
-  </div>
-  <button class="pb-close" id="pbClose" aria-label="закрыть">×</button>
-</div>
-
 <!-- ═══ HERO ═══ -->
 <section id="hero">
   <div class="glow" style="width:640px;height:640px;left:-10%;top:20%"></div>
@@ -382,6 +392,30 @@ footer b{color:var(--red)}
             </g>
           </svg>
           <div class="cap"><div class="mono">шоурил · rec/cut</div><b>Ролики в работе</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ ВСТРОЕННАЯ РЕКЛАМА ГАЙДА ═══ -->
+<section class="s-ink" style="padding-top:40px;padding-bottom:40px">
+  <div class="wrap">
+    <div class="adband rv">
+      <div class="ab-bg">
+        <img class="ab-gif" src="promo-bg.gif" alt="">
+        <video class="ab-mp4" autoplay muted loop playsinline preload="auto"><source src="promo-bg.mp4" type="video/mp4"></video>
+      </div>
+      <div class="ab-veil"></div>
+      <div class="ab-scan"></div>
+      <div class="ab-inner">
+        <span class="ab-live"><i></i>rec · оффер недели</span>
+        <h3>Монтажёры берут за это <em>2500&nbsp;₽</em>.<br>Научись сам за вечер.</h3>
+        <p>Гайд «Монтаж в деньги»: система, по которой я делаю коммерческие ролики — от первого клика в CapCut до предоплаты на карте.</p>
+        <div class="ab-row">
+          <span class="ab-price"><s>990&nbsp;₽</s>499&nbsp;₽</span>
+          <a class="rbtn" href="#guide">Забрать гайд</a>
         </div>
       </div>
     </div>
@@ -569,12 +603,7 @@ document.getElementById('leadForm').addEventListener('submit',async e=>{
 });
 
 
-/* закрытие рекламного баннера */
-var pbc=document.getElementById('pbClose');
-if(pbc)pbc.addEventListener('click',()=>{
-  document.getElementById('promobar').classList.add('hide');
-  document.getElementById('hero').style.paddingTop='130px';
-});
+
 
 
 /* ── атмосферные частицы и лучи ── */
