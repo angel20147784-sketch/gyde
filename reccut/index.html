@@ -104,33 +104,20 @@ header nav a:hover{color:var(--red);opacity:1}
 
 
 
-/* ── ШАПКА ПРОФИЛЯ: баннер + поднимающаяся камера ── */
-.profbanner{position:relative;width:100%;aspect-ratio:1983/793;overflow:hidden;border-radius:18px;
+/* ── ШАПКА ПРОФИЛЯ: видео-баннер ── */
+.profbanner{position:relative;width:100%;aspect-ratio:900/350;overflow:hidden;border-radius:18px;
   box-shadow:0 30px 70px -26px #000;border:1px solid rgba(255,255,255,.1);background:#1a0e2a}
-.profbanner .pbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
-/* слой рук с камерой — поднимается к лицу */
-.profbanner .pcam{position:absolute;z-index:2;
-  left:60.262%;top:59.269%;width:13.868%;height:26.482%;
-  transform-origin:60% 90%;
-  animation:raiseCam 5.5s cubic-bezier(.4,0,.25,1) infinite;}
-@keyframes raiseCam{
-  0%,20%   {transform:translate(0,0) rotate(0deg) scale(1)}
-  42%,64%  {transform:translate(-6%,-118%) rotate(-7deg) scale(1.06)}
-  86%,100% {transform:translate(0,0) rotate(0deg) scale(1)}
-}
-/* вспышка затвора в верхней точке */
-.profbanner .pflash{position:absolute;inset:0;z-index:4;pointer-events:none;background:#fff;opacity:0;
-  animation:shutter 5.5s linear infinite}
-@keyframes shutter{0%,47%{opacity:0}49%{opacity:.42}52%{opacity:0}54%{opacity:.22}57%,100%{opacity:0}}
-.profbanner .pshine{position:absolute;top:0;left:-40%;width:35%;height:100%;z-index:5;pointer-events:none;
-  background:linear-gradient(105deg,transparent,rgba(255,255,255,.14),transparent);
+.profbanner .pgif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.profbanner .pvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+.profbanner .pshine{position:absolute;top:0;left:-40%;width:35%;height:100%;z-index:4;pointer-events:none;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.12),transparent);
   animation:shineMove 7s ease-in-out infinite}
 @keyframes shineMove{0%,70%{left:-40%}100%{left:120%}}
-.profbanner .prec{position:absolute;top:14px;right:16px;z-index:6;display:flex;align-items:center;gap:7px;
+.profbanner .prec{position:absolute;top:14px;right:16px;z-index:5;display:flex;align-items:center;gap:7px;
   font-family:'Oswald',sans-serif;font-weight:700;font-size:11px;letter-spacing:.2em;color:#fff;
   background:rgba(0,0,0,.5);padding:6px 12px;border-radius:30px;backdrop-filter:blur(6px)}
 .profbanner .prec i{width:8px;height:8px;border-radius:50%;background:#E01B17;box-shadow:0 0 8px #E01B17;animation:blink 1s steps(2) infinite}
-@media(prefers-reduced-motion:reduce){.profbanner .pcam,.profbanner .pflash,.profbanner .pshine{animation:none}}
+@media(prefers-reduced-motion:reduce){.profbanner .pshine{animation:none}}
 
 /* ── ВСТРОЕННАЯ РЕКЛАМА ГАЙДА (баннер-секция) ── */
 .adband{position:relative;border-radius:22px;overflow:hidden;min-height:230px;display:flex;align-items:center;
@@ -329,9 +316,8 @@ footer b{color:var(--red)}
 <section class="s-ink" style="padding-top:92px;padding-bottom:22px">
   <div class="wrap">
     <div class="profbanner rv">
-      <img class="pbg" src="hero-full.jpg" alt="Монтаж за 30 дней">
-      <img class="pcam" src="cam-hands.png" alt="">
-      <div class="pflash"></div>
+      <img class="pgif" src="hero-video.gif" alt="REC/CUT — монтаж за 30 дней">
+      <video class="pvid" autoplay muted loop playsinline preload="auto" poster="hero-poster.jpg"><source src="hero-video.mp4" type="video/mp4"></video>
       <div class="pshine"></div>
       <div class="prec"><i></i>REC</div>
     </div>
