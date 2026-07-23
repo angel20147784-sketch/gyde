@@ -152,7 +152,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:59;
 .rv.d1{transition-delay:.09s}.rv.d2{transition-delay:.18s}.rv.d3{transition-delay:.27s}
 
 /* ── HERO ── */
-#hero{padding-top:150px;min-height:100vh;display:flex;align-items:center}
+#hero{padding-top:30px;min-height:auto;display:flex;align-items:center}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
 .hero-badges{display:flex;flex-direction:column;gap:14px;margin:26px 0}
@@ -296,6 +296,29 @@ footer b{color:var(--red)}
   <a class="hbtn" href="#zayavka">Заявка</a>
 </header>
 
+<!-- ═══ ВСТРОЕННАЯ РЕКЛАМА ГАЙДА ═══ -->
+<section class="s-ink" style="padding-top:96px;padding-bottom:30px">
+  <div class="wrap">
+    <div class="adband rv">
+      <div class="ab-bg">
+        <img class="ab-gif" src="promo-bg.gif" alt="">
+        <video class="ab-mp4" autoplay muted loop playsinline preload="auto"><source src="promo-bg.mp4" type="video/mp4"></video>
+      </div>
+      <div class="ab-veil"></div>
+      <div class="ab-scan"></div>
+      <div class="ab-inner">
+        <span class="ab-live"><i></i>rec · оффер недели</span>
+        <h3>Монтажёры берут за это <em>2500&nbsp;₽</em>.<br>Научись сам за вечер.</h3>
+        <p>Гайд «Монтаж в деньги»: система, по которой я делаю коммерческие ролики — от первого клика в CapCut до предоплаты на карте.</p>
+        <div class="ab-row">
+          <span class="ab-price"><s>990&nbsp;₽</s>499&nbsp;₽</span>
+          <a class="rbtn" href="#guide">Забрать гайд</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ HERO ═══ -->
 <section id="hero">
   <div class="glow" style="width:640px;height:640px;left:-10%;top:20%"></div>
@@ -399,28 +422,6 @@ footer b{color:var(--red)}
 </section>
 
 
-<!-- ═══ ВСТРОЕННАЯ РЕКЛАМА ГАЙДА ═══ -->
-<section class="s-ink" style="padding-top:40px;padding-bottom:40px">
-  <div class="wrap">
-    <div class="adband rv">
-      <div class="ab-bg">
-        <img class="ab-gif" src="promo-bg.gif" alt="">
-        <video class="ab-mp4" autoplay muted loop playsinline preload="auto"><source src="promo-bg.mp4" type="video/mp4"></video>
-      </div>
-      <div class="ab-veil"></div>
-      <div class="ab-scan"></div>
-      <div class="ab-inner">
-        <span class="ab-live"><i></i>rec · оффер недели</span>
-        <h3>Монтажёры берут за это <em>2500&nbsp;₽</em>.<br>Научись сам за вечер.</h3>
-        <p>Гайд «Монтаж в деньги»: система, по которой я делаю коммерческие ролики — от первого клика в CapCut до предоплаты на карте.</p>
-        <div class="ab-row">
-          <span class="ab-price"><s>990&nbsp;₽</s>499&nbsp;₽</span>
-          <a class="rbtn" href="#guide">Забрать гайд</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ═══ ОБО МНЕ ═══ -->
 <section id="about">
