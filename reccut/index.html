@@ -103,6 +103,40 @@ header nav a:hover{color:var(--red);opacity:1}
 
 
 
+
+/* ── ШАПКА ПРОФИЛЯ: граффити-баннер с анимированным персонажем ── */
+.profbanner{position:relative;width:100%;aspect-ratio:1983/793;overflow:hidden;border-radius:18px;
+  box-shadow:0 30px 70px -26px #000;border:1px solid rgba(255,255,255,.1);background:#1a0e2a}
+.profbanner .pbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+/* персонаж: стоит там же, где был на исходнике */
+.profbanner .pperson{position:absolute;z-index:3;
+  left:56.9%;top:3.8%;width:22.9%;height:89.7%;
+  object-fit:contain;object-position:bottom center;
+  transform-origin:50% 92%;
+  animation:raiseCam 5s cubic-bezier(.45,0,.25,1) infinite;
+  filter:drop-shadow(0 14px 26px rgba(0,0,0,.55));}
+/* подъём камеры к лицу: подаётся вперёд, приподнимается, лёгкий наклон */
+@keyframes raiseCam{
+  0%,18%   {transform:translateY(0) scale(1) rotate(0deg)}
+  38%,62%  {transform:translateY(-2.5%) scale(1.045) rotate(-1.2deg)}
+  82%,100% {transform:translateY(0) scale(1) rotate(0deg)}
+}
+/* вспышка затвора в момент съёмки */
+.profbanner .pflash{position:absolute;inset:0;z-index:4;pointer-events:none;background:#fff;opacity:0;
+  animation:shutter 5s linear infinite}
+@keyframes shutter{0%,44%{opacity:0}46%{opacity:.5}49%{opacity:0}51%{opacity:.28}54%,100%{opacity:0}}
+/* блик-свет проходит по баннеру */
+.profbanner .pshine{position:absolute;top:0;left:-40%;width:35%;height:100%;z-index:5;pointer-events:none;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.16),transparent);
+  animation:shineMove 6s ease-in-out infinite}
+@keyframes shineMove{0%,70%{left:-40%}100%{left:120%}}
+/* метка REC поверх баннера */
+.profbanner .prec{position:absolute;top:14px;right:16px;z-index:6;display:flex;align-items:center;gap:7px;
+  font-family:'Oswald',sans-serif;font-weight:700;font-size:11px;letter-spacing:.2em;color:#fff;
+  background:rgba(0,0,0,.5);padding:6px 12px;border-radius:30px;backdrop-filter:blur(6px)}
+.profbanner .prec i{width:8px;height:8px;border-radius:50%;background:#E01B17;box-shadow:0 0 8px #E01B17;animation:blink 1s steps(2) infinite}
+@media(prefers-reduced-motion:reduce){.profbanner .pperson,.profbanner .pflash,.profbanner .pshine{animation:none}}
+
 /* ── ВСТРОЕННАЯ РЕКЛАМА ГАЙДА (баннер-секция) ── */
 .adband{position:relative;border-radius:22px;overflow:hidden;min-height:230px;display:flex;align-items:center;
   box-shadow:0 26px 60px -22px #000;border:1px solid rgba(255,255,255,.08)}
@@ -296,8 +330,21 @@ footer b{color:var(--red)}
   <a class="hbtn" href="#zayavka">Заявка</a>
 </header>
 
+<!-- ═══ ШАПКА ПРОФИЛЯ ═══ -->
+<section class="s-ink" style="padding-top:92px;padding-bottom:22px">
+  <div class="wrap">
+    <div class="profbanner rv">
+      <img class="pbg" src="hero-bg.jpg" alt="Монтаж за 30 дней">
+      <img class="pperson" src="person.png" alt="">
+      <div class="pflash"></div>
+      <div class="pshine"></div>
+      <div class="prec"><i></i>REC</div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ ВСТРОЕННАЯ РЕКЛАМА ГАЙДА ═══ -->
-<section class="s-ink" style="padding-top:96px;padding-bottom:30px">
+<section class="s-ink" style="padding-top:10px;padding-bottom:30px">
   <div class="wrap">
     <div class="adband rv">
       <div class="ab-bg">
