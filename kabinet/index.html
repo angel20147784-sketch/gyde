@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Монтаж за 30 дней — личный кабинет</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --violet:#A855F7;
+  --violet-deep:#7C2FD4;
+  --gold:#F5C518;
+  --bg:#0B0A0F;
+  --panel:#151320;
+  --panel2:#1D1A2B;
+  --line:rgba(255,255,255,.08);
+  --txt:#F3F0FA;
+  --muted:#9B93B4;
+  --sidebar:248px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Golos Text',system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:16px;line-height:1.55;overflow-x:hidden}
+::selection{background:var(--violet);color:#fff}
+a{color:inherit;text-decoration:none}
+.head{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em}
+
+/* фоновое свечение */
+.aura{position:fixed;border-radius:50%;filter:blur(110px);pointer-events:none;z-index:0;opacity:.5}
+.aura.a1{width:520px;height:520px;background:#7C2FD4;top:-140px;left:-120px}
+.aura.a2{width:460px;height:460px;background:#C026D3;bottom:-160px;right:-120px;opacity:.35}
+
+/* ══════════ ЭКРАН ВХОДА ══════════ */
+#auth{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:22px;
+  background:radial-gradient(120% 90% at 50% 0%,#241a3d,#0B0A0F 65%)}
+#auth .card{width:100%;max-width:420px;background:rgba(21,19,32,.9);backdrop-filter:blur(20px);
+  border:1px solid var(--line);border-radius:24px;padding:36px 30px;position:relative;z-index:2;
+  box-shadow:0 34px 70px -28px #000}
+#auth .logo{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:26px;line-height:.95;text-align:center}
+#auth .logo b{color:var(--gold)}
+#auth .sub{text-align:center;color:var(--muted);font-size:14px;margin:10px 0 26px}
+.inp{width:100%;background:rgba(0,0,0,.35);border:1.5px solid var(--line);border-radius:12px;
+  padding:15px 16px;color:var(--txt);font-family:inherit;font-size:16px;font-weight:600;outline:none;transition:.2s}
+.inp::placeholder{color:#6B6482;font-weight:500}
+.inp:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(168,85,247,.18)}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;cursor:pointer;border:none;
+  font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:15px;
+  padding:15px;border-radius:12px;transition:transform .2s,box-shadow .2s}
+.btn-main{background:linear-gradient(180deg,var(--violet),var(--violet-deep));color:#fff;box-shadow:0 0 24px rgba(168,85,247,.45)}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 0 32px rgba(168,85,247,.65)}
+.oauth{display:flex;gap:10px;margin-top:12px}
+.obtn{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;border:1.5px solid var(--line);
+  background:rgba(255,255,255,.04);color:var(--txt);border-radius:12px;padding:13px;font-weight:700;font-size:14px;transition:.2s}
+.obtn:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2)}
+.obtn .ic{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff}
+.obtn .vk{background:#0077FF}
+.obtn .ya{background:#FC3F1D}
+.divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.16em}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.hint{margin-top:18px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.5}
+.hint a{color:var(--violet);font-weight:700}
+.err{color:#FF6B6B;font-size:13px;font-weight:600;margin-top:10px;text-align:center;display:none}
+
+/* ══════════ КАБИНЕТ ══════════ */
+#app{display:none;position:relative;z-index:2;min-height:100vh}
+
+/* сайдбар (десктоп) */
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:var(--sidebar);background:var(--panel);
+  border-right:1px solid var(--line);padding:26px 16px;display:flex;flex-direction:column;gap:6px;z-index:40}
+.sidebar .brand{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:20px;
+  line-height:.95;padding:0 10px 22px;letter-spacing:.01em}
+.sidebar .brand b{color:var(--gold)}
+.nav-item{display:flex;align-items:center;gap:13px;padding:12px 14px;border-radius:12px;cursor:pointer;
+  color:var(--muted);font-weight:600;font-size:14.5px;transition:.2s;position:relative}
+.nav-item:hover{background:rgba(255,255,255,.05);color:var(--txt)}
+.nav-item.on{background:rgba(168,85,247,.14);color:#fff}
+.nav-item.on::before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:3px;border-radius:0 4px 4px 0;background:var(--violet)}
+.nav-item svg{width:19px;height:19px;flex:none;stroke:currentColor;fill:none;stroke-width:1.9}
+.nav-item.on svg{stroke:var(--violet)}
+.sidebar .spacer{flex:1}
+.logout{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;cursor:pointer;
+  color:var(--muted);font-weight:600;font-size:14px;transition:.2s}
+.logout:hover{background:rgba(255,80,80,.1);color:#FF8080}
+
+/* верхняя панель */
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;
+  padding:18px 26px;background:rgba(11,10,15,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar h1{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:24px;letter-spacing:.02em}
+.topbar .right{display:flex;align-items:center;gap:12px}
+.iconbtn{width:38px;height:38px;border-radius:50%;background:var(--panel2);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s}
+.iconbtn:hover{background:rgba(168,85,247,.2);border-color:var(--violet)}
+.iconbtn svg{width:17px;height:17px;stroke:var(--txt);fill:none;stroke-width:2}
+.ava{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--violet),#C026D3);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;cursor:pointer;
+  box-shadow:0 0 0 2px rgba(168,85,247,.3)}
+
+/* контент */
+main{margin-left:var(--sidebar);padding-bottom:40px}
+.page{display:none;padding:26px}
+.page.on{display:block;animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* приветствие */
+.hello{background:linear-gradient(120deg,rgba(168,85,247,.22),rgba(192,38,211,.1));border:1px solid rgba(168,85,247,.3);
+  border-radius:20px;padding:26px 28px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;position:relative;overflow:hidden}
+.hello::after{content:"";position:absolute;right:-40px;top:-60px;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(168,85,247,.35),transparent 70%)}
+.hello .txt{flex:1;min-width:220px;position:relative;z-index:2}
+.hello h2{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(22px,3.4vw,32px);line-height:1.05}
+.hello p{color:#D6CEEA;font-size:14.5px;margin-top:6px;font-weight:500}
+.hello .bigava{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--violet),#C026D3);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;position:relative;z-index:2;
+  box-shadow:0 0 0 4px rgba(168,85,247,.22)}
+
+/* прогресс */
+.progress-card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px 26px;margin-top:18px}
+.progress-card .row{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.progress-card .lbl{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--muted)}
+.bar{height:11px;background:rgba(255,255,255,.08);border-radius:20px;overflow:hidden;margin-top:12px;flex:1;min-width:200px}
+.bar i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,var(--violet),#C026D3);
+  box-shadow:0 0 14px rgba(168,85,247,.6);width:0;transition:width 1.2s cubic-bezier(.2,.9,.3,1)}
+.ring{width:78px;height:78px;flex:none;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring .tr{stroke:rgba(255,255,255,.1)}
+.ring .fg{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset 1.4s cubic-bezier(.2,.9,.3,1)}
+.ring span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
+
+/* фильтры */
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 18px}
+.chip{padding:9px 18px;border-radius:30px;background:var(--panel2);border:1px solid var(--line);
+  font-size:13.5px;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s}
+.chip:hover{color:var(--txt);border-color:rgba(255,255,255,.2)}
+.chip.on{background:rgba(168,85,247,.2);border-color:var(--violet);color:#fff}
+
+/* карточки уроков */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.lesson{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;
+  transition:transform .3s,border-color .3s,box-shadow .3s;position:relative}
+.lesson:hover{transform:translateY(-5px);border-color:rgba(168,85,247,.5);box-shadow:0 18px 40px -18px rgba(168,85,247,.4)}
+.lesson .thumb{aspect-ratio:16/10;position:relative;overflow:hidden;
+  background:linear-gradient(140deg,#2A1B45,#4C2A6B 60%,#1A1228)}
+.lesson .thumb .glow{position:absolute;inset:0;background:radial-gradient(60% 60% at 30% 30%,rgba(168,85,247,.5),transparent 70%)}
+.lesson .thumb .play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:44px;height:44px;border-radius:50%;
+  background:rgba(168,85,247,.9);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 8px rgba(168,85,247,.16);transition:.3s}
+.lesson:hover .thumb .play{transform:scale(1.12)}
+.lesson .thumb .play::after{content:"";border-style:solid;border-width:7px 0 7px 12px;border-color:transparent transparent transparent #fff;margin-left:3px}
+.lesson .dur{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.7);color:#fff;font-size:11px;
+  font-weight:700;padding:4px 8px;border-radius:6px;font-family:'Oswald',sans-serif;letter-spacing:.06em}
+.lesson .num{position:absolute;left:12px;top:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:22px;
+  color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.lesson .body{padding:14px 16px 16px}
+.lesson .body .t{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:15px;line-height:1.15}
+.lesson .body .s{color:var(--muted);font-size:12.5px;margin-top:4px;font-weight:500}
+.lesson.done .thumb::before{content:"✓";position:absolute;right:10px;top:10px;z-index:3;width:24px;height:24px;
+  background:var(--gold);color:#111;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
+.lesson.lock{opacity:.55}
+.lesson.lock .thumb .play{background:rgba(255,255,255,.15)}
+.lesson.lock .thumb .play::after{content:"🔒";border:none;margin:0;font-size:14px}
+
+/* блоки практики/бонусов */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:14px}
+.card h3{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:18px;margin-bottom:8px}
+.card p{color:#C9C1DE;font-size:14.5px}
+.task{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.task:last-child{border:none}
+.task i{flex:none;width:22px;height:22px;border-radius:7px;border:2px solid var(--violet);margin-top:2px;
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:transparent;transition:.2s}
+.task.done i{background:var(--violet);color:#fff}
+.task.done span{opacity:.5;text-decoration:line-through}
+.task span{font-size:14.5px;font-weight:500}
+
+/* чат/сообщество */
+.msg{display:flex;gap:12px;margin-bottom:16px}
+.msg .m-ava{width:38px;height:38px;flex:none;border-radius:50%;background:linear-gradient(135deg,#5B21B6,#A855F7);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.msg .m-body{background:var(--panel);border:1px solid var(--line);border-radius:4px 16px 16px 16px;padding:12px 16px;flex:1}
+.msg .m-name{font-weight:800;font-size:13px;color:var(--violet);margin-bottom:3px}
+.msg .m-text{font-size:14.5px;color:#D6CEEA}
+
+/* мобильная нижняя навигация */
+.tabbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:rgba(21,19,32,.94);backdrop-filter:blur(18px);border-top:1px solid var(--line);
+  padding:10px 6px calc(10px + env(safe-area-inset-bottom));justify-content:space-around;align-items:center}
+.tab{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:var(--muted);
+  font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:12px;transition:.2s;flex:1}
+.tab svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.9}
+.tab.on{color:var(--violet)}
+.tab.on svg{stroke:var(--violet)}
+
+@media(max-width:900px){
+  .sidebar{display:none}
+  main{margin-left:0;padding-bottom:96px}
+  .tabbar{display:flex}
+  .topbar{padding:14px 18px}
+  .page{padding:18px}
+  .hello{padding:22px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="aura a1"></div><div class="aura a2"></div>
+
+<!-- ══════════ ВХОД ══════════ -->
+<div id="auth">
+  <div class="card">
+    <div class="logo">Монтаж<br><b>за 30 дней</b></div>
+    <div class="sub">Личный кабинет ученика</div>
+
+    <input class="inp" id="codeInput" placeholder="Код покупателя из бота" autocomplete="off">
+    <button class="btn btn-main" style="margin-top:12px" id="codeBtn">Войти по коду</button>
+    <div class="err" id="authErr">Неверный код. Проверь сообщение от бота.</div>
+
+    <div class="divider">или</div>
+    <div class="oauth">
+      <div class="obtn" data-oauth="vk"><span class="ic vk">VK</span>ВКонтакте</div>
+      <div class="obtn" data-oauth="ya"><span class="ic ya">Я</span>Яндекс</div>
+    </div>
+
+    <div class="hint">Код приходит в Telegram сразу после покупки.<br>Нет кода? <a href="https://t.me/ВАШ_БОТ_ПРОДАЖ" target="_blank">Получить гайд →</a></div>
+  </div>
+</div>
+
+<!-- ══════════ КАБИНЕТ ══════════ -->
+<div id="app">
+  <!-- сайдбар -->
+  <aside class="sidebar">
+    <div class="brand">Монтаж<br><b>за 30 дней</b></div>
+    <div class="nav-item on" data-go="home">
+      <svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Главная</div>
+    <div class="nav-item" data-go="lessons">
+      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Уроки</div>
+    <div class="nav-item" data-go="practice">
+      <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6-6.3 4.6L7.9 14 2 9.4h7.6z"/></svg>Практика</div>
+    <div class="nav-item" data-go="bonus">
+      <svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>Бонусы</div>
+    <div class="nav-item" data-go="feedback">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Обратная связь</div>
+    <div class="nav-item" data-go="community">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>Сообщество</div>
+    <div class="nav-item" data-go="settings">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>Настройки</div>
+    <div class="spacer"></div>
+    <div class="logout" id="logout">
+      <svg viewBox="0 0 24 24" width="19" height="19" style="stroke:currentColor;fill:none;stroke-width:1.9"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Выйти</div>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <h1 id="pageTitle">Главная</h1>
+      <div class="right">
+        <div class="iconbtn" title="Уведомления">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        </div>
+        <div class="ava" id="avaTop">A</div>
+      </div>
+    </div>
+
+    <!-- ГЛАВНАЯ -->
+    <section class="page on" id="p-home">
+      <div class="hello">
+        <div class="bigava" id="avaBig">A</div>
+        <div class="txt">
+          <h2>Привет, <span id="uname">друг</span>!</h2>
+          <p id="helloSub">Продолжаем? До первого платного заказа осталось совсем немного.</p>
+        </div>
+      </div>
+
+      <div class="progress-card">
+        <div class="row">
+          <div style="flex:1;min-width:220px">
+            <div class="lbl">Твой прогресс</div>
+            <div class="bar"><i id="barFill"></i></div>
+            <div style="color:var(--muted);font-size:13px;margin-top:9px" id="progTxt">0 из 12 уроков пройдено</div>
+          </div>
+          <div class="ring">
+            <svg width="78" height="78">
+              <circle class="tr" cx="39" cy="39" r="33" stroke-width="7" fill="none"/>
+              <circle class="fg" id="ringFg" cx="39" cy="39" r="33" stroke-width="7" fill="none"
+                      stroke-dasharray="207" stroke-dashoffset="207"/>
+            </svg>
+            <span id="ringTxt">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="head" style="font-size:19px;margin:26px 0 14px">Продолжить обучение</h3>
+      <div class="grid" id="continueGrid"></div>
+    </section>
+
+    <!-- УРОКИ -->
+    <section class="page" id="p-lessons">
+      <div class="chips">
+        <div class="chip on" data-filter="all">Все уроки</div>
+        <div class="chip" data-filter="base">Базовый блок</div>
+        <div class="chip" data-filter="pro">Продвинутый блок</div>
+        <div class="chip" data-filter="bonus">Бонусы</div>
+      </div>
+      <div class="grid" id="lessonGrid"></div>
+    </section>
+
+    <!-- ПРАКТИКА -->
+    <section class="page" id="p-practice">
+      <div class="card">
+        <h3>Задания недели 1 · Инструмент в руках</h3>
+        <p style="margin-bottom:8px">Отмечай выполненное — прогресс считается автоматически.</p>
+        <div id="taskList"></div>
+      </div>
+      <div class="card">
+        <h3>Чек-лист перед сдачей ролика</h3>
+        <p>Прогоняй каждую работу по 12 пунктам из гайда. Меньше 10 — обратно в монтажку.</p>
+      </div>
+    </section>
+
+    <!-- БОНУСЫ -->
+    <section class="page" id="p-bonus">
+      <div class="grid">
+        <div class="card"><h3>15 скриптов переговоров</h3><p>Готовые сообщения: холодный контакт, цена, возражения, сдача работы.</p></div>
+        <div class="card"><h3>10 шаблонов плашек</h3><p>Связки «шрифт + подложка + цвет» для любых ниш.</p></div>
+        <div class="card"><h3>Калькулятор цены</h3><p>База + надбавки: считай стоимость заказа по формуле.</p></div>
+        <div class="card"><h3>30 ниш для рассылки</h3><p>Куда писать, чтобы получить первый заказ за 30 дней.</p></div>
+      </div>
+    </section>
+
+    <!-- ОБРАТНАЯ СВЯЗЬ -->
+    <section class="page" id="p-feedback">
+      <div class="card">
+        <h3>Отправить работу на разбор</h3>
+        <p style="margin-bottom:14px">Пришли ссылку на свой ролик — дам подробный разбор по чек-листу из гайда.</p>
+        <input class="inp" placeholder="Ссылка на ролик (Google Drive, Telegram, YouTube)" id="workLink">
+        <button class="btn btn-main" style="margin-top:12px" id="sendWork">Отправить на разбор</button>
+      </div>
+    </section>
+
+    <!-- СООБЩЕСТВО -->
+    <section class="page" id="p-community">
+      <div class="card">
+        <h3>Чат учеников</h3>
+        <p style="margin-bottom:18px">Здесь делятся работами, находят заказы и разбирают ошибки.</p>
+        <div class="msg"><div class="m-ava">И</div><div class="m-body"><div class="m-name">Иван · автор</div>
+          <div class="m-text">Ребята, напоминаю правило: 10 сообщений в день — и первый заказ придёт математически. Не «повезёт», а воронка.</div></div></div>
+        <div class="msg"><div class="m-ava">М</div><div class="m-body"><div class="m-name">Максим</div>
+          <div class="m-text">Сдал первый ролик кофейне за 2500! Скрипт из бонусов сработал с третьего сообщения 🔥</div></div></div>
+        <div class="msg"><div class="m-ava">А</div><div class="m-body"><div class="m-name">Аня</div>
+          <div class="m-text">Кто монтирует спортзалы — какой темп ставите под биты? У меня 0.8 сек на план, вроде живо.</div></div></div>
+        <a class="btn btn-main" href="https://t.me/ВАШ_ЧАТ" target="_blank" style="margin-top:6px">Открыть чат в Telegram</a>
+      </div>
+    </section>
+
+    <!-- НАСТРОЙКИ -->
+    <section class="page" id="p-settings">
+      <div class="card">
+        <h3>Профиль</h3>
+        <p style="margin-bottom:12px">Как к тебе обращаться в кабинете:</p>
+        <input class="inp" id="nameEdit" placeholder="Твоё имя">
+        <button class="btn btn-main" style="margin-top:12px" id="saveName">Сохранить</button>
+      </div>
+      <div class="card">
+        <h3>Сброс прогресса</h3>
+        <p style="margin-bottom:12px">Обнулит отметки об уроках и заданиях. Действие необратимо.</p>
+        <button class="btn" style="background:rgba(255,80,80,.15);color:#FF8080;border:1px solid rgba(255,80,80,.3)" id="resetProg">Сбросить прогресс</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- мобильная навигация -->
+  <nav class="tabbar">
+    <div class="tab on" data-go="home">
+      <svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Главная</div>
+    <div class="tab" data-go="lessons">
+      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Уроки</div>
+    <div class="tab" data-go="practice">
+      <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6-6.3 4.6L7.9 14 2 9.4h7.6z"/></svg>Практика</div>
+    <div class="tab" data-go="community">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Чат</div>
+    <div class="tab" data-go="settings">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Профиль</div>
+  </nav>
+</div>
+
+<script>
+/* ═══════════════ НАСТРОЙКА ═══════════════
+   ВАЖНО: коды покупателей.
+   Вариант А (сейчас): коды генерирует бот по формуле — сайт проверяет её же.
+   Формула: MVD- + 4 цифры, где сумма цифр кратна 7  (пример: MVD-1069)
+   Вариант Б: впиши конкретные коды в массив CODES ниже.               */
+const CODES = ["MVD-DEMO","МОНТАЖ2026"];         // ручные коды (всегда работают)
+function checkCode(c){
+  c = c.trim().toUpperCase();
+  if(CODES.includes(c)) return true;
+  const m = c.match(/^MVD-(\d{4})$/);
+  if(!m) return false;
+  const sum = [...m[1]].reduce((a,b)=>a+ +b,0);
+  return sum % 7 === 0;                            // та же формула, что в боте
+}
+
+/* ── данные уроков ── */
+const LESSONS = [
+  {n:"01",t:"Интерфейс и импорт материалов",s:"База монтажа",d:"06:43",g:"base"},
+  {n:"02",t:"Монтаж на практике",s:"Первая сборка",d:"18:42",g:"base"},
+  {n:"03",t:"Переходы и динамика",s:"Ритм ролика",d:"14:20",g:"base"},
+  {n:"04",t:"Текст, плашки и сабы",s:"Оформление",d:"11:05",g:"base"},
+  {n:"05",t:"Звук и даккинг",s:"Работа с аудио",d:"09:38",g:"base"},
+  {n:"06",t:"Хук: первые 3 секунды",s:"7 рабочих типов",d:"12:11",g:"base"},
+  {n:"07",t:"Цветокоррекция как в кино",s:"Lumetri и пресеты",d:"16:27",g:"pro"},
+  {n:"08",t:"Скоростные рампы",s:"Motion blur",d:"10:52",g:"pro"},
+  {n:"09",t:"Анимация в After Effects",s:"6 приёмов",d:"21:14",g:"pro"},
+  {n:"10",t:"Портфолио за 7 дней",s:"3 бесплатных ролика",d:"13:40",g:"pro"},
+  {n:"11",t:"Скрипты переговоров",s:"Как назвать цену",d:"15:03",g:"bonus"},
+  {n:"12",t:"Первый платный заказ",s:"Сделка и отзыв",d:"17:58",g:"bonus"}
+];
+const TASKS = [
+  "Установить CapCut и завести облачную папку",
+  "Собрать первый тренировочный ролик «в стол»",
+  "Разобрать чужой Reels по кадрам («копия мастера»)",
+  "Сделать 3 ролика в трёх разных нишах",
+  "Оформить Telegram-канал с портфолио",
+  "Написать 10 клиентам по скрипту"
+];
+
+/* ── состояние ── */
+const S = {
+  get name(){return localStorage.getItem('mvd_name')||''},
+  set name(v){localStorage.setItem('mvd_name',v)},
+  get auth(){return localStorage.getItem('mvd_auth')==='1'},
+  set auth(v){localStorage.setItem('mvd_auth',v?'1':'0')},
+  get done(){try{return JSON.parse(localStorage.getItem('mvd_done'))||[]}catch(e){return []}},
+  set done(v){localStorage.setItem('mvd_done',JSON.stringify(v))},
+  get tasks(){try{return JSON.parse(localStorage.getItem('mvd_tasks'))||[]}catch(e){return []}},
+  set tasks(v){localStorage.setItem('mvd_tasks',JSON.stringify(v))}
+};
+
+/* ── вход ── */
+const authBox=document.getElementById('auth'), app=document.getElementById('app');
+function askName(){
+  let n = S.name;
+  if(!n){
+    n = prompt('Как тебя зовут? (появится в кабинете)') || 'Друг';
+    S.name = n.trim().slice(0,24);
+  }
+  return S.name;
+}
+function enter(){
+  S.auth = true;
+  const n = askName();
+  authBox.style.display='none';
+  app.style.display='block';
+  document.getElementById('uname').textContent = n;
+  const L = n.trim()[0]?.toUpperCase() || 'A';
+  document.getElementById('avaTop').textContent = L;
+  document.getElementById('avaBig').textContent = L;
+  document.getElementById('nameEdit').value = n;
+  render();
+}
+document.getElementById('codeBtn').onclick=()=>{
+  const v=document.getElementById('codeInput').value;
+  if(checkCode(v)){document.getElementById('authErr').style.display='none';enter();}
+  else{document.getElementById('authErr').style.display='block';}
+};
+document.getElementById('codeInput').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('codeBtn').click()});
+document.querySelectorAll('[data-oauth]').forEach(b=>b.onclick=()=>{
+  alert('Вход через '+(b.dataset.oauth==='vk'?'ВКонтакте':'Яндекс')+' подключается на сервере.\n\nПока используй код покупателя из Telegram-бота.');
+});
+document.getElementById('logout').onclick=()=>{S.auth=false;location.reload()};
+
+/* ── навигация ── */
+const TITLES={home:'Главная',lessons:'Уроки',practice:'Практика',bonus:'Бонусы',feedback:'Обратная связь',community:'Сообщество',settings:'Настройки'};
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.getElementById('p-'+id)?.classList.add('on');
+  document.getElementById('pageTitle').textContent=TITLES[id]||'';
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('on',n.dataset.go===id));
+  document.querySelectorAll('.tab').forEach(n=>n.classList.toggle('on',n.dataset.go===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('[data-go]').forEach(el=>el.onclick=()=>go(el.dataset.go));
+
+/* ── отрисовка ── */
+function lessonCard(l,i){
+  const done=S.done.includes(i);
+  const lock = i>0 && !S.done.includes(i-1) && !done;
+  return `<div class="lesson ${done?'done':''} ${lock?'lock':''}" data-i="${i}" data-g="${l.g}">
+    <div class="thumb"><div class="glow"></div><div class="num">${l.n}</div><div class="play"></div><div class="dur">${l.d}</div></div>
+    <div class="body"><div class="t">${l.t}</div><div class="s">${l.s}</div></div>
+  </div>`;
+}
+function render(){
+  document.getElementById('lessonGrid').innerHTML = LESSONS.map(lessonCard).join('');
+  const next = LESSONS.findIndex((_,i)=>!S.done.includes(i));
+  const cont = next<0 ? [0,1,2] : [next, next+1, next+2].filter(i=>i<LESSONS.length);
+  document.getElementById('continueGrid').innerHTML = cont.map(i=>lessonCard(LESSONS[i],i)).join('');
+
+  document.getElementById('taskList').innerHTML = TASKS.map((t,i)=>
+    `<div class="task ${S.tasks.includes(i)?'done':''}" data-t="${i}"><i>✓</i><span>${t}</span></div>`).join('');
+
+  const pc = Math.round(S.done.length/LESSONS.length*100);
+  document.getElementById('barFill').style.width = pc+'%';
+  document.getElementById('progTxt').textContent = `${S.done.length} из ${LESSONS.length} уроков пройдено`;
+  document.getElementById('ringTxt').textContent = pc+'%';
+  document.getElementById('ringFg').style.strokeDashoffset = 207 - 207*pc/100;
+  const sub=document.getElementById('helloSub');
+  sub.textContent = pc===0 ? 'Начнём? Первый урок займёт меньше 7 минут.'
+    : pc<50 ? 'Отличный темп! Продолжаем — до первого заказа осталось совсем немного.'
+    : pc<100 ? 'Больше половины позади. Пора искать первого клиента.'
+    : 'Курс пройден! Теперь только практика и заказы.';
+
+  document.querySelectorAll('.lesson').forEach(el=>el.onclick=()=>{
+    if(el.classList.contains('lock')){alert('Сначала пройди предыдущий урок 🙂');return}
+    const i=+el.dataset.i, d=S.done;
+    if(d.includes(i)) S.done=d.filter(x=>x!==i); else S.done=[...d,i];
+    render();
+  });
+  document.querySelectorAll('.task').forEach(el=>el.onclick=()=>{
+    const i=+el.dataset.t, t=S.tasks;
+    if(t.includes(i)) S.tasks=t.filter(x=>x!==i); else S.tasks=[...t,i];
+    render();
+  });
+}
+/* фильтры уроков */
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
+  document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));
+  c.classList.add('on');
+  const f=c.dataset.filter;
+  document.querySelectorAll('#lessonGrid .lesson').forEach(el=>{
+    el.style.display = (f==='all'||el.dataset.g===f) ? '' : 'none';
+  });
+});
+/* настройки */
+document.getElementById('saveName').onclick=()=>{
+  const v=document.getElementById('nameEdit').value.trim();
+  if(!v)return;
+  S.name=v.slice(0,24);
+  document.getElementById('uname').textContent=S.name;
+  const L=S.name[0].toUpperCase();
+  document.getElementById('avaTop').textContent=L;
+  document.getElementById('avaBig').textContent=L;
+  alert('Сохранено!');
+};
+document.getElementById('resetProg').onclick=()=>{
+  if(confirm('Точно сбросить весь прогресс?')){S.done=[];S.tasks=[];render();}
+};
+document.getElementById('sendWork').onclick=()=>{
+  const v=document.getElementById('workLink').value.trim();
+  if(!v){alert('Вставь ссылку на ролик');return}
+  window.open('https://t.me/ВАШ_НИК?text='+encodeURIComponent('Работа на разбор: '+v),'_blank');
+};
+
+/* автовход, если уже заходил */
+if(S.auth && S.name) enter();
+</script>
+</body>
+</html>
