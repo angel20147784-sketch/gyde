@@ -455,6 +455,93 @@ footer b{color:var(--red)}
   .kpage{padding:16px}
 }
 
+
+/* ═══════════ ВИЗУАЛЬНЫЕ ЭФФЕКТЫ ═══════════ */
+/* мягкое появление страниц кабинета */
+.kpage.on{animation:pgIn .5s cubic-bezier(.2,.9,.3,1)}
+@keyframes pgIn{from{opacity:0;transform:translateY(20px) scale(.99)}to{opacity:1;transform:none}}
+/* стаггер-появление карточек */
+.kgrid>*{animation:cardIn .55s cubic-bezier(.2,.9,.3,1) backwards}
+.kgrid>*:nth-child(1){animation-delay:.03s}.kgrid>*:nth-child(2){animation-delay:.08s}
+.kgrid>*:nth-child(3){animation-delay:.13s}.kgrid>*:nth-child(4){animation-delay:.18s}
+.kgrid>*:nth-child(5){animation-delay:.23s}.kgrid>*:nth-child(6){animation-delay:.28s}
+.kgrid>*:nth-child(n+7){animation-delay:.33s}
+@keyframes cardIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
+
+/* кнопки: волна при клике + свечение */
+.rbtn,.hbtn,.socbtn,.kchip,.mtab{position:relative;overflow:hidden;isolation:isolate}
+.ripple{position:absolute;border-radius:50%;transform:scale(0);background:rgba(255,255,255,.45);
+  pointer-events:none;animation:rip .6s ease-out forwards;z-index:0}
+@keyframes rip{to{transform:scale(3.4);opacity:0}}
+.rbtn::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .3s;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.22) 50%,transparent 70%)}
+.rbtn:hover::before{opacity:1;animation:sweep 1s ease}
+@keyframes sweep{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.rbtn:active{transform:translateY(1px) scale(.98)}
+
+/* карточки уроков — наклон и подсветка */
+.klesson{will-change:transform}
+.klesson .kth img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  transition:transform .7s cubic-bezier(.2,.9,.3,1),filter .4s;filter:saturate(.85) contrast(1.05)}
+.klesson:hover .kth img{transform:scale(1.09);filter:saturate(1.15) contrast(1.1)}
+.klesson .kth::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(10,9,8,.15),rgba(10,9,8,.82))}
+.klesson .kglow,.klesson .knum,.klesson .kplay,.klesson .kdur{z-index:2}
+.klesson .kb{position:relative;z-index:2}
+
+/* градиентная рамка у активных элементов */
+.kitem.on,.ktab.on{position:relative}
+.kchip.on{box-shadow:0 0 20px -4px rgba(224,27,23,.6)}
+
+/* пульс у аватара */
+.kava,.khello .kbig{position:relative}
+.khello .kbig::after{content:"";position:absolute;inset:-6px;border-radius:50%;
+  border:2px solid rgba(224,27,23,.4);animation:avaPulse 2.6s ease-in-out infinite}
+@keyframes avaPulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.12);opacity:0}}
+
+/* фото-баннер в кабинете */
+.khero{position:relative;border-radius:18px;overflow:hidden;height:190px;margin-bottom:16px;
+  border:1px solid var(--line);box-shadow:0 20px 44px -22px #000}
+.khero img{width:100%;height:100%;object-fit:cover;filter:saturate(.9)}
+.khero .kh-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,9,8,.94),rgba(140,10,6,.55) 60%,transparent)}
+.khero .kh-txt{position:absolute;left:26px;top:50%;translate:0 -50%;z-index:2;max-width:60%}
+.khero .kh-txt h4{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(19px,2.6vw,28px);line-height:1.05;text-shadow:0 3px 12px rgba(0,0,0,.7)}
+.khero .kh-txt p{font-size:13.5px;color:#e4dcd9;margin-top:6px;font-weight:500}
+@media(max-width:640px){.khero{height:150px}.khero .kh-txt{left:18px;max-width:72%}}
+
+/* фото в карточках лендинга */
+.svc-img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:14px;
+  filter:saturate(.9) contrast(1.05);transition:transform .6s,filter .4s}
+.paper:hover .svc-img,.glass:hover .svc-img{transform:scale(1.03);filter:saturate(1.1)}
+
+/* галерея работ */
+.works{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:24px}
+.work{position:relative;aspect-ratio:9/14;border-radius:16px;overflow:hidden;cursor:pointer;
+  border:1px solid var(--line);box-shadow:0 18px 40px -20px #000;transition:transform .4s,box-shadow .4s}
+.work:hover{transform:translateY(-7px);box-shadow:0 26px 54px -22px rgba(224,27,23,.5)}
+.work img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.9,.3,1);filter:saturate(.85)}
+.work:hover img{transform:scale(1.08);filter:saturate(1.15)}
+.work .w-veil{position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,9,8,.92))}
+.work .w-play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:54px;height:54px;border-radius:50%;
+  background:rgba(224,27,23,.92);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 10px rgba(224,27,23,.15);transition:transform .35s}
+.work:hover .w-play{transform:scale(1.15)}
+.work .w-play::after{content:"";border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff;margin-left:3px}
+.work .w-cap{position:absolute;left:14px;right:14px;bottom:13px;z-index:2}
+.work .w-cap b{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:14.5px;display:block}
+.work .w-cap span{font-size:11.5px;color:#c9c1be;font-weight:600}
+.work .w-tag{position:absolute;left:12px;top:12px;z-index:2;background:rgba(224,27,23,.9);
+  font-family:'Oswald',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;padding:5px 10px;border-radius:20px}
+
+/* скролл-прогресс сверху */
+#scrollbar{position:fixed;top:0;left:0;height:3px;z-index:120;width:0;
+  background:linear-gradient(90deg,var(--red),#ff8a5c);box-shadow:0 0 12px rgba(224,27,23,.8);transition:width .1s}
+
+/* плавное появление модалки */
+.modal-card{transform-origin:center}
+
 </style>
 </head>
 <body>
@@ -730,6 +817,35 @@ footer b{color:var(--red)}
       <a class="contact" href="https://wa.me/70000000000" target="_blank"><span class="ic">WA</span><b>WhatsApp</b></a>
       <a class="contact" href="https://instagram.com/ВАШ_НИК" target="_blank"><span class="ic">IG</span><b>Instagram</b></a>
     </div>
+  </div>
+</section>
+
+
+<!-- ═══ ПРИМЕРЫ РАБОТ ═══ -->
+<section id="works">
+  <div class="glow" style="width:520px;height:520px;left:-8%;top:20%"></div>
+  <div class="wrap">
+    <div class="rv" style="text-align:center"><span class="mono red-t">примеры работ</span></div>
+    <h2 class="head-font h-big rv d1" style="text-align:center;margin:12px 0 8px">Смотрится в ленте —<br><span class="red-t">работает в кассе</span></h2>
+    <p class="lead rv d2" style="text-align:center;margin:0 auto">Рестораны, спортзалы, мероприятия. Живые ссылки пришлю в переписке.</p>
+    <div class="works">
+      <div class="work rv">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=700&q=80" alt="Ролик для кафе" loading="lazy">
+        <div class="w-veil"></div><div class="w-tag">кафе</div><div class="w-play"></div>
+        <div class="w-cap"><b>Подача блюда</b><span>0:27 · +38% брони через директ</span></div>
+      </div>
+      <div class="work rv d1">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=700&q=80" alt="Ролик для спортзала" loading="lazy">
+        <div class="w-veil"></div><div class="w-tag">спорт</div><div class="w-play"></div>
+        <div class="w-cap"><b>Трансформация</b><span>0:19 · 12 заявок за неделю</span></div>
+      </div>
+      <div class="work rv d2">
+        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=700&q=80" alt="Афтемуви с мероприятия" loading="lazy">
+        <div class="w-veil"></div><div class="w-tag">ивент</div><div class="w-play"></div>
+        <div class="w-cap"><b>Афтемуви</b><span>0:24 · сдан через 20 часов</span></div>
+      </div>
+    </div>
+    <div class="rv" style="text-align:center;margin-top:30px"><a class="rbtn" href="#zayavka">Хочу такой ролик</a></div>
   </div>
 </section>
 
@@ -1098,6 +1214,11 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
     </div>
 
     <section class="kpage on" id="k-home">
+      <div class="khero">
+        <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1200&q=80" alt="" loading="lazy">
+        <div class="kh-veil"></div>
+        <div class="kh-txt"><h4>30 дней до первого заказа</h4><p>12 уроков · практика · разбор твоих работ</p></div>
+      </div>
       <div class="khello">
         <div class="kbig" id="kBigAva">A</div>
         <div class="kt">
@@ -1194,19 +1315,20 @@ function checkCode(c){
   return [...m[1]].reduce((a,b)=>a+ +b,0)%7===0;
 }
 
+const U="https://images.unsplash.com/photo-";
 const LESSONS=[
-  {n:"01",t:"Интерфейс и импорт",s:"База монтажа",d:"06:43",g:"base"},
-  {n:"02",t:"Монтаж на практике",s:"Первая сборка",d:"18:42",g:"base"},
-  {n:"03",t:"Переходы и динамика",s:"Ритм ролика",d:"14:20",g:"base"},
-  {n:"04",t:"Текст, плашки и сабы",s:"Оформление",d:"11:05",g:"base"},
-  {n:"05",t:"Звук и даккинг",s:"Работа с аудио",d:"09:38",g:"base"},
-  {n:"06",t:"Хук: первые 3 секунды",s:"7 типов хука",d:"12:11",g:"base"},
-  {n:"07",t:"Цветокоррекция",s:"Lumetri и пресеты",d:"16:27",g:"pro"},
-  {n:"08",t:"Скоростные рампы",s:"Motion blur",d:"10:52",g:"pro"},
-  {n:"09",t:"Анимация в After Effects",s:"6 приёмов",d:"21:14",g:"pro"},
-  {n:"10",t:"Портфолио за 7 дней",s:"3 бесплатных ролика",d:"13:40",g:"pro"},
-  {n:"11",t:"Скрипты переговоров",s:"Как назвать цену",d:"15:03",g:"bonus"},
-  {n:"12",t:"Первый платный заказ",s:"Сделка и отзыв",d:"17:58",g:"bonus"}
+  {n:"01",t:"Интерфейс и импорт",s:"База монтажа",d:"06:43",g:"base",img:U+"1492691527719-9d1e07e534b4?w=500&q=75"},
+  {n:"02",t:"Монтаж на практике",s:"Первая сборка",d:"18:42",g:"base",img:U+"1574717024653-61fd2cf4d44d?w=500&q=75"},
+  {n:"03",t:"Переходы и динамика",s:"Ритм ролика",d:"14:20",g:"base",img:U+"1536240478700-b869070f9279?w=500&q=75"},
+  {n:"04",t:"Текст, плашки и сабы",s:"Оформление",d:"11:05",g:"base",img:U+"1626785774573-4b799315345d?w=500&q=75"},
+  {n:"05",t:"Звук и даккинг",s:"Работа с аудио",d:"09:38",g:"base",img:U+"1598488035139-bdbb2231ce04?w=500&q=75"},
+  {n:"06",t:"Хук: первые 3 секунды",s:"7 типов хука",d:"12:11",g:"base",img:U+"1611262588024-d12430b98920?w=500&q=75"},
+  {n:"07",t:"Цветокоррекция",s:"Lumetri и пресеты",d:"16:27",g:"pro",img:U+"1502920917128-1aa500764cbd?w=500&q=75"},
+  {n:"08",t:"Скоростные рампы",s:"Motion blur",d:"10:52",g:"pro",img:U+"1579632652768-6cb9dcf85912?w=500&q=75"},
+  {n:"09",t:"Анимация в After Effects",s:"6 приёмов",d:"21:14",g:"pro",img:U+"1550745165-9bc0b252726f?w=500&q=75"},
+  {n:"10",t:"Портфолио за 7 дней",s:"3 бесплатных ролика",d:"13:40",g:"pro",img:U+"1554118811-1e0d58224f24?w=500&q=75"},
+  {n:"11",t:"Скрипты переговоров",s:"Как назвать цену",d:"15:03",g:"bonus",img:U+"1573497019940-1c28c88b4f3e?w=500&q=75"},
+  {n:"12",t:"Первый платный заказ",s:"Сделка и отзыв",d:"17:58",g:"bonus",img:U+"1450101499163-c8848c66ca85?w=500&q=75"}
 ];
 const TASKS=[
   "Установить CapCut и завести облачную папку",
@@ -1310,7 +1432,8 @@ function card(l,i){
   const done=S.done.includes(i);
   const lock=i>0&&!S.done.includes(i-1)&&!done;
   return '<div class="klesson '+(done?'done':'')+' '+(lock?'lock':'')+'" data-i="'+i+'" data-g="'+l.g+'">'
-    +'<div class="kth"><div class="kglow"></div><div class="knum">'+l.n+'</div><div class="kplay"></div><div class="kdur">'+l.d+'</div></div>'
+    +'<div class="kth"><img src="'+l.img+'" alt="" loading="lazy"><div class="kglow"></div>'
+    +'<div class="knum">'+l.n+'</div><div class="kplay"></div><div class="kdur">'+l.d+'</div></div>'
     +'<div class="kb"><div class="kt2">'+l.t+'</div><div class="ks">'+l.s+'</div></div></div>';
 }
 function render(){
@@ -1368,6 +1491,55 @@ $('btnLogin2')&&($('btnLogin2').onclick=()=>openAuth('login'));
 document.querySelectorAll('[data-openauth]').forEach(b=>b.onclick=e=>{e.preventDefault();openAuth('login')});
 
 syncHeader();
+})();
+</script>
+
+
+<script>
+/* ═══════════ ЭФФЕКТЫ ИНТЕРФЕЙСА ═══════════ */
+(function(){
+if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+
+/* волна по клику на кнопках */
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.rbtn,.hbtn,.socbtn,.kchip,.mtab,.kitem,.ktab');
+  if(!b)return;
+  const r=b.getBoundingClientRect(), d=Math.max(r.width,r.height);
+  const s=document.createElement('span');
+  s.className='ripple';
+  s.style.width=s.style.height=d+'px';
+  s.style.left=(e.clientX-r.left-d/2)+'px';
+  s.style.top=(e.clientY-r.top-d/2)+'px';
+  b.appendChild(s);
+  setTimeout(()=>s.remove(),620);
+},true);
+
+/* полоса прогресса чтения */
+const sb=document.createElement('div');sb.id='scrollbar';document.body.appendChild(sb);
+addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  sb.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight||1)*100)+'%';
+},{passive:true});
+
+/* наклон карточек уроков за курсором */
+function tilt(sel,max){
+  document.addEventListener('mousemove',e=>{
+    const c=e.target.closest(sel); if(!c)return;
+    const r=c.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    c.style.transform=`translateY(-5px) perspective(700px) rotateX(${-y*max}deg) rotateY(${x*max}deg)`;
+  },{passive:true});
+  document.addEventListener('mouseout',e=>{
+    const c=e.target.closest(sel); if(c)c.style.transform='';
+  },{passive:true});
+}
+tilt('.klesson',6); tilt('.work',5);
+
+/* плавное появление галереи работ */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+}),{threshold:.15});
+document.querySelectorAll('#works .rv').forEach(el=>io.observe(el));
 })();
 </script>
 
