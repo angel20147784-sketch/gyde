@@ -783,12 +783,13 @@ footer b{color:var(--red)}
       <div class="rv d2">
         <p class="lead" style="color:#d4cdc8">Всё, чем я зарабатываю сам, собрано в один интерактивный гайд — от первого клика в CapCut до предоплаты на карте.</p>
         <ul class="gl">
-          <li>Маршрут CapCut → Premiere → After Effects</li>
-          <li>Формула ролика: хук — показ — доказательство — действие</li>
-          <li>15 готовых скриптов переговоров с клиентами</li>
-          <li>Калькулятор цены + план на каждый из 30 дней</li>
-          <li><b>Доступ в личный кабинет:</b> 12 видеоуроков, практика, трекер прогресса</li>
+          <li>Пошаговый маршрут обучения монтажу — от нуля до заказа</li>
+          <li>Формула продающего ролика, за который платят</li>
+          <li>Готовые скрипты переговоров с клиентами</li>
+          <li>Инструменты ценообразования и план на 30 дней</li>
+          <li><b>Личный кабинет:</b> 12 видеоуроков, практика, трекер прогресса</li>
         </ul>
+        <p style="font-size:13px;color:var(--grey);margin-top:-6px">🔒 Полное содержание открывается после покупки</p>
         <p style="font-weight:600;color:#d4cdc8;margin-bottom:16px">Первый же заказ на 2500 ₽ окупает гайд <b class="red-t">пятикратно</b>.</p>
         <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px">
           <span class="gprice"><s>990 ₽</s>499 ₽</span>
@@ -960,346 +961,6 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
 <!-- ═══════════ ЛИЧНЫЙ КАБИНЕТ ═══════════ -->
 <div class="aura a2"></div>
-<!-- ══════════ ВХОД ══════════ -->
-<div id="auth">
-  <div class="card">
-    <div class="logo">Монтаж<br><b>за 30 дней</b></div>
-    <div class="sub">Личный кабинет ученика</div>
-
-    <input class="inp" id="nameInput" placeholder="Как тебя зовут?" autocomplete="off" style="margin-bottom:10px">
-    <input class="inp" id="codeInput" placeholder="Код покупателя из бота" autocomplete="off">
-    <button class="btn btn-main" style="margin-top:12px" id="codeBtn">Войти по коду</button>
-    <div class="err" id="authErr">Неверный код. Проверь сообщение от бота.</div>
-
-    <div class="divider">или</div>
-    <div class="oauth">
-      <div class="obtn" data-oauth="vk"><span class="ic vk">VK</span>ВКонтакте</div>
-      <div class="obtn" data-oauth="ya"><span class="ic ya">Я</span>Яндекс</div>
-    </div>
-
-    <div class="hint">Код приходит в Telegram сразу после покупки.<br>
-      Нет кода? <a href="https://t.me/Gayd30day_bot" target="_blank">Купить доступ в боте →</a><br>
-      <a href="https://angel20147784-sketch.github.io/gyde/reccut/" style="color:var(--muted)">← Вернуться на сайт REC/CUT</a></div>
-  </div>
-</div>
-
-
-<div id="app">
-  <!-- сайдбар -->
-  <aside class="sidebar">
-    <div class="brand">Монтаж<br><b>за 30 дней</b></div>
-    <div class="nav-item on" data-go="home">
-      <svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Главная</div>
-    <div class="nav-item" data-go="lessons">
-      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Уроки</div>
-    <div class="nav-item" data-go="practice">
-      <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6-6.3 4.6L7.9 14 2 9.4h7.6z"/></svg>Практика</div>
-    <div class="nav-item" data-go="bonus">
-      <svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>Бонусы</div>
-    <div class="nav-item" data-go="feedback">
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Обратная связь</div>
-    <div class="nav-item" data-go="community">
-      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>Сообщество</div>
-    <div class="nav-item" data-go="settings">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>Настройки</div>
-    <a class="nav-item" href="https://angel20147784-sketch.github.io/gyde/" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Мой гайд</a>
-    <a class="nav-item" href="https://angel20147784-sketch.github.io/gyde/reccut/" target="_blank">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></svg>Сайт REC/CUT</a>
-    <div class="spacer"></div>
-    <div class="logout" id="logout">
-      <svg viewBox="0 0 24 24" width="19" height="19" style="stroke:currentColor;fill:none;stroke-width:1.9"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Выйти</div>
-  </aside>
-
-  <main>
-    <div class="topbar">
-      <h1 id="pageTitle">Главная</h1>
-      <div class="right">
-        <div class="iconbtn" title="Уведомления">
-          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-        </div>
-        <div class="ava" id="avaTop">A</div>
-      </div>
-    </div>
-
-    <!-- ГЛАВНАЯ -->
-    <section class="page on" id="p-home">
-      <div class="hello">
-        <div class="bigava" id="avaBig">A</div>
-        <div class="txt">
-          <h2>Привет, <span id="uname">друг</span>!</h2>
-          <p id="helloSub">Продолжаем? До первого платного заказа осталось совсем немного.</p>
-        </div>
-      </div>
-
-      <div class="progress-card">
-        <div class="row">
-          <div style="flex:1;min-width:220px">
-            <div class="lbl">Твой прогресс</div>
-            <div class="bar"><i id="barFill"></i></div>
-            <div style="color:var(--muted);font-size:13px;margin-top:9px" id="progTxt">0 из 12 уроков пройдено</div>
-          </div>
-          <div class="ring">
-            <svg width="78" height="78">
-              <circle class="tr" cx="39" cy="39" r="33" stroke-width="7" fill="none"/>
-              <circle class="fg" id="ringFg" cx="39" cy="39" r="33" stroke-width="7" fill="none"
-                      stroke-dasharray="207" stroke-dashoffset="207"/>
-            </svg>
-            <span id="ringTxt">0%</span>
-          </div>
-        </div>
-      </div>
-
-      <h3 class="head" style="font-size:19px;margin:26px 0 14px">Продолжить обучение</h3>
-      <div class="grid" id="continueGrid"></div>
-    </section>
-
-    <!-- УРОКИ -->
-    <section class="page" id="p-lessons">
-      <div class="chips">
-        <div class="chip on" data-filter="all">Все уроки</div>
-        <div class="chip" data-filter="base">Базовый блок</div>
-        <div class="chip" data-filter="pro">Продвинутый блок</div>
-        <div class="chip" data-filter="bonus">Бонусы</div>
-      </div>
-      <div class="grid" id="lessonGrid"></div>
-    </section>
-
-    <!-- ПРАКТИКА -->
-    <section class="page" id="p-practice">
-      <div class="card">
-        <h3>Задания недели 1 · Инструмент в руках</h3>
-        <p style="margin-bottom:8px">Отмечай выполненное — прогресс считается автоматически.</p>
-        <div id="taskList"></div>
-      </div>
-      <div class="card">
-        <h3>Чек-лист перед сдачей ролика</h3>
-        <p>Прогоняй каждую работу по 12 пунктам из гайда. Меньше 10 — обратно в монтажку.</p>
-      </div>
-    </section>
-
-    <!-- БОНУСЫ -->
-    <section class="page" id="p-bonus">
-      <div class="grid">
-        <div class="card"><h3>15 скриптов переговоров</h3><p>Готовые сообщения: холодный контакт, цена, возражения, сдача работы.</p></div>
-        <div class="card"><h3>10 шаблонов плашек</h3><p>Связки «шрифт + подложка + цвет» для любых ниш.</p></div>
-        <div class="card"><h3>Калькулятор цены</h3><p>База + надбавки: считай стоимость заказа по формуле.</p></div>
-        <div class="card"><h3>30 ниш для рассылки</h3><p>Куда писать, чтобы получить первый заказ за 30 дней.</p></div>
-      </div>
-      <a class="btn btn-main" href="https://angel20147784-sketch.github.io/gyde/" target="_blank" style="margin-top:16px;max-width:340px">Открыть полный гайд</a>
-      <div style="display:none">
-      </div>
-    </section>
-
-    <!-- ОБРАТНАЯ СВЯЗЬ -->
-    <section class="page" id="p-feedback">
-      <div class="card">
-        <h3>Отправить работу на разбор</h3>
-        <p style="margin-bottom:14px">Пришли ссылку на свой ролик — дам подробный разбор по чек-листу из гайда.</p>
-        <input class="inp" placeholder="Ссылка на ролик (Google Drive, Telegram, YouTube)" id="workLink">
-        <button class="btn btn-main" style="margin-top:12px" id="sendWork">Отправить на разбор</button>
-      </div>
-    </section>
-
-    <!-- СООБЩЕСТВО -->
-    <section class="page" id="p-community">
-      <div class="card">
-        <h3>Чат учеников</h3>
-        <p style="margin-bottom:18px">Здесь делятся работами, находят заказы и разбирают ошибки.</p>
-        <div class="msg"><div class="m-ava">И</div><div class="m-body"><div class="m-name">Иван · автор</div>
-          <div class="m-text">Ребята, напоминаю правило: 10 сообщений в день — и первый заказ придёт математически. Не «повезёт», а воронка.</div></div></div>
-        <div class="msg"><div class="m-ava">М</div><div class="m-body"><div class="m-name">Максим</div>
-          <div class="m-text">Сдал первый ролик кофейне за 2500! Скрипт из бонусов сработал с третьего сообщения 🔥</div></div></div>
-        <div class="msg"><div class="m-ava">А</div><div class="m-body"><div class="m-name">Аня</div>
-          <div class="m-text">Кто монтирует спортзалы — какой темп ставите под биты? У меня 0.8 сек на план, вроде живо.</div></div></div>
-        <a class="btn btn-main" href="https://t.me/ВАШ_ЧАТ" target="_blank" style="margin-top:6px">Открыть чат в Telegram</a>
-      </div>
-    </section>
-
-    <!-- НАСТРОЙКИ -->
-    <section class="page" id="p-settings">
-      <div class="card">
-        <h3>Профиль</h3>
-        <p style="margin-bottom:12px">Как к тебе обращаться в кабинете:</p>
-        <input class="inp" id="nameEdit" placeholder="Твоё имя">
-        <button class="btn btn-main" style="margin-top:12px" id="saveName">Сохранить</button>
-      </div>
-      <div class="card">
-        <h3>Сброс прогресса</h3>
-        <p style="margin-bottom:12px">Обнулит отметки об уроках и заданиях. Действие необратимо.</p>
-        <button class="btn" style="background:rgba(255,80,80,.15);color:#FF8080;border:1px solid rgba(255,80,80,.3)" id="resetProg">Сбросить прогресс</button>
-      </div>
-    </section>
-  </main>
-
-  <!-- мобильная навигация -->
-  <nav class="tabbar">
-    <div class="tab on" data-go="home">
-      <svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Главная</div>
-    <div class="tab" data-go="lessons">
-      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Уроки</div>
-    <div class="tab" data-go="practice">
-      <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6-6.3 4.6L7.9 14 2 9.4h7.6z"/></svg>Практика</div>
-    <div class="tab" data-go="community">
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Чат</div>
-    <div class="tab" data-go="settings">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Профиль</div>
-  </nav>
-</div>
-
-
-</div>
-
-
-<!-- ═══════════ МОДАЛКА ВХОДА/РЕГИСТРАЦИИ ═══════════ -->
-<div class="modal" id="authModal">
-  <div class="modal-card">
-    <button class="modal-close" id="authClose">×</button>
-    <h3 id="authTitle">Вход в кабинет</h3>
-    <div class="msub" id="authSub">Доступ к урокам, практике и чату учеников</div>
-
-    <div class="mtabs">
-      <div class="mtab on" data-mode="login">Войти</div>
-      <div class="mtab" data-mode="reg">Регистрация</div>
-    </div>
-
-    <div class="soc">
-      <div class="socbtn" data-auth="tg">
-        <span class="si si-tg">TG</span>
-        <span>Через Telegram<small>по коду от бота — работает сейчас</small></span>
-      </div>
-      <div class="socbtn" data-auth="vk">
-        <span class="si si-vk">VK</span>
-        <span>Через ВКонтакте<small>подключается</small></span>
-      </div>
-      <div class="socbtn" data-auth="ya">
-        <span class="si si-ya">Я</span>
-        <span>Через Яндекс ID<small>подключается</small></span>
-      </div>
-    </div>
-
-    <div id="tgBox" style="display:none">
-      <div class="mdiv">код из telegram</div>
-      <input class="minp" id="authName" placeholder="Как тебя зовут?" autocomplete="off">
-      <input class="minp" id="authCode" placeholder="Код доступа (MVD-XXXX)" autocomplete="off">
-      <button class="rbtn" id="authGo" style="width:100%;justify-content:center">Войти в кабинет</button>
-      <div class="merr" id="authErr"></div>
-    </div>
-
-    <div class="mhint" id="authHint">
-      Нет кода? <a href="https://t.me/Gayd30day_bot" target="_blank">Купить доступ в боте →</a>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ ЛИЧНЫЙ КАБИНЕТ ═══════════ -->
-<div id="kab">
-  <aside class="kside">
-    <div class="kbrand">REC<b>/CUT</b><br>кабинет</div>
-    <div class="kitem on" data-kgo="home"><svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Главная</div>
-    <div class="kitem" data-kgo="lessons"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Уроки</div>
-    <div class="kitem" data-kgo="practice"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6-6.3 4.6L7.9 14 2 9.4h7.6z"/></svg>Практика</div>
-    <div class="kitem" data-kgo="bonus"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>Бонусы</div>
-    <div class="kitem" data-kgo="chat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Сообщество</div>
-    <div class="kitem" data-kgo="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Профиль</div>
-    <div class="kspacer"></div>
-    <div class="kitem" id="kToSite"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></svg>На сайт</div>
-    <div class="kexit" id="kLogout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Выйти</div>
-  </aside>
-
-  <div class="kmain">
-    <div class="ktop">
-      <h2 id="kTitle">Главная</h2>
-      <div class="kava" id="kAva">A</div>
-    </div>
-
-    <section class="kpage on" id="k-home">
-      <div class="khero">
-        <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1200&q=80" alt="" loading="lazy">
-        <div class="kh-veil"></div>
-        <div class="kh-txt"><h4>30 дней до первого заказа</h4><p>12 уроков · практика · разбор твоих работ</p></div>
-      </div>
-      <div class="khello">
-        <div class="kbig" id="kBigAva">A</div>
-        <div class="kt">
-          <h3>Привет, <span id="kName">друг</span>!</h3>
-          <p id="kSub">Продолжаем? До первого платного заказа осталось совсем немного.</p>
-        </div>
-      </div>
-      <div class="kprog">
-        <div class="pl">
-          <div class="klbl">Твой прогресс</div>
-          <div class="kbar"><i id="kBar"></i></div>
-          <div style="color:var(--grey);font-size:13px;margin-top:9px" id="kProgTxt">0 из 12 уроков пройдено</div>
-        </div>
-        <div class="kring">
-          <svg width="74" height="74"><circle class="tr" cx="37" cy="37" r="31" stroke-width="7" fill="none"/>
-            <circle class="fg" id="kRing" cx="37" cy="37" r="31" stroke-width="7" fill="none" stroke-dasharray="195" stroke-dashoffset="195"/></svg>
-          <span id="kPct">0%</span>
-        </div>
-      </div>
-      <h3 class="head" style="font-size:18px;margin:24px 0 13px">Продолжить обучение</h3>
-      <div class="kgrid" id="kContinue"></div>
-    </section>
-
-    <section class="kpage" id="k-lessons">
-      <div class="kchips">
-        <div class="kchip on" data-kf="all">Все уроки</div>
-        <div class="kchip" data-kf="base">Базовый блок</div>
-        <div class="kchip" data-kf="pro">Продвинутый</div>
-        <div class="kchip" data-kf="bonus">Бонусы</div>
-      </div>
-      <div class="kgrid" id="kLessons"></div>
-    </section>
-
-    <section class="kpage" id="k-practice">
-      <div class="kcard"><h4>Задания недели 1 · Инструмент в руках</h4>
-        <p style="margin-bottom:6px">Отмечай выполненное — прогресс считается автоматически.</p>
-        <div id="kTasks"></div></div>
-    </section>
-
-    <section class="kpage" id="k-bonus">
-      <div class="kgrid">
-        <div class="kcard"><h4>15 скриптов переговоров</h4><p>Холодный контакт, цена, возражения, сдача работы.</p></div>
-        <div class="kcard"><h4>10 шаблонов плашек</h4><p>Связки «шрифт + подложка + цвет» для любых ниш.</p></div>
-        <div class="kcard"><h4>Калькулятор цены</h4><p>База + надбавки: считай стоимость заказа по формуле.</p></div>
-        <div class="kcard"><h4>30 ниш для рассылки</h4><p>Куда писать, чтобы получить первый заказ.</p></div>
-      </div>
-      <a class="rbtn" href="https://angel20147784-sketch.github.io/gyde/" target="_blank" style="margin-top:16px">Открыть полный гайд</a>
-    </section>
-
-    <section class="kpage" id="k-chat">
-      <div class="kcard"><h4>Чат учеников</h4>
-        <p style="margin-bottom:16px">Здесь делятся работами, находят заказы и разбирают ошибки.</p>
-        <div class="kmsg"><div class="ma">И</div><div class="mb"><div class="mn">Иван · автор</div>
-          <div class="mt">Правило простое: 10 сообщений в день — и первый заказ придёт математически.</div></div></div>
-        <div class="kmsg"><div class="ma">М</div><div class="mb"><div class="mn">Максим</div>
-          <div class="mt">Сдал первый ролик кофейне за 2500! Скрипт из бонусов сработал с третьего сообщения 🔥</div></div></div>
-        <a class="rbtn" href="https://t.me/Gayd30day_bot" target="_blank" style="margin-top:8px">Открыть чат в Telegram</a>
-      </div>
-    </section>
-
-    <section class="kpage" id="k-profile">
-      <div class="kcard"><h4>Профиль</h4>
-        <p style="margin-bottom:12px">Как к тебе обращаться:</p>
-        <input class="minp" id="kNameEdit" placeholder="Твоё имя">
-        <button class="rbtn" id="kSaveName" style="width:100%;justify-content:center">Сохранить</button></div>
-      <div class="kcard"><h4>Сброс прогресса</h4>
-        <p style="margin-bottom:12px">Обнулит отметки об уроках и заданиях.</p>
-        <button class="rbtn ghost" id="kReset" style="width:100%;justify-content:center">Сбросить прогресс</button></div>
-    </section>
-  </div>
-
-  <nav class="ktabbar">
-    <div class="ktab on" data-kgo="home"><svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Главная</div>
-    <div class="ktab" data-kgo="lessons"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Уроки</div>
-    <div class="ktab" data-kgo="practice"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6-6.3 4.6L7.9 14 2 9.4h7.6z"/></svg>Практика</div>
-    <div class="ktab" data-kgo="chat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Чат</div>
-    <div class="ktab" data-kgo="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Профиль</div>
-  </nav>
-</div>
-
-
 <script>
 /* ═══════════════ АВТОРИЗАЦИЯ И КАБИНЕТ ═══════════════ */
 (function(){
@@ -1315,6 +976,7 @@ function checkCode(c){
   return [...m[1]].reduce((a,b)=>a+ +b,0)%7===0;
 }
 
+/* уроки грузятся только после входа — публично названия не раскрываются */
 const U="https://images.unsplash.com/photo-";
 const LESSONS=[
   {n:"01",t:"Интерфейс и импорт",s:"База монтажа",d:"06:43",g:"base",img:U+"1492691527719-9d1e07e534b4?w=500&q=75"},
@@ -1542,6 +1204,132 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
 document.querySelectorAll('#works .rv').forEach(el=>io.observe(el));
 })();
 </script>
+
+
+<!-- ═══════════ МОДАЛКА ВХОДА/РЕГИСТРАЦИИ ═══════════ -->
+<div class="modal" id="authModal">
+  <div class="modal-card">
+    <button class="modal-close" id="authClose">×</button>
+    <h3 id="authTitle">Вход в кабинет</h3>
+    <div class="msub" id="authSub">Доступ к урокам, практике и чату учеников</div>
+    <div class="mtabs">
+      <div class="mtab on" data-mode="login">Войти</div>
+      <div class="mtab" data-mode="reg">Регистрация</div>
+    </div>
+    <div class="soc">
+      <div class="socbtn" data-auth="tg"><span class="si si-tg">TG</span>
+        <span>Через Telegram<small>по коду от бота — работает сейчас</small></span></div>
+      <div class="socbtn" data-auth="vk"><span class="si si-vk">VK</span>
+        <span>Через ВКонтакте<small>подключается</small></span></div>
+      <div class="socbtn" data-auth="ya"><span class="si si-ya">Я</span>
+        <span>Через Яндекс ID<small>подключается</small></span></div>
+    </div>
+    <div id="tgBox" style="display:none">
+      <div class="mdiv">код из telegram</div>
+      <input class="minp" id="authName" placeholder="Как тебя зовут?" autocomplete="off">
+      <input class="minp" id="authCode" placeholder="Код доступа (MVD-XXXX)" autocomplete="off">
+      <button class="rbtn" id="authGo" style="width:100%;justify-content:center">Войти в кабинет</button>
+      <div class="merr" id="authErr"></div>
+    </div>
+    <div class="mhint" id="authHint">Нет кода? <a href="https://t.me/Gayd30day_bot" target="_blank">Купить доступ в боте →</a></div>
+  </div>
+</div>
+
+<!-- ═══════════ ЛИЧНЫЙ КАБИНЕТ ═══════════ -->
+<div id="kab">
+  <aside class="kside">
+    <div class="kbrand">REC<b>/CUT</b><br>кабинет</div>
+    <div class="kitem on" data-kgo="home"><svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Главная</div>
+    <div class="kitem" data-kgo="lessons"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Уроки</div>
+    <div class="kitem" data-kgo="practice"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6-6.3 4.6L7.9 14 2 9.4h7.6z"/></svg>Практика</div>
+    <div class="kitem" data-kgo="bonus"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18"/></svg>Бонусы</div>
+    <div class="kitem" data-kgo="chat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Сообщество</div>
+    <div class="kitem" data-kgo="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Профиль</div>
+    <div class="kspacer"></div>
+    <div class="kitem" id="kToSite"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg>На сайт</div>
+    <div class="kexit" id="kLogout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Выйти</div>
+  </aside>
+  <div class="kmain">
+    <div class="ktop"><h2 id="kTitle">Главная</h2><div class="kava" id="kAva">A</div></div>
+<section class="kpage on" id="k-home">
+      <div class="khero">
+        <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1200&q=80" alt="" loading="lazy">
+        <div class="kh-veil"></div>
+        <div class="kh-txt"><h4>30 дней до первого заказа</h4><p>12 уроков · практика · разбор твоих работ</p></div>
+      </div>
+      <div class="khello">
+        <div class="kbig" id="kBigAva">A</div>
+        <div class="kt">
+          <h3>Привет, <span id="kName">друг</span>!</h3>
+          <p id="kSub">Продолжаем? До первого платного заказа осталось совсем немного.</p>
+        </div>
+      </div>
+      <div class="kprog">
+        <div class="pl">
+          <div class="klbl">Твой прогресс</div>
+          <div class="kbar"><i id="kBar"></i></div>
+          <div style="color:var(--grey);font-size:13px;margin-top:9px" id="kProgTxt">0 из 12 уроков пройдено</div>
+        </div>
+        <div class="kring">
+          <svg width="74" height="74"><circle class="tr" cx="37" cy="37" r="31" stroke-width="7" fill="none"/>
+            <circle class="fg" id="kRing" cx="37" cy="37" r="31" stroke-width="7" fill="none" stroke-dasharray="195" stroke-dashoffset="195"/></svg>
+          <span id="kPct">0%</span>
+        </div>
+      </div>
+      <h3 class="head" style="font-size:18px;margin:24px 0 13px">Продолжить обучение</h3>
+      <div class="kgrid" id="kContinue"></div>
+    </section>
+<section class="kpage" id="k-lessons">
+      <div class="kchips">
+        <div class="kchip on" data-kf="all">Все уроки</div>
+        <div class="kchip" data-kf="base">Базовый блок</div>
+        <div class="kchip" data-kf="pro">Продвинутый</div>
+        <div class="kchip" data-kf="bonus">Бонусы</div>
+      </div>
+      <div class="kgrid" id="kLessons"></div>
+    </section>
+<section class="kpage" id="k-practice">
+      <div class="kcard"><h4>Задания недели 1 · Инструмент в руках</h4>
+        <p style="margin-bottom:6px">Отмечай выполненное — прогресс считается автоматически.</p>
+        <div id="kTasks"></div></div>
+    </section>
+<section class="kpage" id="k-bonus">
+      <div class="kgrid">
+        <div class="kcard"><h4>Банк скриптов</h4><p>Холодный контакт, цена, возражения, сдача работы.</p></div>
+        <div class="kcard"><h4>Шаблоны плашек</h4><p>Связки «шрифт + подложка + цвет» для любых ниш.</p></div>
+        <div class="kcard"><h4>Калькулятор цены</h4><p>База + надбавки: считай стоимость заказа по формуле.</p></div>
+        <div class="kcard"><h4>База ниш для рассылки</h4><p>Куда писать, чтобы получить первый заказ.</p></div>
+      </div>
+      <a class="rbtn" href="https://angel20147784-sketch.github.io/gyde/" target="_blank" style="margin-top:16px">Открыть полный гайд</a>
+    </section>
+<section class="kpage" id="k-chat">
+      <div class="kcard"><h4>Чат учеников</h4>
+        <p style="margin-bottom:16px">Здесь делятся работами, находят заказы и разбирают ошибки.</p>
+        <div class="kmsg"><div class="ma">И</div><div class="mb"><div class="mn">Иван · автор</div>
+          <div class="mt">Правило простое: 10 сообщений в день — и первый заказ придёт математически.</div></div></div>
+        <div class="kmsg"><div class="ma">М</div><div class="mb"><div class="mn">Максим</div>
+          <div class="mt">Сдал первый ролик кофейне за 2500! Скрипт из бонусов сработал с третьего сообщения 🔥</div></div></div>
+        <a class="rbtn" href="https://t.me/Gayd30day_bot" target="_blank" style="margin-top:8px">Открыть чат в Telegram</a>
+      </div>
+    </section>
+<section class="kpage" id="k-profile">
+      <div class="kcard"><h4>Профиль</h4>
+        <p style="margin-bottom:12px">Как к тебе обращаться:</p>
+        <input class="minp" id="kNameEdit" placeholder="Твоё имя">
+        <button class="rbtn" id="kSaveName" style="width:100%;justify-content:center">Сохранить</button></div>
+      <div class="kcard"><h4>Сброс прогресса</h4>
+        <p style="margin-bottom:12px">Обнулит отметки об уроках и заданиях.</p>
+        <button class="rbtn ghost" id="kReset" style="width:100%;justify-content:center">Сбросить прогресс</button></div>
+    </section>
+  </div>
+  <nav class="ktabbar">
+    <div class="ktab on" data-kgo="home"><svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Главная</div>
+    <div class="ktab" data-kgo="lessons"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Уроки</div>
+    <div class="ktab" data-kgo="practice"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6-6.3 4.6L7.9 14 2 9.4h7.6z"/></svg>Практика</div>
+    <div class="ktab" data-kgo="chat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Чат</div>
+    <div class="ktab" data-kgo="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Профиль</div>
+  </nav>
+</div>
 
 </body>
 </html>
