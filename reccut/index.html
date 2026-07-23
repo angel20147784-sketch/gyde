@@ -297,76 +297,163 @@ footer b{color:var(--red)}
 @media(max-width:640px){section{padding:76px 22px}#hero{padding-top:120px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 
-/* ═══════════ ЛИЧНЫЙ КАБИНЕТ (встроен) ═══════════ */
-#lkWrap{display:none;position:fixed;inset:0;z-index:200;overflow-y:auto;background:#0B0A0F;color:#F3F0FA;font-family:"Golos Text",system-ui,sans-serif;font-size:16px;line-height:1.55}
-#lkWrap.on{display:block}
-#lkClose{position:fixed;right:16px;top:16px;z-index:260;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
-#lkClose:hover{background:rgba(255,80,80,.25)}
-#lkWrap{
-  --violet:#A855F7;
-  --violet-deep:#7C2FD4;
-  --gold:#F5C518;
-  --bg:#0B0A0F;
-  --panel:#151320;
-  --panel2:#1D1A2B;
-  --line:rgba(255,255,255,.08);
-  --txt:#F3F0FA;
-  --muted:#9B93B4;
-  --sidebar:248px;
-}#lkWrap *{margin:0;padding:0;box-sizing:border-box}#lkWrap html{scroll-behavior:smooth}#lkWrap .lk-body{font-family:'Golos Text',system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:16px;line-height:1.55;overflow-x:hidden}#lkWrap ::selection{background:var(--violet);color:#fff}#lkWrap a{color:inherit;text-decoration:none}#lkWrap .head{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em}#lkWrap /* фоновое свечение */
-.aura{position:fixed;border-radius:50%;filter:blur(110px);pointer-events:none;z-index:0;opacity:.5}#lkWrap .aura.a1{width:520px;height:520px;background:#7C2FD4;top:-140px;left:-120px}#lkWrap .aura.a2{width:460px;height:460px;background:#C026D3;bottom:-160px;right:-120px;opacity:.35}#lkWrap /* ══════════ ЭКРАН ВХОДА ══════════ */
-#lkWrap #auth{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:22px;
-  background:radial-gradient(120% 90% at 50% 0%,#241a3d,#0B0A0F 65%)}#lkWrap #auth .card{width:100%;max-width:420px;background:rgba(21,19,32,.9);backdrop-filter:blur(20px);
-  border:1px solid var(--line);border-radius:24px;padding:36px 30px;position:relative;z-index:2;
-  box-shadow:0 34px 70px -28px #000}#lkWrap #auth .logo{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:26px;line-height:.95;text-align:center}#lkWrap #auth .logo b{color:var(--gold)}#lkWrap #auth .sub{text-align:center;color:var(--muted);font-size:14px;margin:10px 0 26px}#lkWrap .inp{width:100%;background:rgba(0,0,0,.35);border:1.5px solid var(--line);border-radius:12px;
-  padding:15px 16px;color:var(--txt);font-family:inherit;font-size:16px;font-weight:600;outline:none;transition:.2s}#lkWrap .inp::placeholder{color:#6B6482;font-weight:500}#lkWrap .inp:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(168,85,247,.18)}#lkWrap .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;cursor:pointer;border:none;
-  font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:15px;
-  padding:15px;border-radius:12px;transition:transform .2s,box-shadow .2s}#lkWrap .btn-main{background:linear-gradient(180deg,var(--violet),var(--violet-deep));color:#fff;box-shadow:0 0 24px rgba(168,85,247,.45)}#lkWrap .btn-main:hover{transform:translateY(-2px);box-shadow:0 0 32px rgba(168,85,247,.65)}#lkWrap .oauth{display:flex;gap:10px;margin-top:12px}#lkWrap .obtn{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;border:1.5px solid var(--line);
-  background:rgba(255,255,255,.04);color:var(--txt);border-radius:12px;padding:13px;font-weight:700;font-size:14px;transition:.2s}#lkWrap .obtn:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2)}#lkWrap .obtn .ic{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff}#lkWrap .obtn .vk{background:#0077FF}#lkWrap .obtn .ya{background:#FC3F1D}#lkWrap .divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.16em}#lkWrap .divider::before,
-#lkWrap .divider::after{content:"";flex:1;height:1px;background:var(--line)}#lkWrap .hint{margin-top:18px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.5}#lkWrap .hint a{color:var(--violet);font-weight:700}#lkWrap .err{color:#FF6B6B;font-size:13px;font-weight:600;margin-top:10px;text-align:center;display:none}#lkWrap /* ══════════ КАБИНЕТ ══════════ */
-#lkWrap #app{display:none;position:relative;z-index:2;min-height:100vh}#lkWrap /* сайдбар (десктоп) */
-.sidebar{position:fixed;left:0;top:0;bottom:0;width:var(--sidebar);background:var(--panel);
-  border-right:1px solid var(--line);padding:26px 16px;display:flex;flex-direction:column;gap:6px;z-index:40}#lkWrap .sidebar .brand{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:20px;
-  line-height:.95;padding:0 10px 22px;letter-spacing:.01em}#lkWrap .sidebar .brand b{color:var(--gold)}#lkWrap .nav-item{display:flex;align-items:center;gap:13px;padding:12px 14px;border-radius:12px;cursor:pointer;
-  color:var(--muted);font-weight:600;font-size:14.5px;transition:.2s;position:relative}#lkWrap .nav-item:hover{background:rgba(255,255,255,.05);color:var(--txt)}#lkWrap .nav-item.on{background:rgba(168,85,247,.14);color:#fff}#lkWrap .nav-item.on::before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:3px;border-radius:0 4px 4px 0;background:var(--violet)}#lkWrap .nav-item svg{width:19px;height:19px;flex:none;stroke:currentColor;fill:none;stroke-width:1.9}#lkWrap .nav-item.on svg{stroke:var(--violet)}#lkWrap .sidebar .spacer{flex:1}#lkWrap .logout{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;cursor:pointer;
-  color:var(--muted);font-weight:600;font-size:14px;transition:.2s}#lkWrap .logout:hover{background:rgba(255,80,80,.1);color:#FF8080}#lkWrap /* верхняя панель */
-.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;
-  padding:18px 26px;background:rgba(11,10,15,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}#lkWrap .topbar h1{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:24px;letter-spacing:.02em}#lkWrap .topbar .right{display:flex;align-items:center;gap:12px}#lkWrap .iconbtn{width:38px;height:38px;border-radius:50%;background:var(--panel2);border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s}#lkWrap .iconbtn:hover{background:rgba(168,85,247,.2);border-color:var(--violet)}#lkWrap .iconbtn svg{width:17px;height:17px;stroke:var(--txt);fill:none;stroke-width:2}#lkWrap .ava{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--violet),#C026D3);
-  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;cursor:pointer;
-  box-shadow:0 0 0 2px rgba(168,85,247,.3)}#lkWrap /* контент */
-main{margin-left:var(--sidebar);padding-bottom:40px}#lkWrap .page{display:none;padding:26px}#lkWrap .page.on{display:block;animation:fade .4s ease}
-@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}#lkWrap /* приветствие */
-.hello{background:linear-gradient(120deg,rgba(168,85,247,.22),rgba(192,38,211,.1));border:1px solid rgba(168,85,247,.3);
-  border-radius:20px;padding:26px 28px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;position:relative;overflow:hidden}#lkWrap .hello::after{content:"";position:absolute;right:-40px;top:-60px;width:220px;height:220px;border-radius:50%;
-  background:radial-gradient(circle,rgba(168,85,247,.35),transparent 70%)}#lkWrap .hello .txt{flex:1;min-width:220px;position:relative;z-index:2}#lkWrap .hello h2{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(22px,3.4vw,32px);line-height:1.05}#lkWrap .hello p{color:#D6CEEA;font-size:14.5px;margin-top:6px;font-weight:500}#lkWrap .hello .bigava{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--violet),#C026D3);
-  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;position:relative;z-index:2;
-  box-shadow:0 0 0 4px rgba(168,85,247,.22)}#lkWrap /* прогресс */
-.progress-card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px 26px;margin-top:18px}#lkWrap .progress-card .row{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}#lkWrap .progress-card .lbl{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:12px;color:var(--muted)}#lkWrap .bar{height:11px;background:rgba(255,255,255,.08);border-radius:20px;overflow:hidden;margin-top:12px;flex:1;min-width:200px}#lkWrap .bar i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,var(--violet),#C026D3);
-  box-shadow:0 0 14px rgba(168,85,247,.6);width:0;transition:width 1.2s cubic-bezier(.2,.9,.3,1)}#lkWrap .ring{width:78px;height:78px;flex:none;position:relative}#lkWrap .ring svg{transform:rotate(-90deg)}#lkWrap .ring .tr{stroke:rgba(255,255,255,.1)}#lkWrap .ring .fg{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset 1.4s cubic-bezier(.2,.9,.3,1)}#lkWrap .ring span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}#lkWrap /* фильтры */
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 18px}#lkWrap .chip{padding:9px 18px;border-radius:30px;background:var(--panel2);border:1px solid var(--line);
-  font-size:13.5px;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s}#lkWrap .chip:hover{color:var(--txt);border-color:rgba(255,255,255,.2)}#lkWrap .chip.on{background:rgba(168,85,247,.2);border-color:var(--violet);color:#fff}#lkWrap /* карточки уроков */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}#lkWrap .lesson{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;
-  transition:transform .3s,border-color .3s,box-shadow .3s;position:relative}#lkWrap .lesson:hover{transform:translateY(-5px);border-color:rgba(168,85,247,.5);box-shadow:0 18px 40px -18px rgba(168,85,247,.4)}#lkWrap .lesson .thumb{aspect-ratio:16/10;position:relative;overflow:hidden;
-  background:linear-gradient(140deg,#2A1B45,#4C2A6B 60%,#1A1228)}#lkWrap .lesson .thumb .glow{position:absolute;inset:0;background:radial-gradient(60% 60% at 30% 30%,rgba(168,85,247,.5),transparent 70%)}#lkWrap .lesson .thumb .play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:44px;height:44px;border-radius:50%;
-  background:rgba(168,85,247,.9);display:flex;align-items:center;justify-content:center;
-  box-shadow:0 0 0 8px rgba(168,85,247,.16);transition:.3s}#lkWrap .lesson:hover .thumb .play{transform:scale(1.12)}#lkWrap .lesson .thumb .play::after{content:"";border-style:solid;border-width:7px 0 7px 12px;border-color:transparent transparent transparent #fff;margin-left:3px}#lkWrap .lesson .dur{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.7);color:#fff;font-size:11px;
-  font-weight:700;padding:4px 8px;border-radius:6px;font-family:'Oswald',sans-serif;letter-spacing:.06em}#lkWrap .lesson .num{position:absolute;left:12px;top:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:22px;
-  color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6)}#lkWrap .lesson .#lkWrap .lk-body{padding:14px 16px 16px}#lkWrap .lesson .body .t{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:15px;line-height:1.15}#lkWrap .lesson .body .s{color:var(--muted);font-size:12.5px;margin-top:4px;font-weight:500}#lkWrap .lesson.done .thumb::before{content:"✓";position:absolute;right:10px;top:10px;z-index:3;width:24px;height:24px;
-  background:var(--gold);color:#111;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}#lkWrap .lesson.lock{opacity:.55}#lkWrap .lesson.lock .thumb .play{background:rgba(255,255,255,.15)}#lkWrap .lesson.lock .thumb .play::after{content:"🔒";border:none;margin:0;font-size:14px}#lkWrap /* блоки практики/бонусов */
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:14px}#lkWrap .card h3{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:18px;margin-bottom:8px}#lkWrap .card p{color:#C9C1DE;font-size:14.5px}#lkWrap .task{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px dashed var(--line);cursor:pointer}#lkWrap .task:last-child{border:none}#lkWrap .task i{flex:none;width:22px;height:22px;border-radius:7px;border:2px solid var(--violet);margin-top:2px;
-  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:transparent;transition:.2s}#lkWrap .task.done i{background:var(--violet);color:#fff}#lkWrap .task.done span{opacity:.5;text-decoration:line-through}#lkWrap .task span{font-size:14.5px;font-weight:500}#lkWrap /* чат/сообщество */
-.msg{display:flex;gap:12px;margin-bottom:16px}#lkWrap .msg .m-ava{width:38px;height:38px;flex:none;border-radius:50%;background:linear-gradient(135deg,#5B21B6,#A855F7);
-  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}#lkWrap .msg .m-#lkWrap .lk-body{background:var(--panel);border:1px solid var(--line);border-radius:4px 16px 16px 16px;padding:12px 16px;flex:1}#lkWrap .msg .m-name{font-weight:800;font-size:13px;color:var(--violet);margin-bottom:3px}#lkWrap .msg .m-text{font-size:14.5px;color:#D6CEEA}#lkWrap /* мобильная нижняя навигация */
-.tabbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;
-  background:rgba(21,19,32,.94);backdrop-filter:blur(18px);border-top:1px solid var(--line);
-  padding:10px 6px calc(10px + env(safe-area-inset-bottom));justify-content:space-around;align-items:center}#lkWrap .tab{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:var(--muted);
-  font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:12px;transition:.2s;flex:1}#lkWrap .tab svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.9}#lkWrap .tab.on{color:var(--violet)}#lkWrap .tab.on svg{stroke:var(--violet)}
 
+/* ═══════════════ АВТОРИЗАЦИЯ И КАБИНЕТ ═══════════════ */
+/* модалка входа */
+.modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px;
+  background:rgba(6,5,5,.86);backdrop-filter:blur(10px)}
+.modal.on{display:flex;animation:mFade .3s ease}
+@keyframes mFade{from{opacity:0}to{opacity:1}}
+.modal-card{width:100%;max-width:420px;background:linear-gradient(160deg,var(--panel2),var(--panel));
+  border:1px solid rgba(224,27,23,.35);border-radius:20px;padding:34px 30px;position:relative;
+  box-shadow:0 34px 80px -26px #000,0 0 60px -30px var(--red);animation:mUp .45s cubic-bezier(.2,.9,.3,1.1)}
+@keyframes mUp{from{transform:translateY(26px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+.modal-card h3{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:26px;text-align:center;line-height:1.05}
+.modal-card .msub{text-align:center;color:var(--grey);font-size:14px;margin:8px 0 24px}
+.modal-close{position:absolute;right:14px;top:14px;width:32px;height:32px;border-radius:50%;cursor:pointer;
+  background:rgba(255,255,255,.07);border:1px solid var(--line);color:#fff;font-size:17px;line-height:1;
+  display:flex;align-items:center;justify-content:center;transition:.2s}
+.modal-close:hover{background:rgba(224,27,23,.3)}
+/* табы вход/регистрация */
+.mtabs{display:flex;gap:6px;background:rgba(0,0,0,.35);padding:5px;border-radius:12px;margin-bottom:22px}
+.mtab{flex:1;text-align:center;padding:11px;border-radius:9px;cursor:pointer;font-family:'Oswald',sans-serif;
+  font-weight:600;text-transform:uppercase;letter-spacing:.06em;font-size:13.5px;color:var(--grey);transition:.2s}
+.mtab.on{background:var(--red);color:#fff;box-shadow:0 0 18px rgba(224,27,23,.5)}
+/* соц-кнопки */
+.soc{display:flex;flex-direction:column;gap:10px}
+.socbtn{display:flex;align-items:center;gap:13px;padding:14px 16px;border-radius:12px;cursor:pointer;
+  background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--white);font-weight:600;font-size:15px;transition:.2s}
+.socbtn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);transform:translateY(-2px)}
+.socbtn .si{width:34px;height:34px;flex:none;border-radius:9px;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:13px;color:#fff}
+.si-tg{background:#2AABEE}.si-vk{background:#0077FF}.si-ya{background:#FC3F1D}
+.socbtn small{display:block;font-weight:500;font-size:11.5px;color:var(--grey);margin-top:1px}
+.mdiv{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--grey);font-size:11px;
+  text-transform:uppercase;letter-spacing:.18em;font-family:'Oswald',sans-serif}
+.mdiv::before,.mdiv::after{content:"";flex:1;height:1px;background:var(--line)}
+.minp{width:100%;background:rgba(0,0,0,.4);border:1.5px solid var(--line);border-radius:11px;padding:14px 16px;
+  color:var(--white);font-family:'Golos Text',sans-serif;font-size:15.5px;font-weight:600;outline:none;transition:.2s;margin-bottom:10px}
+.minp::placeholder{color:#6b6360;font-weight:500}
+.minp:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(224,27,23,.16)}
+.merr{color:#ff8080;font-size:13px;font-weight:600;text-align:center;margin-top:8px;display:none}
+.mhint{margin-top:16px;font-size:12.5px;color:var(--grey);text-align:center;line-height:1.55}
+.mhint a{color:var(--red);font-weight:700}
+
+/* ═══ КАБИНЕТ ═══ */
+#kab{display:none;position:fixed;inset:0;z-index:190;background:var(--bg);overflow-y:auto}
+#kab.on{display:block}
+.kside{position:fixed;left:0;top:0;bottom:0;width:236px;background:var(--panel);border-right:1px solid var(--line);
+  padding:24px 14px;display:flex;flex-direction:column;gap:5px;z-index:20}
+.kside .kbrand{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:19px;
+  line-height:.95;padding:0 10px 20px}
+.kside .kbrand b{color:var(--red)}
+.kitem{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:11px;cursor:pointer;
+  color:var(--grey);font-weight:600;font-size:14.5px;transition:.2s;position:relative}
+.kitem:hover{background:rgba(255,255,255,.05);color:var(--white)}
+.kitem.on{background:rgba(224,27,23,.15);color:#fff}
+.kitem.on::before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:3px;border-radius:0 4px 4px 0;background:var(--red)}
+.kitem svg{width:19px;height:19px;flex:none;stroke:currentColor;fill:none;stroke-width:1.9}
+.kitem.on svg{stroke:var(--red)}
+.kside .kspacer{flex:1}
+.kexit{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:11px;cursor:pointer;
+  color:var(--grey);font-weight:600;font-size:14px;transition:.2s}
+.kexit:hover{background:rgba(255,80,80,.12);color:#ff8080}
+.kexit svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9}
+/* топбар кабинета */
+.ktop{position:sticky;top:0;z-index:15;display:flex;align-items:center;justify-content:space-between;
+  padding:16px 24px;background:rgba(10,9,8,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.ktop h2{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:22px}
+.kava{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--red),#ff6a4d);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;
+  box-shadow:0 0 0 2px rgba(224,27,23,.3)}
+.kmain{margin-left:236px;padding-bottom:40px}
+.kpage{display:none;padding:24px}
+.kpage.on{display:block;animation:kFade .35s ease}
+@keyframes kFade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* приветствие */
+.khello{background:linear-gradient(120deg,rgba(224,27,23,.22),rgba(224,27,23,.05));
+  border:1px solid rgba(224,27,23,.3);border-radius:18px;padding:24px 26px;display:flex;align-items:center;
+  gap:20px;flex-wrap:wrap;position:relative;overflow:hidden}
+.khello::after{content:"";position:absolute;right:-50px;top:-70px;width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(circle,rgba(224,27,23,.3),transparent 70%)}
+.khello .kbig{width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,var(--red),#ff6a4d);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;position:relative;z-index:2;
+  box-shadow:0 0 0 4px rgba(224,27,23,.2)}
+.khello .kt{flex:1;min-width:210px;position:relative;z-index:2}
+.khello h3{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(20px,3vw,30px);line-height:1.05}
+.khello p{color:#d8d0cd;font-size:14.5px;margin-top:5px;font-weight:500}
+/* прогресс */
+.kprog{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-top:16px;
+  display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.kprog .pl{flex:1;min-width:210px}
+.klbl{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.16em;font-size:11.5px;color:var(--grey)}
+.kbar{height:10px;background:rgba(255,255,255,.08);border-radius:20px;overflow:hidden;margin-top:11px}
+.kbar i{display:block;height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,var(--red),#ff6a4d);
+  box-shadow:0 0 14px rgba(224,27,23,.6);transition:width 1.1s cubic-bezier(.2,.9,.3,1)}
+.kring{width:74px;height:74px;position:relative;flex:none}
+.kring svg{transform:rotate(-90deg)}
+.kring .tr{stroke:rgba(255,255,255,.1)}
+.kring .fg{stroke:var(--red);stroke-linecap:round;transition:stroke-dashoffset 1.3s cubic-bezier(.2,.9,.3,1)}
+.kring span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+/* чипы и уроки */
+.kchips{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 16px}
+.kchip{padding:9px 17px;border-radius:30px;background:var(--panel2);border:1px solid var(--line);
+  font-size:13.5px;font-weight:600;color:var(--grey);cursor:pointer;transition:.2s}
+.kchip.on{background:rgba(224,27,23,.2);border-color:var(--red);color:#fff}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:16px}
+.klesson{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;
+  transition:transform .3s,border-color .3s,box-shadow .3s}
+.klesson:hover{transform:translateY(-5px);border-color:rgba(224,27,23,.5);box-shadow:0 18px 40px -18px rgba(224,27,23,.4)}
+.klesson .kth{aspect-ratio:16/10;position:relative;background:linear-gradient(140deg,#3a1512,#611d16 60%,#1a0d0c)}
+.klesson .kth .kglow{position:absolute;inset:0;background:radial-gradient(60% 60% at 30% 30%,rgba(224,27,23,.45),transparent 70%)}
+.klesson .kth .kplay{position:absolute;left:50%;top:50%;translate:-50% -50%;width:42px;height:42px;border-radius:50%;
+  background:rgba(224,27,23,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(224,27,23,.16);transition:.3s}
+.klesson:hover .kth .kplay{transform:scale(1.12)}
+.klesson .kth .kplay::after{content:"";border-style:solid;border-width:7px 0 7px 11px;border-color:transparent transparent transparent #fff;margin-left:3px}
+.klesson .knum{position:absolute;left:11px;top:10px;font-family:'Oswald',sans-serif;font-weight:700;font-size:21px;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.klesson .kdur{position:absolute;right:9px;bottom:9px;background:rgba(0,0,0,.72);font-size:11px;font-weight:700;
+  padding:3px 8px;border-radius:6px;font-family:'Oswald',sans-serif;letter-spacing:.05em}
+.klesson .kb{padding:13px 15px 15px}
+.klesson .kb .kt2{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:14.5px;line-height:1.15}
+.klesson .kb .ks{color:var(--grey);font-size:12.5px;margin-top:4px;font-weight:500}
+.klesson.done .kth::before{content:"✓";position:absolute;right:9px;top:9px;z-index:3;width:23px;height:23px;
+  background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px}
+.klesson.lock{opacity:.5}
+.klesson.lock .kplay{background:rgba(255,255,255,.15)}
+.klesson.lock .kplay::after{content:"🔒";border:none;margin:0;font-size:13px}
+/* карточки/задания/чат */
+.kcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:13px}
+.kcard h4{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;font-size:17px;margin-bottom:7px}
+.kcard p{color:#c9c1be;font-size:14.5px}
+.ktask{display:flex;gap:13px;align-items:flex-start;padding:13px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.ktask:last-child{border:none}
+.ktask i{flex:none;width:22px;height:22px;border-radius:7px;border:2px solid var(--red);margin-top:2px;
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:transparent;transition:.2s}
+.ktask.done i{background:var(--red);color:#fff}
+.ktask.done span{opacity:.5;text-decoration:line-through}
+.ktask span{font-size:14.5px;font-weight:500}
+.kmsg{display:flex;gap:11px;margin-bottom:14px}
+.kmsg .ma{width:36px;height:36px;flex:none;border-radius:50%;background:linear-gradient(135deg,#8f0b08,var(--red));
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.kmsg .mb{background:var(--panel);border:1px solid var(--line);border-radius:4px 14px 14px 14px;padding:11px 15px;flex:1}
+.kmsg .mn{font-weight:800;font-size:12.5px;color:var(--red);margin-bottom:3px}
+.kmsg .mt{font-size:14.5px;color:#d8d0cd}
+/* нижняя навигация кабинета */
+.ktabbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:25;background:rgba(20,17,16,.96);
+  backdrop-filter:blur(18px);border-top:1px solid var(--line);
+  padding:9px 4px calc(9px + env(safe-area-inset-bottom));justify-content:space-around;align-items:center}
+.ktab{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:var(--grey);
+  font-size:10.5px;font-weight:700;padding:4px 8px;border-radius:11px;transition:.2s;flex:1}
+.ktab svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.9}
+.ktab.on{color:var(--red)}
+.ktab.on svg{stroke:var(--red)}
 @media(max-width:900px){
-  .sidebar{display:none}#lkWrap main{margin-left:0;padding-bottom:96px}#lkWrap .tabbar{display:flex}#lkWrap .topbar{padding:14px 18px}#lkWrap .page{padding:18px}#lkWrap .hello{padding:22px}
+  .kside{display:none}
+  .kmain{margin-left:0;padding-bottom:92px}
+  .ktabbar{display:flex}
+  .ktop{padding:13px 18px}
+  .kpage{padding:16px}
 }
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 </style>
 </head>
@@ -381,10 +468,12 @@ main{margin-left:var(--sidebar);padding-bottom:40px}#lkWrap .page{display:none;p
     <a href="#guide">Гайд</a>
     <a href="#contacts">Контакты</a>
   </nav>
-  <div style="display:flex;gap:8px;align-items:center">
-    <a class="hbtn" href="#kabinet" data-lk
-       style="background:transparent;border:1.5px solid var(--red);color:var(--red);box-shadow:none">Кабинет</a>
-    <a class="hbtn" href="#zayavka">Заявка</a>
+  <div style="display:flex;gap:8px;align-items:center" id="hdrBtns">
+    <a class="hbtn" id="btnLogin" style="background:transparent;border:1.5px solid var(--red);color:var(--red);box-shadow:none;cursor:pointer">Войти</a>
+    <a class="hbtn" id="btnReg" style="cursor:pointer">Регистрация</a>
+  </div>
+  <div style="display:none;gap:8px;align-items:center" id="hdrUser">
+    <a class="hbtn" id="btnKab" style="cursor:pointer">Мой кабинет</a>
   </div>
 </header>
 
@@ -417,7 +506,7 @@ main{margin-left:var(--sidebar);padding-bottom:40px}#lkWrap .page{display:none;p
         <div class="ab-row">
           <span class="ab-price"><s>990&nbsp;₽</s>499&nbsp;₽</span>
           <a class="rbtn" href="#guide">Забрать гайд</a>
-          <a class="rbtn ghost" href="#kabinet" data-lk>У меня есть код</a>
+          <a class="rbtn ghost" id="btnHasCode" style="cursor:pointer">У меня есть код</a>
         </div>
       </div>
     </div>
@@ -623,8 +712,7 @@ main{margin-left:var(--sidebar);padding-bottom:40px}#lkWrap .page{display:none;p
           <a class="rbtn ghost" href="https://angel20147784-sketch.github.io/gyde/" target="_blank">Полистать демо</a>
         </div>
         <p style="margin-top:14px;font-size:13.5px;color:var(--grey)">
-          Уже купил? <a href="#kabinet" data-lk
-          style="color:var(--red);font-weight:700">Войти в кабинет по коду →</a>
+          Уже купил? <a id="btnLogin2" style="color:var(--red);font-weight:700;cursor:pointer">Войти в кабинет по коду →</a>
         </p>
       </div>
     </div>
@@ -755,9 +843,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 </script>
 
 <!-- ═══════════ ЛИЧНЫЙ КАБИНЕТ ═══════════ -->
-<div id="lkWrap">
-<button id="lkClose" title="Закрыть кабинет">×</button>
-<div class="aura a1"></div><div class="aura a2"></div>
+<div class="aura a2"></div>
 <!-- ══════════ ВХОД ══════════ -->
 <div id="auth">
   <div class="card">
@@ -948,41 +1034,181 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
 </div>
 
-<script>
-/* ═══════════ ЛОГИКА ЛИЧНОГО КАБИНЕТА ═══════════ */
-(function(){
 
-/* ═══════════════ НАСТРОЙКА ═══════════════
-   ВАЖНО: коды покупателей.
-   Вариант А (сейчас): коды генерирует бот по формуле — сайт проверяет её же.
-   Формула: MVD- + 4 цифры, где сумма цифр кратна 7  (пример: MVD-1069)
-   Вариант Б: впиши конкретные коды в массив CODES ниже.               */
-const CODES = ["MVD-DEMO","МОНТАЖ2026"];         // ручные коды (всегда работают)
+<!-- ═══════════ МОДАЛКА ВХОДА/РЕГИСТРАЦИИ ═══════════ -->
+<div class="modal" id="authModal">
+  <div class="modal-card">
+    <button class="modal-close" id="authClose">×</button>
+    <h3 id="authTitle">Вход в кабинет</h3>
+    <div class="msub" id="authSub">Доступ к урокам, практике и чату учеников</div>
+
+    <div class="mtabs">
+      <div class="mtab on" data-mode="login">Войти</div>
+      <div class="mtab" data-mode="reg">Регистрация</div>
+    </div>
+
+    <div class="soc">
+      <div class="socbtn" data-auth="tg">
+        <span class="si si-tg">TG</span>
+        <span>Через Telegram<small>по коду от бота — работает сейчас</small></span>
+      </div>
+      <div class="socbtn" data-auth="vk">
+        <span class="si si-vk">VK</span>
+        <span>Через ВКонтакте<small>подключается</small></span>
+      </div>
+      <div class="socbtn" data-auth="ya">
+        <span class="si si-ya">Я</span>
+        <span>Через Яндекс ID<small>подключается</small></span>
+      </div>
+    </div>
+
+    <div id="tgBox" style="display:none">
+      <div class="mdiv">код из telegram</div>
+      <input class="minp" id="authName" placeholder="Как тебя зовут?" autocomplete="off">
+      <input class="minp" id="authCode" placeholder="Код доступа (MVD-XXXX)" autocomplete="off">
+      <button class="rbtn" id="authGo" style="width:100%;justify-content:center">Войти в кабинет</button>
+      <div class="merr" id="authErr"></div>
+    </div>
+
+    <div class="mhint" id="authHint">
+      Нет кода? <a href="https://t.me/Gayd30day_bot" target="_blank">Купить доступ в боте →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ЛИЧНЫЙ КАБИНЕТ ═══════════ -->
+<div id="kab">
+  <aside class="kside">
+    <div class="kbrand">REC<b>/CUT</b><br>кабинет</div>
+    <div class="kitem on" data-kgo="home"><svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Главная</div>
+    <div class="kitem" data-kgo="lessons"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Уроки</div>
+    <div class="kitem" data-kgo="practice"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6-6.3 4.6L7.9 14 2 9.4h7.6z"/></svg>Практика</div>
+    <div class="kitem" data-kgo="bonus"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>Бонусы</div>
+    <div class="kitem" data-kgo="chat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Сообщество</div>
+    <div class="kitem" data-kgo="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Профиль</div>
+    <div class="kspacer"></div>
+    <div class="kitem" id="kToSite"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></svg>На сайт</div>
+    <div class="kexit" id="kLogout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Выйти</div>
+  </aside>
+
+  <div class="kmain">
+    <div class="ktop">
+      <h2 id="kTitle">Главная</h2>
+      <div class="kava" id="kAva">A</div>
+    </div>
+
+    <section class="kpage on" id="k-home">
+      <div class="khello">
+        <div class="kbig" id="kBigAva">A</div>
+        <div class="kt">
+          <h3>Привет, <span id="kName">друг</span>!</h3>
+          <p id="kSub">Продолжаем? До первого платного заказа осталось совсем немного.</p>
+        </div>
+      </div>
+      <div class="kprog">
+        <div class="pl">
+          <div class="klbl">Твой прогресс</div>
+          <div class="kbar"><i id="kBar"></i></div>
+          <div style="color:var(--grey);font-size:13px;margin-top:9px" id="kProgTxt">0 из 12 уроков пройдено</div>
+        </div>
+        <div class="kring">
+          <svg width="74" height="74"><circle class="tr" cx="37" cy="37" r="31" stroke-width="7" fill="none"/>
+            <circle class="fg" id="kRing" cx="37" cy="37" r="31" stroke-width="7" fill="none" stroke-dasharray="195" stroke-dashoffset="195"/></svg>
+          <span id="kPct">0%</span>
+        </div>
+      </div>
+      <h3 class="head" style="font-size:18px;margin:24px 0 13px">Продолжить обучение</h3>
+      <div class="kgrid" id="kContinue"></div>
+    </section>
+
+    <section class="kpage" id="k-lessons">
+      <div class="kchips">
+        <div class="kchip on" data-kf="all">Все уроки</div>
+        <div class="kchip" data-kf="base">Базовый блок</div>
+        <div class="kchip" data-kf="pro">Продвинутый</div>
+        <div class="kchip" data-kf="bonus">Бонусы</div>
+      </div>
+      <div class="kgrid" id="kLessons"></div>
+    </section>
+
+    <section class="kpage" id="k-practice">
+      <div class="kcard"><h4>Задания недели 1 · Инструмент в руках</h4>
+        <p style="margin-bottom:6px">Отмечай выполненное — прогресс считается автоматически.</p>
+        <div id="kTasks"></div></div>
+    </section>
+
+    <section class="kpage" id="k-bonus">
+      <div class="kgrid">
+        <div class="kcard"><h4>15 скриптов переговоров</h4><p>Холодный контакт, цена, возражения, сдача работы.</p></div>
+        <div class="kcard"><h4>10 шаблонов плашек</h4><p>Связки «шрифт + подложка + цвет» для любых ниш.</p></div>
+        <div class="kcard"><h4>Калькулятор цены</h4><p>База + надбавки: считай стоимость заказа по формуле.</p></div>
+        <div class="kcard"><h4>30 ниш для рассылки</h4><p>Куда писать, чтобы получить первый заказ.</p></div>
+      </div>
+      <a class="rbtn" href="https://angel20147784-sketch.github.io/gyde/" target="_blank" style="margin-top:16px">Открыть полный гайд</a>
+    </section>
+
+    <section class="kpage" id="k-chat">
+      <div class="kcard"><h4>Чат учеников</h4>
+        <p style="margin-bottom:16px">Здесь делятся работами, находят заказы и разбирают ошибки.</p>
+        <div class="kmsg"><div class="ma">И</div><div class="mb"><div class="mn">Иван · автор</div>
+          <div class="mt">Правило простое: 10 сообщений в день — и первый заказ придёт математически.</div></div></div>
+        <div class="kmsg"><div class="ma">М</div><div class="mb"><div class="mn">Максим</div>
+          <div class="mt">Сдал первый ролик кофейне за 2500! Скрипт из бонусов сработал с третьего сообщения 🔥</div></div></div>
+        <a class="rbtn" href="https://t.me/Gayd30day_bot" target="_blank" style="margin-top:8px">Открыть чат в Telegram</a>
+      </div>
+    </section>
+
+    <section class="kpage" id="k-profile">
+      <div class="kcard"><h4>Профиль</h4>
+        <p style="margin-bottom:12px">Как к тебе обращаться:</p>
+        <input class="minp" id="kNameEdit" placeholder="Твоё имя">
+        <button class="rbtn" id="kSaveName" style="width:100%;justify-content:center">Сохранить</button></div>
+      <div class="kcard"><h4>Сброс прогресса</h4>
+        <p style="margin-bottom:12px">Обнулит отметки об уроках и заданиях.</p>
+        <button class="rbtn ghost" id="kReset" style="width:100%;justify-content:center">Сбросить прогресс</button></div>
+    </section>
+  </div>
+
+  <nav class="ktabbar">
+    <div class="ktab on" data-kgo="home"><svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Главная</div>
+    <div class="ktab" data-kgo="lessons"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M10 9l5 3-5 3z"/></svg>Уроки</div>
+    <div class="ktab" data-kgo="practice"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6-6.3 4.6L7.9 14 2 9.4h7.6z"/></svg>Практика</div>
+    <div class="ktab" data-kgo="chat"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Чат</div>
+    <div class="ktab" data-kgo="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>Профиль</div>
+  </nav>
+</div>
+
+
+<script>
+/* ═══════════════ АВТОРИЗАЦИЯ И КАБИНЕТ ═══════════════ */
+(function(){
+"use strict";
+
+/* коды: MVD-XXXX, сумма 4 цифр кратна 7 (та же формула в боте) */
+const MANUAL = ["MVD-DEMO","МОНТАЖ2026"];
 function checkCode(c){
-  c = c.trim().toUpperCase();
-  if(CODES.includes(c)) return true;
-  const m = c.match(/^MVD-(\d{4})$/);
+  c=(c||"").trim().toUpperCase();
+  if(MANUAL.includes(c)) return true;
+  const m=c.match(/^MVD-(\d{4})$/);
   if(!m) return false;
-  const sum = [...m[1]].reduce((a,b)=>a+ +b,0);
-  return sum % 7 === 0;                            // та же формула, что в боте
+  return [...m[1]].reduce((a,b)=>a+ +b,0)%7===0;
 }
 
-/* ── данные уроков ── */
-const LESSONS = [
-  {n:"01",t:"Интерфейс и импорт материалов",s:"База монтажа",d:"06:43",g:"base"},
+const LESSONS=[
+  {n:"01",t:"Интерфейс и импорт",s:"База монтажа",d:"06:43",g:"base"},
   {n:"02",t:"Монтаж на практике",s:"Первая сборка",d:"18:42",g:"base"},
   {n:"03",t:"Переходы и динамика",s:"Ритм ролика",d:"14:20",g:"base"},
   {n:"04",t:"Текст, плашки и сабы",s:"Оформление",d:"11:05",g:"base"},
   {n:"05",t:"Звук и даккинг",s:"Работа с аудио",d:"09:38",g:"base"},
-  {n:"06",t:"Хук: первые 3 секунды",s:"7 рабочих типов",d:"12:11",g:"base"},
-  {n:"07",t:"Цветокоррекция как в кино",s:"Lumetri и пресеты",d:"16:27",g:"pro"},
+  {n:"06",t:"Хук: первые 3 секунды",s:"7 типов хука",d:"12:11",g:"base"},
+  {n:"07",t:"Цветокоррекция",s:"Lumetri и пресеты",d:"16:27",g:"pro"},
   {n:"08",t:"Скоростные рампы",s:"Motion blur",d:"10:52",g:"pro"},
   {n:"09",t:"Анимация в After Effects",s:"6 приёмов",d:"21:14",g:"pro"},
   {n:"10",t:"Портфолио за 7 дней",s:"3 бесплатных ролика",d:"13:40",g:"pro"},
   {n:"11",t:"Скрипты переговоров",s:"Как назвать цену",d:"15:03",g:"bonus"},
   {n:"12",t:"Первый платный заказ",s:"Сделка и отзыв",d:"17:58",g:"bonus"}
 ];
-const TASKS = [
+const TASKS=[
   "Установить CapCut и завести облачную папку",
   "Собрать первый тренировочный ролик «в стол»",
   "Разобрать чужой Reels по кадрам («копия мастера»)",
@@ -991,152 +1217,159 @@ const TASKS = [
   "Написать 10 клиентам по скрипту"
 ];
 
-/* ── состояние ── */
-const S = {
-  get name(){return localStorage.getItem('mvd_name')||''},
-  set name(v){localStorage.setItem('mvd_name',v)},
-  get auth(){return localStorage.getItem('mvd_auth')==='1'},
-  set auth(v){localStorage.setItem('mvd_auth',v?'1':'0')},
-  get done(){try{return JSON.parse(localStorage.getItem('mvd_done'))||[]}catch(e){return []}},
-  set done(v){localStorage.setItem('mvd_done',JSON.stringify(v))},
-  get tasks(){try{return JSON.parse(localStorage.getItem('mvd_tasks'))||[]}catch(e){return []}},
-  set tasks(v){localStorage.setItem('mvd_tasks',JSON.stringify(v))}
+const S={
+  get name(){return localStorage.getItem('rc_name')||''},
+  set name(v){localStorage.setItem('rc_name',v)},
+  get auth(){return localStorage.getItem('rc_auth')==='1'},
+  set auth(v){localStorage.setItem('rc_auth',v?'1':'0')},
+  get done(){try{return JSON.parse(localStorage.getItem('rc_done'))||[]}catch(e){return[]}},
+  set done(v){localStorage.setItem('rc_done',JSON.stringify(v))},
+  get tasks(){try{return JSON.parse(localStorage.getItem('rc_tasks'))||[]}catch(e){return[]}},
+  set tasks(v){localStorage.setItem('rc_tasks',JSON.stringify(v))}
 };
 
-/* ── вход ── */
-const authBox=document.getElementById('auth'), app=document.getElementById('app');
-function askName(){
-  const f=document.getElementById('nameInput');
-  let n = (f && f.value.trim()) || S.name || 'Друг';
-  S.name = n.slice(0,24);
-  return S.name;
+const $=id=>document.getElementById(id);
+const modal=$('authModal'), kab=$('kab');
+
+/* ── модалка ── */
+function openAuth(mode){
+  modal.classList.add('on');
+  document.body.style.overflow='hidden';
+  setMode(mode||'login');
 }
-function enter(){
-  S.auth = true;
-  const n = askName();
-  authBox.style.display='none';
-  app.style.display='block';
-  document.getElementById('uname').textContent = n;
-  const L = n.trim()[0]?.toUpperCase() || 'A';
-  document.getElementById('avaTop').textContent = L;
-  document.getElementById('avaBig').textContent = L;
-  document.getElementById('nameEdit').value = n;
-  render();
+function closeAuth(){modal.classList.remove('on');document.body.style.overflow=''}
+function setMode(m){
+  document.querySelectorAll('.mtab').forEach(t=>t.classList.toggle('on',t.dataset.mode===m));
+  $('authTitle').textContent = m==='reg' ? 'Регистрация' : 'Вход в кабинет';
+  $('authSub').textContent = m==='reg'
+    ? 'Создай аккаунт — прогресс сохранится навсегда'
+    : 'Доступ к урокам, практике и чату учеников';
+  $('authHint').innerHTML = m==='reg'
+    ? 'Уже есть код? Просто войди — регистрация произойдёт сама.'
+    : 'Нет кода? <a href="https://t.me/Gayd30day_bot" target="_blank">Купить доступ в боте →</a>';
 }
-document.getElementById('codeBtn').onclick=()=>{
-  const nm=document.getElementById('nameInput');
-  const err=document.getElementById('authErr');
-  if(nm && !nm.value.trim() && !S.name){
-    err.textContent='Сначала напиши, как тебя зовут';err.style.display='block';return;
-  }
-  const v=document.getElementById('codeInput').value;
-  if(checkCode(v)){err.style.display='none';enter();}
-  else{err.textContent='Неверный код. Проверь сообщение от бота.';err.style.display='block';}
-};
-document.getElementById('codeInput').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('codeBtn').click()});
-document.querySelectorAll('[data-oauth]').forEach(b=>b.onclick=()=>{
-  alert('Вход через '+(b.dataset.oauth==='vk'?'ВКонтакте':'Яндекс')+' подключается на сервере.\n\nПока используй код покупателя из Telegram-бота.');
+document.querySelectorAll('.mtab').forEach(t=>t.onclick=()=>setMode(t.dataset.mode));
+$('authClose').onclick=closeAuth;
+modal.addEventListener('click',e=>{if(e.target===modal)closeAuth()});
+
+/* соц-кнопки */
+document.querySelectorAll('[data-auth]').forEach(b=>b.onclick=()=>{
+  const k=b.dataset.auth;
+  if(k==='tg'){ $('tgBox').style.display='block'; $('authName').focus(); return; }
+  const nm = k==='vk' ? 'ВКонтакте' : 'Яндекс ID';
+  alert('Вход через '+nm+' скоро подключим.\n\nСейчас доступен вход через Telegram — по коду от бота @Gayd30day_bot');
 });
-document.getElementById('logout').onclick=()=>{S.auth=false;location.reload()};
 
-/* ── навигация ── */
-const TITLES={home:'Главная',lessons:'Уроки',practice:'Практика',bonus:'Бонусы',feedback:'Обратная связь',community:'Сообщество',settings:'Настройки'};
-function go(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
-  document.getElementById('p-'+id)?.classList.add('on');
-  document.getElementById('pageTitle').textContent=TITLES[id]||'';
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('on',n.dataset.go===id));
-  document.querySelectorAll('.tab').forEach(n=>n.classList.toggle('on',n.dataset.go===id));
-  window.scrollTo({top:0,behavior:'smooth'});
+/* вход по коду */
+$('authGo').onclick=()=>{
+  const nm=$('authName').value.trim(), cd=$('authCode').value, err=$('authErr');
+  if(!nm){err.textContent='Напиши, как тебя зовут';err.style.display='block';return}
+  if(!checkCode(cd)){err.textContent='Неверный код. Проверь сообщение от бота.';err.style.display='block';return}
+  err.style.display='none';
+  S.name=nm.slice(0,24); S.auth=true;
+  closeAuth(); openKab();
+};
+$('authCode').addEventListener('keydown',e=>{if(e.key==='Enter')$('authGo').click()});
+
+/* ── кабинет ── */
+function openKab(){
+  kab.classList.add('on');
+  document.body.style.overflow='hidden';
+  const L=(S.name[0]||'A').toUpperCase();
+  $('kName').textContent=S.name||'друг';
+  $('kAva').textContent=L; $('kBigAva').textContent=L;
+  $('kNameEdit').value=S.name;
+  render(); kgo('home');
+  syncHeader();
 }
-document.querySelectorAll('[data-go]').forEach(el=>el.onclick=()=>go(el.dataset.go));
+function closeKab(){kab.classList.remove('on');document.body.style.overflow=''}
+function syncHeader(){
+  const inA=S.auth&&S.name;
+  const hb=$('hdrBtns'), hu=$('hdrUser');
+  if(hb) hb.style.display = inA?'none':'flex';
+  if(hu) hu.style.display = inA?'flex':'none';
+}
+
+const KT={home:'Главная',lessons:'Уроки',practice:'Практика',bonus:'Бонусы',chat:'Сообщество',profile:'Профиль'};
+function kgo(id){
+  document.querySelectorAll('.kpage').forEach(p=>p.classList.remove('on'));
+  const pg=$('k-'+id); if(pg)pg.classList.add('on');
+  $('kTitle').textContent=KT[id]||'';
+  document.querySelectorAll('[data-kgo]').forEach(n=>n.classList.toggle('on',n.dataset.kgo===id));
+  kab.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('[data-kgo]').forEach(el=>el.onclick=()=>kgo(el.dataset.kgo));
+$('kToSite').onclick=closeKab;
+$('kLogout').onclick=()=>{
+  if(!confirm('Выйти из кабинета?'))return;
+  S.auth=false; closeKab(); syncHeader();
+};
 
 /* ── отрисовка ── */
-function lessonCard(l,i){
+function card(l,i){
   const done=S.done.includes(i);
-  const lock = i>0 && !S.done.includes(i-1) && !done;
-  return `<div class="lesson ${done?'done':''} ${lock?'lock':''}" data-i="${i}" data-g="${l.g}">
-    <div class="thumb"><div class="glow"></div><div class="num">${l.n}</div><div class="play"></div><div class="dur">${l.d}</div></div>
-    <div class="body"><div class="t">${l.t}</div><div class="s">${l.s}</div></div>
-  </div>`;
+  const lock=i>0&&!S.done.includes(i-1)&&!done;
+  return '<div class="klesson '+(done?'done':'')+' '+(lock?'lock':'')+'" data-i="'+i+'" data-g="'+l.g+'">'
+    +'<div class="kth"><div class="kglow"></div><div class="knum">'+l.n+'</div><div class="kplay"></div><div class="kdur">'+l.d+'</div></div>'
+    +'<div class="kb"><div class="kt2">'+l.t+'</div><div class="ks">'+l.s+'</div></div></div>';
 }
 function render(){
-  document.getElementById('lessonGrid').innerHTML = LESSONS.map(lessonCard).join('');
-  const next = LESSONS.findIndex((_,i)=>!S.done.includes(i));
-  const cont = next<0 ? [0,1,2] : [next, next+1, next+2].filter(i=>i<LESSONS.length);
-  document.getElementById('continueGrid').innerHTML = cont.map(i=>lessonCard(LESSONS[i],i)).join('');
+  $('kLessons').innerHTML=LESSONS.map(card).join('');
+  const next=LESSONS.findIndex((_,i)=>!S.done.includes(i));
+  const cont=next<0?[0,1,2]:[next,next+1,next+2].filter(i=>i<LESSONS.length);
+  $('kContinue').innerHTML=cont.map(i=>card(LESSONS[i],i)).join('');
+  $('kTasks').innerHTML=TASKS.map((t,i)=>'<div class="ktask '+(S.tasks.includes(i)?'done':'')+'" data-t="'+i+'"><i>✓</i><span>'+t+'</span></div>').join('');
 
-  document.getElementById('taskList').innerHTML = TASKS.map((t,i)=>
-    `<div class="task ${S.tasks.includes(i)?'done':''}" data-t="${i}"><i>✓</i><span>${t}</span></div>`).join('');
+  const pc=Math.round(S.done.length/LESSONS.length*100);
+  $('kBar').style.width=pc+'%';
+  $('kProgTxt').textContent=S.done.length+' из '+LESSONS.length+' уроков пройдено';
+  $('kPct').textContent=pc+'%';
+  $('kRing').style.strokeDashoffset=195-195*pc/100;
+  $('kSub').textContent = pc===0?'Начнём? Первый урок займёт меньше 7 минут.'
+    : pc<50?'Отличный темп! До первого заказа осталось совсем немного.'
+    : pc<100?'Больше половины позади. Пора искать первого клиента.'
+    :'Курс пройден! Теперь только практика и заказы.';
 
-  const pc = Math.round(S.done.length/LESSONS.length*100);
-  document.getElementById('barFill').style.width = pc+'%';
-  document.getElementById('progTxt').textContent = `${S.done.length} из ${LESSONS.length} уроков пройдено`;
-  document.getElementById('ringTxt').textContent = pc+'%';
-  document.getElementById('ringFg').style.strokeDashoffset = 207 - 207*pc/100;
-  const sub=document.getElementById('helloSub');
-  sub.textContent = pc===0 ? 'Начнём? Первый урок займёт меньше 7 минут.'
-    : pc<50 ? 'Отличный темп! Продолжаем — до первого заказа осталось совсем немного.'
-    : pc<100 ? 'Больше половины позади. Пора искать первого клиента.'
-    : 'Курс пройден! Теперь только практика и заказы.';
-
-  document.querySelectorAll('.lesson').forEach(el=>el.onclick=()=>{
+  document.querySelectorAll('.klesson').forEach(el=>el.onclick=()=>{
     if(el.classList.contains('lock')){alert('Сначала пройди предыдущий урок 🙂');return}
-    const i=+el.dataset.i, d=S.done;
-    if(d.includes(i)) S.done=d.filter(x=>x!==i); else S.done=[...d,i];
+    const i=+el.dataset.i,d=S.done;
+    S.done = d.includes(i)? d.filter(x=>x!==i) : [...d,i];
     render();
   });
-  document.querySelectorAll('.task').forEach(el=>el.onclick=()=>{
-    const i=+el.dataset.t, t=S.tasks;
-    if(t.includes(i)) S.tasks=t.filter(x=>x!==i); else S.tasks=[...t,i];
+  document.querySelectorAll('.ktask').forEach(el=>el.onclick=()=>{
+    const i=+el.dataset.t,t=S.tasks;
+    S.tasks = t.includes(i)? t.filter(x=>x!==i) : [...t,i];
     render();
   });
 }
-/* фильтры уроков */
-document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
-  document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));
+document.querySelectorAll('.kchip').forEach(c=>c.onclick=()=>{
+  document.querySelectorAll('.kchip').forEach(x=>x.classList.remove('on'));
   c.classList.add('on');
-  const f=c.dataset.filter;
-  document.querySelectorAll('#lessonGrid .lesson').forEach(el=>{
-    el.style.display = (f==='all'||el.dataset.g===f) ? '' : 'none';
+  const f=c.dataset.kf;
+  document.querySelectorAll('#kLessons .klesson').forEach(el=>{
+    el.style.display=(f==='all'||el.dataset.g===f)?'':'none';
   });
 });
-/* настройки */
-document.getElementById('saveName').onclick=()=>{
-  const v=document.getElementById('nameEdit').value.trim();
-  if(!v)return;
+$('kSaveName').onclick=()=>{
+  const v=$('kNameEdit').value.trim(); if(!v)return;
   S.name=v.slice(0,24);
-  document.getElementById('uname').textContent=S.name;
   const L=S.name[0].toUpperCase();
-  document.getElementById('avaTop').textContent=L;
-  document.getElementById('avaBig').textContent=L;
+  $('kName').textContent=S.name; $('kAva').textContent=L; $('kBigAva').textContent=L;
   alert('Сохранено!');
 };
-document.getElementById('resetProg').onclick=()=>{
-  if(confirm('Точно сбросить весь прогресс?')){S.done=[];S.tasks=[];render();}
-};
-document.getElementById('sendWork').onclick=()=>{
-  const v=document.getElementById('workLink').value.trim();
-  if(!v){alert('Вставь ссылку на ролик');return}
-  window.open('https://t.me/ВАШ_НИК?text='+encodeURIComponent('Работа на разбор: '+v),'_blank');
-};
+$('kReset').onclick=()=>{if(confirm('Сбросить весь прогресс?')){S.done=[];S.tasks=[];render();}};
 
-/* автовход, если уже заходил */
-if(S.auth && S.name){const f=document.getElementById('nameInput');if(f)f.value=S.name;}
+/* ── кнопки на сайте ── */
+$('btnLogin')&&($('btnLogin').onclick=()=>openAuth('login'));
+$('btnReg')&&($('btnReg').onclick=()=>openAuth('reg'));
+$('btnKab')&&($('btnKab').onclick=openKab);
+$('btnHasCode')&&($('btnHasCode').onclick=()=>openAuth('login'));
+$('btnLogin2')&&($('btnLogin2').onclick=()=>openAuth('login'));
+document.querySelectorAll('[data-openauth]').forEach(b=>b.onclick=e=>{e.preventDefault();openAuth('login')});
 
-/* открытие/закрытие кабинета */
-const lk=document.getElementById('lkWrap');
-function openLK(){
-  lk.classList.add('on');
-  document.body.style.overflow='hidden';
-  if(S.auth && S.name){const f=document.getElementById('nameInput');if(f)f.value=S.name;}
-}
-function closeLK(){ lk.classList.remove('on'); document.body.style.overflow=''; history.replaceState(null,'',location.pathname); }
-document.getElementById('lkClose').onclick=closeLK;
-document.querySelectorAll('[data-lk]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();openLK()}));
-if(location.hash==='#kabinet') openLK();
-window.addEventListener('hashchange',()=>{if(location.hash==='#kabinet')openLK()});
+syncHeader();
 })();
 </script>
+
 </body>
 </html>
